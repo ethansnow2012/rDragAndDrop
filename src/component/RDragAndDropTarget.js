@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import {useRef, useState, useContext} from 'react'
-import {dragAndDropUtils, dragAndDropContext} from 'utils/dragAndDropUtils'
+import {dragAndDropUtils, dragAndDropContext} from 'utils/rDragAndDropUtils'
 
 const Styled = styled.div`
     padding: 5px 10px;
@@ -20,7 +20,7 @@ const Styled = styled.div`
 `
 
 
-export function TodoItem(props){
+export function RDragAndDropTarget(props){
     const ref = useRef(null)
     const {dragAndDropContextInstance} = useContext(dragAndDropContext)
     const [isDragHover, setIsDragHover] = useState(false)

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import {useState, useRef, useContext, useEffect, useLayoutEffect} from 'react'
-import {dragAndDropUtils, dragAndDropContext, isDescendant} from 'utils/dragAndDropUtils'
+import {dragAndDropUtils, dragAndDropContext, isDescendant} from 'utils/rDragAndDropUtils'
 
 const Styled = styled.div`
     &.hovered {
@@ -10,7 +10,7 @@ const Styled = styled.div`
     box-sizing: context-box;
 `
 
-export function TodoColumnWrapper(props){
+export function RDragAndDropWrapper(props){
     const [hovered, setHovered] = useState(false)
     const ref = useRef(null)
     const {

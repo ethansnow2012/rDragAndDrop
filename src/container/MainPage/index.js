@@ -4,12 +4,12 @@ import bg_3 from 'assets/bg-3.jpg';
 
 import react, {useState, useEffect} from 'react'
 import styled from 'styled-components'
-import {getTodoData} from 'Service/todos'
+import {getTodoData} from 'service/todos'
 import {StaticBackgroundBlock, DefaultStyle as StaticBackgroundBlockStyle} from 'container/StaticBackgroundBlock'
-import {TodoWrapper} from 'container/wrapper/TodoWrapper'
-import {TodoColumnWrapper} from 'container/wrapper/TodoColumnWrapper'
-import {TodoItem} from 'component/TodoItem'
-import {dragAndDropUtils, dragAndDropContext} from 'utils/dragAndDropUtils'
+import {RDragAndDropRoot} from 'container/wrapper/RDragAndDropRoot'
+import {RDragAndDropWrapper} from 'container/wrapper/RDragAndDropWrapper'
+import {RDragAndDropTarget} from 'component/RDragAndDropTarget'
+import {dragAndDropUtils, dragAndDropContext} from 'utils/rDragAndDropUtils'
 import {makeid} from 'utils/globalUtils'
 
 
@@ -31,25 +31,25 @@ export function MainPage() {
         <Styled>
         <StaticBackgroundBlock image={bg_1}>
             <dragAndDropContext.Provider value={{todoData, setTodoData, dragAndDropContextInstance}}>   
-                <TodoWrapper>
+                <RDragAndDropRoot>
                     {
                         todoData.data
                             ?.map((columnData,ii) =>
                             {
                                 return(    
-                                    <TodoColumnWrapper data-foo='ii' key={columnData.id} self={columnData} parent={columnData} >
+                                    <RDragAndDropWrapper data-foo='ii' key={columnData.id} self={columnData} parent={columnData} >
                                         {
                                             columnData.data
                                                 .map((todoItem, jj)=>(
-                                                    <TodoItem key={todoItem.id} self={todoItem} parent={columnData}/>
+                                                    <RDragAndDropTarget key={todoItem.id} self={todoItem} parent={columnData}/>
                                                 ))
                                         }
-                                    </TodoColumnWrapper>
+                                    </RDragAndDropWrapper>
                                 )
                             }
                         )
                     }
-                </TodoWrapper>
+                </RDragAndDropRoot>
             </dragAndDropContext.Provider>
         </StaticBackgroundBlock>
         <StaticBackgroundBlock image={bg_2}/>

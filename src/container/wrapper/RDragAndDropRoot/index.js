@@ -1,7 +1,7 @@
 import {ref, useRef, useContext, useEffect} from 'react'
 import styled from 'styled-components'
-import {DefaultStyle} from 'container/wrapper/TodoColumnWrapper'
-import {dragAndDropContext, isDescendant} from 'utils/dragAndDropUtils'
+import {DefaultStyle} from 'container/wrapper/RDragAndDropWrapper'
+import {dragAndDropContext, isDescendant} from 'utils/rDragAndDropUtils'
 
 const Styled = styled.div`
     width: calc(100% - 10vh);
@@ -19,7 +19,7 @@ const Styled = styled.div`
     }
 `
 
-export function TodoWrapper(props){
+export function RDragAndDropRoot(props){
     const ref = useRef(null)
     const {dragAndDropContextInstance} = useContext(dragAndDropContext)
     const [context, setContext] = dragAndDropContextInstance
