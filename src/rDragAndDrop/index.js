@@ -1,15 +1,21 @@
 import {useState, createContext} from 'react'
 import {dragAndDropTarget} from './dragAndDropTarget'
 import {dragAndDropWrapper} from './dragAndDropWrapper'
+
+
  /**
+  * _context
   * property:
+  *  - data
+  *  - setData
   *  - targetRef
+  *  - wrapperRef
   **/
 const _context = createContext(null)
 
 const core = function () {}
 
-const _dataMutate = function () {}
+//const _dataMutate = function () {}
 
 core.prototype.initContext = function(){
     return function(){
@@ -37,25 +43,12 @@ core.prototype.isDescendantOrSelf = function (parent, child) {
 
 
 
-_dataMutate.prototype.removeSelfFromParent = function(latestDragged, latestDraggedParent){
-    let indexToParent = latestDraggedParent.data.indexOf(latestDragged)
-    latestDraggedParent.data.splice(indexToParent, 1)//using splice sideEffect
-}
 
-_dataMutate.prototype.addToAnotherParent = function(latestDragged, targetParent, dropedElement){
-    //targetParent.date.indexOf(latestDragged)
-    let indexToBeAppend = targetParent.data.indexOf(dropedElement)
-    if(indexToBeAppend){
-        targetParent.data.splice(indexToBeAppend+1, 0, latestDragged)
-    }else{
-        targetParent.data.push(latestDragged)
-    }    
-}
 
 
 core.prototype.dragTarget = new dragAndDropTarget()
 core.prototype.dragWrapper = new dragAndDropWrapper()
-core.prototype.dataMutate = new _dataMutate()
+//core.prototype.dataMutate = new _dataMutate()
 
 export const dragAndDropUtils = new core();
 export const dragAndDropContext = _context;

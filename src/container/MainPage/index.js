@@ -25,8 +25,8 @@ export function MainPage() {
     const [todoData, setTodoData] = useState({data:[]})
     const dragAndDropContextInstance = dragAndDropUtils.initContext()()
     const contextObject = {
-        content: todoData, 
-        setContent: setTodoData, 
+        data: todoData, 
+        setData: setTodoData, 
         contextInstance: dragAndDropContextInstance
     }
     useEffect(async ()=>{

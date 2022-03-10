@@ -11,86 +11,51 @@ const Styled = styled.div`
 `
 
 export function RDragAndDropWrapper(props){
-    const [hovered, setHovered] = useState(false)
+    const [isDragHover, setIsDragHover] = useState(false)
     const ref = useRef(null)
     const {
-            content,
-            setContent,
+            data,
+            setData,
             contextInstance
         } = useContext(dragAndDropContext)
-    const [dragContext, setDragContext] = contextInstance
-    useEffect(()=>{
-        //console.log('context changed')
-        if(dragContext.wrapperRef?.current!=ref.current&&dragContext.targetRef?.current&&dragContext.wrapperRef?.current){
-            if(!dragAndDropUtils.isDescendantOrSelf(dragContext.wrapperRef.current, dragContext.targetRef.current)){
-                setHovered(false)                
-            }
-        }
-        console.log('got catch', dragContext.wrapperRef, hovered, ref.current, props)
-    },[dragContext.wrapperRef])
-    const dragStart = ()=>{
-        console.log('dragStart',hovered)
+    const [context, setContext] = contextInstance
+    const dragAndDropWrapperInitObject = {
+        usedContext: [context, setContext],
+        stateData: [data, setData],
+        stateDragHover: [isDragHover, setIsDragHover],
+        props,
+        ref
     }
-    const dragOver = dragAndDropUtils.dragWrapper.dragOver((ev)=>{
-        //console.log('dragOver',hovered)
-        //ev.preventDefault()
-        //setHovered(true)
-        if(dragContext.wrapperRef?.current!=ref.current){
-            setDragContext({...dragContext, wrapperRef: ref})
-        }
-        //console.log('wrapper dragOver')
-    })
-    // useLayoutEffect(()=>{
-    //     console.log('context changed(effect)')
-    // }, [dragContext])
-    // useEffect(()=>{
-    //     console.log('context changed')
-    // },[dragContext])
-    const drop = (ev)=>{
-        setTimeout(()=>{ // this wait for state to be updated
-            console.log('drop')
+    useEffect(
+            dragAndDropUtils.dragWrapper.wrapperRefEffectFn(dragAndDropWrapperInitObject),
+            [context.wrapperRef]
+        )
+    
+    
 
-            console.log('dragContext', dragContext)
-            let latestDraggedParent = dragContext.latestDraggedParent
-            let latestDragged = dragContext.latestDragged
-            let latestDropParent = dragContext.latestDropParent// the same with props.self
-            let latestDrop = dragContext.latestDrop
-            
-            // functions with side effects
-            dragAndDropUtils.dataMutate.removeSelfFromParent(latestDragged, latestDraggedParent)
-            dragAndDropUtils.dataMutate.addToAnotherParent(latestDragged, props.self, latestDrop)
-            
-            setContent((_content)=>{//after mutation forcely invoke react update
-                return {..._content}
-            })
-            setHovered(false)
-            
-            const targetDataId = ev.dataTransfer.getData("_dragAndDropUtils_self");
-            
-        }, 0)
-        
-    }
-    const dragEnter = (ev)=>{
-        console.log('enter outter')
-        setDragContext({...dragContext, hoverDelegated: [hovered, setHovered, ref]}) 
-        setHovered(true)
-    }
-    const dragLeave = dragAndDropUtils.dragWrapper.dragLeave((ev)=>{
-        console.log('leave outter',document.latestDragEntered, ev.target, ref.current)
-        
-        if(!dragAndDropUtils.isDescendantOrSelf(ref.current, ev.target)){
-            setHovered(false)                
-        }
-
-        if(document.latestWrapperState=='DRAG_IN_CHILD'){
-            return
-        }else if(document.latestWrapperState=='DRAG_INIT'){
-            setHovered(false)
-        }
-        document.latestDragEntered = null
-        document.latestDragLeaved = null
-        
-    })
+    const dragStart = dragAndDropUtils.dragWrapper.dragStart(
+        dragAndDropWrapperInitObject,
+        (ev)=>{console.log('dragStart')}
+    )
+    const dragEnd = dragAndDropUtils.dragWrapper.dragEnd(
+        dragAndDropWrapperInitObject
+    )
+    
+    const dragOver = dragAndDropUtils.dragWrapper.dragOver(
+        dragAndDropWrapperInitObject
+    )
+    const dragLeave = dragAndDropUtils.dragWrapper.dragLeave(
+        dragAndDropWrapperInitObject
+    )
+    
+    const drop = dragAndDropUtils.dragWrapper.drop(
+        dragAndDropWrapperInitObject
+    )
+    const dragEnter = dragAndDropUtils.dragWrapper.dragEnter(
+        dragAndDropWrapperInitObject
+    )
+    
+    
     
     return (
         <Styled 
@@ -98,9 +63,10 @@ export function RDragAndDropWrapper(props){
             onDragStart={dragStart}
             onDragOver={dragOver} 
             onDrop={drop} 
+            onDragEnd={dragEnd}
             onDragLeave={dragLeave} 
             onDragEnter={dragEnter}
-            className={hovered?'hovered':''}
+            className={isDragHover?'hovered':''}
         >
             {props.children}
         </Styled>

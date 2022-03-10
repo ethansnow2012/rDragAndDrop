@@ -1,5 +1,14 @@
 export const dragAndDropTarget = function () {}
-
+/**
+ * this
+ * prototype:
+ * - dragStart
+ * - dragEnd
+ * - dragOver
+ * - drop
+ * - dragEnter
+ * - dragLeave
+ **/
 
 
 /**
@@ -7,22 +16,21 @@ export const dragAndDropTarget = function () {}
  * Example:
  * // const dragTargetInitObject = {
  * //     usedContext: [context, setContext],
+ * //     stateData: [data, setData],
  * //     stateDragging: [isDragging, setIsDragging],
- * //     stateDragHovering: [isDragHover, setIsDragHover],
+ * //     stateDragHover: [isDragHover, setIsDragHover],
  * //     props,
  * //     ref,
  * //     latestDrop: props.self,
  * //     latestDropParent: props.parent,
  * // }
- * 
- * 
  **/
 
 /**
  * dragStart
  *
  * @param {object} _ {
- *                      usedContext<react context>,
+ *                      usedContext<dragTargetInitObject>,
  *                      stateDragging<[reactState, reactStateSetter]> 
  *                          // expose this so that component can know
  *                          // whether itself is being dragged.
@@ -62,7 +70,7 @@ dragAndDropTarget.prototype.dragStart = function({usedContext, stateDragging, pr
  * dragOver
  * @param {object} _ usedContext<react context>,
  *                   ref<react ref>
- * 
+ * @return {function}
  **/
 dragAndDropTarget.prototype.dragOver = function({usedContext, ref}, callback){
     const [context, setContext] = usedContext
@@ -77,6 +85,10 @@ dragAndDropTarget.prototype.dragOver = function({usedContext, ref}, callback){
     }
 }
 
+/**
+ * 
+ * @return {function}
+ **/
 dragAndDropTarget.prototype.dragEnd = function({usedContext, stateDragging}, callback){
     return function(ev){
         const _isDragging = false
@@ -94,6 +106,10 @@ dragAndDropTarget.prototype.dragEnd = function({usedContext, stateDragging}, cal
     }
 }
 
+/**
+ * 
+ * @return {function}
+ **/
 dragAndDropTarget.prototype.drop = function({usedContext, latestDrop, latestDropParent}, callback){
     return function(ev){
         const [context, setContext] = usedContext
@@ -105,24 +121,30 @@ dragAndDropTarget.prototype.drop = function({usedContext, latestDrop, latestDrop
     }
 }
 
-dragAndDropTarget.prototype.dragEnter = function({stateDragHovering}, callback){
+/**
+ * 
+ * @return {function}
+ **/
+dragAndDropTarget.prototype.dragEnter = function({stateDragHover}, callback){
     return function(){
-        const [isDragHover, setIsDragHover] = stateDragHovering
+        const [isDragHover, setIsDragHover] = stateDragHover
         if(document.latestWrapperState=='DRAG_INIT'){
             document.latestWrapperState='DRAG_IN_CHILD'
             console.log('DRAG_IN_CHILD')
         }
         console.log('enter inner')
-        ///document.latestDragEntered = ev.target
-        ///document.latestDragLeaved = null
         setIsDragHover(true)
     }
 
 }
 
-dragAndDropTarget.prototype.dragLeave = function({stateDragHovering}, callback){
+/**
+ * 
+ * @return {function}
+ **/
+dragAndDropTarget.prototype.dragLeave = function({stateDragHover}, callback){
     return function(ev){
-        const [isDragHover, setIsDragHover] = stateDragHovering
+        const [isDragHover, setIsDragHover] = stateDragHover
         if(document.latestWrapperState=='DRAG_IN_CHILD'){
             document.latestWrapperState='DRAG_INIT'    
             console.log('DRAG_INIT')

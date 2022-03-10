@@ -34,9 +34,10 @@ export function RDragAndDropRoot(props){
     const drop = ()=>{
         console.log('root drop')
         if(context.hoverDelegated){
-            const [_hovered, _setHovered, _ref] = context.hoverDelegated
-            _setHovered(false)
+            const [isDragHover, setIsDragHover, _ref] = context.hoverDelegated
+            setIsDragHover(false)   
         }
+        console.log('root drop next')
     }
     return (
             <Styled 

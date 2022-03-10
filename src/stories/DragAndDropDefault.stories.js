@@ -19,8 +19,8 @@ export const Default = ()=>{
     const [contentTestData, setContentTestData] = useState({data:[]})
     const dragAndDropContextInstance = dragAndDropUtils.initContext()()
     const contextObject = {
-        content: contentTestData, 
-        setContent: setContentTestData, 
+        data: contentTestData, 
+        setData: setContentTestData, 
         contextInstance: dragAndDropContextInstance
     }
     useEffect(async ()=>{
