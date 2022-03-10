@@ -14,11 +14,11 @@ export function RDragAndDropWrapper(props){
     const [hovered, setHovered] = useState(false)
     const ref = useRef(null)
     const {
-            todoData,
-            setTodoData,
-            dragAndDropContextInstance
+            content,
+            setContent,
+            contextInstance
         } = useContext(dragAndDropContext)
-    const [dragContext, setDragContext] = dragAndDropContextInstance
+    const [dragContext, setDragContext] = contextInstance
     useEffect(()=>{
         //console.log('context changed')
         if(dragContext.wrapperRef?.current!=ref.current&&dragContext.targetRef?.current&&dragContext.wrapperRef?.current){
@@ -60,8 +60,8 @@ export function RDragAndDropWrapper(props){
             dragAndDropUtils.dataMutate.removeSelfFromParent(latestDragged, latestDraggedParent)
             dragAndDropUtils.dataMutate.addToAnotherParent(latestDragged, props.self, latestDrop)
             
-            setTodoData((_todoData)=>{//after mutation forcely invoke react update
-                return {..._todoData}
+            setContent((_content)=>{//after mutation forcely invoke react update
+                return {..._content}
             })
             setHovered(false)
             

@@ -24,13 +24,18 @@ const Styled = styled.div`
 export function MainPage() {
     const [todoData, setTodoData] = useState({data:[]})
     const dragAndDropContextInstance = dragAndDropUtils.initContext()()
+    const contextObject = {
+        content: todoData, 
+        setContent: setTodoData, 
+        contextInstance: dragAndDropContextInstance
+    }
     useEffect(async ()=>{
         setTodoData(await getTodoData().then((data)=>{console.log('a', data); return data }))
     },[])
     return (
         <Styled>
         <StaticBackgroundBlock image={bg_1}>
-            <dragAndDropContext.Provider value={{todoData, setTodoData, dragAndDropContextInstance}}>   
+            <dragAndDropContext.Provider value={contextObject}>   
                 <RDragAndDropRoot>
                     {
                         todoData.data

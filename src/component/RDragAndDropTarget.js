@@ -22,12 +22,10 @@ const Styled = styled.div`
 
 export function RDragAndDropTarget(props){
     const ref = useRef(null)
-    const {dragAndDropContextInstance} = useContext(dragAndDropContext)
+    const {contextInstance} = useContext(dragAndDropContext)
     const [isDragHover, setIsDragHover] = useState(false)
     const [isDragging, setIsDragging] = useState(false)
-    const [context, setContext] = dragAndDropContextInstance
-    //const hoverDelegated = context.hoverDelegated
-    
+    const [context, setContext] = contextInstance
 
     const dragStart = dragAndDropUtils.dragStart(
             {usedContext: [context, setContext], stateDragging: [isDragging, setIsDragging], props},

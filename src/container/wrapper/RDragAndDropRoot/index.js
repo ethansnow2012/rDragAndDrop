@@ -21,8 +21,8 @@ const Styled = styled.div`
 
 export function RDragAndDropRoot(props){
     const ref = useRef(null)
-    const {dragAndDropContextInstance} = useContext(dragAndDropContext)
-    const [context, setContext] = dragAndDropContextInstance
+    const {contextInstance} = useContext(dragAndDropContext)
+    const [context, setContext] = contextInstance
     
     const dragOver = (ev)=>{
         if(context.rootRef!=ref){
