@@ -1,7 +1,7 @@
 import {ref, useRef, useContext, useEffect} from 'react'
 import styled from 'styled-components'
 import {DefaultStyle} from 'container/wrapper/RDragAndDropWrapper'
-import {dragAndDropContext, isDescendant} from 'utils/rDragAndDropUtils'
+import {dragAndDropContext} from 'rDragAndDrop/index'
 
 const Styled = styled.div`
     width: calc(100% - 10vh);

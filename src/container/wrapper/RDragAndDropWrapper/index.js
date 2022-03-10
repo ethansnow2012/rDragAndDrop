@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import {useState, useRef, useContext, useEffect, useLayoutEffect} from 'react'
-import {dragAndDropUtils, dragAndDropContext, isDescendant} from 'utils/rDragAndDropUtils'
+import {dragAndDropUtils, dragAndDropContext, isDescendant} from 'rDragAndDrop/index'
 
 const Styled = styled.div`
     &.hovered {
@@ -22,7 +22,7 @@ export function RDragAndDropWrapper(props){
     useEffect(()=>{
         //console.log('context changed')
         if(dragContext.wrapperRef?.current!=ref.current&&dragContext.targetRef?.current&&dragContext.wrapperRef?.current){
-            if(!isDescendant(dragContext.wrapperRef.current, dragContext.targetRef.current)){
+            if(!dragAndDropUtils.isDescendantOrSelf(dragContext.wrapperRef.current, dragContext.targetRef.current)){
                 setHovered(false)                
             }
         }
@@ -31,7 +31,7 @@ export function RDragAndDropWrapper(props){
     const dragStart = ()=>{
         console.log('dragStart',hovered)
     }
-    const dragOver = dragAndDropUtils.dragOver((ev)=>{
+    const dragOver = dragAndDropUtils.dragWrapper.dragOver((ev)=>{
         //console.log('dragOver',hovered)
         //ev.preventDefault()
         //setHovered(true)
@@ -75,10 +75,10 @@ export function RDragAndDropWrapper(props){
         setDragContext({...dragContext, hoverDelegated: [hovered, setHovered, ref]}) 
         setHovered(true)
     }
-    const dragLeave = dragAndDropUtils.dragLeave((ev)=>{
+    const dragLeave = dragAndDropUtils.dragWrapper.dragLeave((ev)=>{
         console.log('leave outter',document.latestDragEntered, ev.target, ref.current)
         
-        if(!isDescendant(ref.current, ev.target)){
+        if(!dragAndDropUtils.isDescendantOrSelf(ref.current, ev.target)){
             setHovered(false)                
         }
 
@@ -89,17 +89,6 @@ export function RDragAndDropWrapper(props){
         }
         document.latestDragEntered = null
         document.latestDragLeaved = null
-        
-        //setHovered(false)
-        // if(!(ref.current==document.latestDragEntered?.parentElement)
-        //     //|| (ref.current==document.latestDragLeaved?.parentElement)
-        // ){
-        //     document.latestDragEntered = null//ev.target
-        //     console.log('11', document.latestDragEntered, document.latestDragLeaved)
-        // }else{
-        //     console.log('22', document.latestDragEntered, document.latestDragLeaved)
-        //     setHovered(false)
-        // }
         
     })
     

@@ -9,8 +9,8 @@ import {StaticBackgroundBlock, DefaultStyle as StaticBackgroundBlockStyle} from 
 import {RDragAndDropRoot} from 'container/wrapper/RDragAndDropRoot'
 import {RDragAndDropWrapper} from 'container/wrapper/RDragAndDropWrapper'
 import {RDragAndDropTarget} from 'component/RDragAndDropTarget'
-import {dragAndDropUtils, dragAndDropContext} from 'utils/rDragAndDropUtils'
-import {makeid} from 'utils/globalUtils'
+import {dragAndDropUtils, dragAndDropContext} from 'rDragAndDrop/index'
+
 
 
 const Styled = styled.div`

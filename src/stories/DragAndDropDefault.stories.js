@@ -3,7 +3,7 @@ import {getTodoData} from 'service/todos'
 import {RDragAndDropTarget} from 'component/RDragAndDropTarget'
 import {RDragAndDropRoot} from 'container/wrapper/RDragAndDropRoot'
 import {RDragAndDropWrapper} from 'container/wrapper/RDragAndDropWrapper'
-import {dragAndDropUtils, dragAndDropContext} from 'utils/rDragAndDropUtils'
+import {dragAndDropUtils, dragAndDropContext} from 'rDragAndDrop/index'
 
 
 
