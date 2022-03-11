@@ -43,30 +43,27 @@ dragAndDropWrapper.prototype.dragOver =  function({usedContext, ref}, callback){
     }
 }
 
-dragAndDropWrapper.prototype.drop = function({usedContext, stateData, stateDragHover, props}, callback){
+dragAndDropWrapper.prototype.drop = function({usedContext, stateData, stateDragHover, ref, props}, callback){
     return function(ev){
+        console.log('drop')
+        
         const [data, setData] = stateData
         const [context, setContext] = usedContext
         const [isDragHover, setIsDragHover] = stateDragHover
-        setTimeout(()=>{ // this wait for state to be updated
-            console.log('drop')
 
-            console.log('context', context)
-            let latestDraggedParent = context.latestDraggedParent
-            let latestDragged = context.latestDragged
-            let latestDropParent = context.latestDropParent// the same with props.self
-            let latestDrop = context.latestDrop
-            
-            // functions with side effects
+        let latestDraggedParent = context.latestDraggedParent
+        let latestDragged = context.latestDragged
+        
+        if(ref.current==ev.target){
             dataMutate.removeSelfFromParent(latestDragged, latestDraggedParent)
-            dataMutate.addToAnotherParent(latestDragged, props.self, latestDrop)
+            dataMutate.addToAnotherParent(latestDragged, props.self, null)
             
             setData((_data)=>{//after mutation forcely invoke react update
                 return {..._data}
             })
-            setIsDragHover(false)
-        }, 0)
-
+        }
+        
+        setIsDragHover(false)
         if(typeof callback=='function'){
             callback(ev)
         }  
@@ -122,5 +119,30 @@ dragAndDropWrapper.prototype.wrapperRefEffectFn = function({usedContext, stateDr
         if(typeof callback=='function'){
             callback()
         }  
+    }
+}
+
+dragAndDropWrapper.prototype.latestDropEffectFn = function({usedContext, stateData, stateDragHover, ref, props}, callback){
+    return function(){
+        
+        console.log('latestDropEffectFn')
+        const [data, setData] = stateData
+        const [context, setContext] = usedContext
+        if(!context.latestDrop){
+            return
+        }
+        const [isDragHover, setIsDragHover] = stateDragHover
+        const latestDraggedParent = context.latestDraggedParent
+        const latestDragged = context.latestDragged
+        const latestDropParent = context.latestDropParent// the same with props.self
+        const latestDrop = context.latestDrop
+        
+        // functions with side effects
+        dataMutate.removeSelfFromParent(latestDragged, latestDraggedParent)
+        dataMutate.addToAnotherParent(latestDragged, props.self, latestDrop)
+        
+        setData((_data)=>{//after mutation forcely invoke react update
+            return {..._data}
+        })
     }
 }

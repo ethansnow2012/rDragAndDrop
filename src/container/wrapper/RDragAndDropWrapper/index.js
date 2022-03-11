@@ -30,6 +30,10 @@ export function RDragAndDropWrapper(props){
             dragAndDropUtils.dragWrapper.wrapperRefEffectFn(dragAndDropWrapperInitObject),
             [context.wrapperRef]
         )
+    useEffect(
+            dragAndDropUtils.dragWrapper.latestDropEffectFn(dragAndDropWrapperInitObject),
+            [context.latestDrop]
+        )
     
     
 
