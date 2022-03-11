@@ -25,3 +25,5 @@ yarn-error.log*
 storybook-static/*
 
 dist/*
+
+.private_note
