@@ -1,7 +1,6 @@
 {
-  "name": "my-app",
+  "name": "rdrag-rdrop",
   "version": "0.1.0",
-  "private": true,
   "main": "dist/rDragAndDrop.js",
   "dependencies": {
     "@storybook/addon-docs": "^6.4.19",
