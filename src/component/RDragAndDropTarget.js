@@ -21,11 +21,12 @@ const Styled = styled.div`
     }
     &.isDragHover{
         margin-bottom: var(---placeholder-height);
+        transform: translateY(var(---placeholder-height));
     }
     &.isDragHover:after{
         position: absolute;
         content: '';
-        top: 100%;
+        bottom: 100%;
         background: grey;
         width: 100%;
         height: 100%;
