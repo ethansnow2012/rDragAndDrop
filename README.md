@@ -6,7 +6,7 @@
 </p>
 
 ## Note!
-> This project is fully tested use with some care. And welcome any form of contribution ^.^ at this stage.
+> This project is Not fully tested use with some care. And welcome any form of contribution ^.^ at this stage.
 
 ## Quickstart
  - npm install: 
