@@ -110,11 +110,12 @@ dragAndDropTarget.prototype.dragEnd = function({usedContext, stateDragging}, cal
  * 
  * @return {function}
  **/
-dragAndDropTarget.prototype.drop = function({usedContext, latestDrop, latestDropParent}, callback){
+dragAndDropTarget.prototype.drop = function({usedContext, latestDrop, latestDropParent, stateDragHover}, callback){
     return function(ev){
         const [context, setContext] = usedContext
+        const [isDragHover, setIsDragHover] = stateDragHover
         setContext({...context, latestDrop, latestDropParent})
-
+        setIsDragHover(false)
         if(typeof callback=='function'){
             callback(ev)
         }  
