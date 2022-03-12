@@ -137,6 +137,10 @@ dragAndDropWrapper.prototype.latestDropEffectFn = function({usedContext, stateDa
         const latestDropParent = context.latestDropParent// the same with props.self
         const latestDrop = context.latestDrop
         
+        if(latestDropParent != props.self){
+            return
+        }
+        
         // functions with side effects
         dataMutate.removeSelfFromParent(latestDragged, latestDraggedParent)
         dataMutate.addToAnotherParent(latestDragged, props.self, latestDrop)
