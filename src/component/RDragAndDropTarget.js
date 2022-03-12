@@ -3,7 +3,10 @@ import {useRef, useState, useContext} from 'react'
 import {dragAndDropUtils, dragAndDropContext} from 'rDragAndDrop/index'
 
 const Styled = styled.div`
+    ---color: yellow;
+    ---placeholder-height: 100px;
     padding: 5px 10px;
+    position:relative;
     &:hover{
         cursor: grab;
         cursor: -moz-grab;
@@ -16,8 +19,20 @@ const Styled = styled.div`
         cursor: grabbing !important;
         cursor: url(https://www.google.com/intl/en_ALL/mapfiles/closedhand.cur);
     }
-    .isDragHover{}
+    &.isDragHover{
+        margin-bottom: var(---placeholder-height);
+    }
+    &.isDragHover:after{
+        position: absolute;
+        content: '';
+        top: 100%;
+        background: grey;
+        width: 100%;
+        height: 100%;
+        left: 0;
+    }
 `
+
 
 
 export function RDragAndDropTarget(props){
@@ -42,7 +57,14 @@ export function RDragAndDropTarget(props){
             (ev)=>{console.log('dragStart');}
         )
     const dragOver = dragAndDropUtils.dragTarget.dragOver(
-            dragTargetInitObject
+            dragTargetInitObject,
+            ()=>{
+                const selfHeight = ref.current.offsetHeight
+                
+                ref.current.style.setProperty("---color", "grey");
+                ref.current.style.setProperty("---placeholder-height", selfHeight+"px");
+                console.log('---placeholder-height', selfHeight+"px")
+            }
         )
     
     const dragEnd = dragAndDropUtils.dragTarget.dragEnd(
