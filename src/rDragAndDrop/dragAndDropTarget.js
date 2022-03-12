@@ -57,7 +57,8 @@ dragAndDropTarget.prototype.dragStart = function({usedContext, stateDragging, pr
             latestDropParent:null
         })
         window.requestAnimationFrame(()=>{
-            ev.target.style.visibility = "hidden"; 
+            ev.target.display="none"
+            //ev.target.style.visibility = "hidden"; 
         })
         document.latestWrapperState = 'DRAG_INIT'
         if(typeof callback=='function'){
@@ -76,6 +77,12 @@ dragAndDropTarget.prototype.dragOver = function({usedContext, ref}, callback){
     const [context, setContext] = usedContext
     return function(ev){
         ev.preventDefault()
+        // if(ev.target==ref.current){
+        //     ref.current.style.height = '0'
+        // }else{
+        //     ref.current.style.height = ''
+        // }
+        
         if(context.targetRef!=ref){
             setContext({...context, targetRef: ref})
         }
@@ -98,7 +105,8 @@ dragAndDropTarget.prototype.dragEnd = function({usedContext, stateDragging}, cal
         setIsDragging(_isDragging)
         setContext({...context, _isDragging})
         window.requestAnimationFrame(()=>{
-            ev.target.style.visibility = ""; 
+            ev.target.display=""
+        //     ev.target.style.visibility = ""; 
         })
         if(typeof callback=='function'){
             callback(ev)

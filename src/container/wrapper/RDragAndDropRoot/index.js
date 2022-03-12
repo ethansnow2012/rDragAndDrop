@@ -1,7 +1,8 @@
 import {ref, useRef, useContext, useEffect} from 'react'
 import styled from 'styled-components'
 import {DefaultStyle} from 'container/wrapper/RDragAndDropWrapper'
-import {dragAndDropContext} from 'rDragAndDrop/index'
+import {dragAndDropContext, dragAndDropUtils} from 'rDragAndDrop/index'
+
 
 const Styled = styled.div`
     width: calc(100% - 10vh);
@@ -23,22 +24,16 @@ export function RDragAndDropRoot(props){
     const ref = useRef(null)
     const {contextInstance} = useContext(dragAndDropContext)
     const [context, setContext] = contextInstance
-    
-    const dragOver = (ev)=>{
-        if(context.rootRef!=ref){
-            setContext({...context, rootRef: ref})
-        }
-        ev.preventDefault()
+    const dragAndDropRootInitObject = {
+        usedContext: [context, setContext],
+        ref
     }
-
-    const drop = ()=>{
-        console.log('root drop')
-        if(context.hoverDelegated){
-            const [isDragHover, setIsDragHover, _ref] = context.hoverDelegated
-            setIsDragHover(false)   
-        }
-        console.log('root drop next')
-    }
+    const dragOver = dragAndDropUtils.dragRoot.dragOver(
+            dragAndDropRootInitObject
+        )
+    const drop = dragAndDropUtils.dragRoot.drop(
+            dragAndDropRootInitObject
+        )
     return (
             <Styled 
                 onDragOver={dragOver}

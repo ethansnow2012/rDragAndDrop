@@ -1,6 +1,7 @@
 import {useState, createContext} from 'react'
 import {dragAndDropTarget} from './dragAndDropTarget'
 import {dragAndDropWrapper} from './dragAndDropWrapper'
+import {dragAndDropRoot} from './dragAndDropRoot'
 
 
  /**
@@ -10,6 +11,7 @@ import {dragAndDropWrapper} from './dragAndDropWrapper'
   *  - setData
   *  - targetRef
   *  - wrapperRef
+  *  - rootRef
   **/
 const _context = createContext(null)
 
@@ -48,6 +50,8 @@ core.prototype.isDescendantOrSelf = function (parent, child) {
 
 core.prototype.dragTarget = new dragAndDropTarget()
 core.prototype.dragWrapper = new dragAndDropWrapper()
+core.prototype.dragRoot = new dragAndDropRoot()
+
 //core.prototype.dataMutate = new _dataMutate()
 
 export const dragAndDropUtils = new core();

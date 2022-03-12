@@ -4,7 +4,7 @@ import {dragAndDropUtils, dragAndDropContext} from 'rDragAndDrop/index'
 
 const Styled = styled.div`
     ---color: yellow;
-    ---placeholder-height: 100px;
+    ---placeholder-height: unset;
     padding: 5px 10px;
     position:relative;
     &:hover{
@@ -14,16 +14,19 @@ const Styled = styled.div`
     }
     &.isDragging{
         background: green;
+        transition: height 1s;/* this seems to avoid some flickers.*/
     }
     &.isDragging:active{
-        cursor: grabbing !important;
-        cursor: url(https://www.google.com/intl/en_ALL/mapfiles/closedhand.cur);
+        //cursor: grabbing !important;
+        //cursor: url(https://www.google.com/intl/en_ALL/mapfiles/closedhand.cur);
     }
-    &.isDragHover{
-        margin-bottom: var(---placeholder-height);
-        transform: translateY(var(---placeholder-height));
+    &.isDragHover:not(.isDragging){
+        z-index: 1;
+        margin-top: calc(1 * var(---placeholder-height));
+        //margin-bottom: calc(0.5 * var(---placeholder-height));
+        //transform: translateY(var(---placeholder-height));
     }
-    &.isDragHover:after{
+    &.isDragHover:not(.isDragging)::after{
         position: absolute;
         content: '';
         bottom: 100%;
