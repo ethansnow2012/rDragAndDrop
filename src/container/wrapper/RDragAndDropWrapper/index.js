@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import {useState, useRef, useContext, useEffect, useLayoutEffect} from 'react'
+import {useState, useRef, useContext, useEffect, useLayoutEffect, useImperativeHandle, forwardRef} from 'react'
 import {dragAndDropUtils, dragAndDropContext, isDescendant} from 'rDragAndDrop/index'
 
 const Styled = styled.div`
@@ -10,7 +10,7 @@ const Styled = styled.div`
     box-sizing: context-box;
 `
 
-export function RDragAndDropWrapper(props){
+export const RDragAndDropWrapper = forwardRef(function (props, forwordSelfRef){
     const [isDragHover, setIsDragHover] = useState(false)
     const ref = useRef(null)
     const {
@@ -26,6 +26,14 @@ export function RDragAndDropWrapper(props){
         props,
         ref
     }
+    
+    useImperativeHandle(forwordSelfRef, ()=>
+        ({
+            simpleConsole: ()=>{ console.log('simpleConsole', ref) }
+        })
+    )
+    
+    
     useEffect(
             dragAndDropUtils.dragWrapper.wrapperRefEffectFn(dragAndDropWrapperInitObject),
             [context.wrapperRef]
@@ -75,6 +83,6 @@ export function RDragAndDropWrapper(props){
             {props.children}
         </Styled>
     )
-}
+})
 
 export const DefaultStyle = Styled;
