@@ -11,8 +11,8 @@ import { ExamplePage } from 'container/ExamplePage';
 
 function App() {
   return (
-    <div>    
-    <BrowserRouter basename="/rdrag-rdrop">
+    <div> 
+    <BrowserRouter basename={process.env.DESTINATION=='github_page'?'/rdrag-rdrop':''}>
       <Routes>
         <Route path='/' element={<MainPage />}></Route>
         <Route path='/about' element={<AboutPage />}></Route>
