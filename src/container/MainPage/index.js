@@ -46,7 +46,6 @@ const Styled = styled.div`
 `
 
 export function MainPage() {
-    let tempRef = useRef(null)
     let refsMap = useRef(new Map()).current;
     const [todoData, setTodoData] = useState({data:[]})
 
@@ -90,7 +89,7 @@ export function MainPage() {
                                 return(    
                                     <RDragAndDropWrapper 
                                         ref={setRefsMap(columnData)}
-                                        data-foo={ii} key={columnData.id} self={columnData} parent={columnData} >
+                                        data-foo={ii} key={columnData.id} self={columnData} parent={todoData.data} >
                                         <div className='p-column-inner'>
                                             {
                                                 columnData.data
