@@ -36,13 +36,32 @@ const Styled = styled.div`
     & ${StaticBackgroundBlockStyle} ${RDragAndDropWrapperStyle} .p-column-inc{
         width: 100%;
         margin-top:auto;
+        min-width:110px
     }
     & ${StaticBackgroundBlockStyle} ${RDragAndDropWrapperStyle} .p-column-inc-add{
         width: 100%;
         height: 30px;
         background: grey;
+        justify-content: center;
+        align-items: center;
+        display:flex;
     }
-    
+    & ${StaticBackgroundBlockStyle} ${RDragAndDropWrapperStyle} .p-column-inc-add::before{
+        content:'+';
+        color: white;
+        position:relative;
+        top:-2px;
+        font-size: 23px;
+        left:-1px;
+    }
+    .rDragAndDropRoot-wrapper{
+        width: calc(100% - 10vh);
+        height: calc(100vh - 20vh);
+        display: flex;
+        justify-content: center;
+        max-width: 100%;
+        overflow: auto;
+    }
 `
 
 export function MainPage() {
@@ -81,33 +100,35 @@ export function MainPage() {
         <Styled>
         <StaticBackgroundBlock image={bg_1}>
             <dragAndDropContext.Provider value={contextObject}>   
-                <RDragAndDropRoot >
-                    {
-                        todoData.data
-                            ?.map((columnData,ii) =>
-                            {
-                                return(    
-                                    <RDragAndDropWrapper 
-                                        ref={setRefsMap(columnData)}
-                                        data-foo={ii} key={columnData.id} self={columnData} parent={todoData.data} >
-                                        <div className='p-column-inner'>
-                                            {
-                                                columnData.data
-                                                    .map((todoItem, jj)=>(
-                                                        <RDragAndDropTarget key={todoItem.id} self={todoItem} parent={columnData}/>
-                                                    ))
-                                            }
-                                        </div>
-                                        <div className='p-column-inc'>
-                                            <div className='p-column-inc-add' onClick={logRef(columnData.id)}>
+                <div className='rDragAndDropRoot-wrapper'>
+                    <RDragAndDropRoot >
+                        {
+                            todoData.data
+                                ?.map((columnData,ii) =>
+                                {
+                                    return(    
+                                        <RDragAndDropWrapper 
+                                            ref={setRefsMap(columnData)}
+                                            data-foo={ii} key={columnData.id} self={columnData} parent={todoData.data} >
+                                            <div className='p-column-inner'>
+                                                {
+                                                    columnData.data
+                                                        .map((todoItem, jj)=>(
+                                                            <RDragAndDropTarget key={todoItem.id} self={todoItem} parent={columnData}/>
+                                                        ))
+                                                }
                                             </div>
-                                        </div>
-                                    </RDragAndDropWrapper>
-                                )
-                            }
-                        )
-                    }
-                </RDragAndDropRoot>
+                                            <div className='p-column-inc'>
+                                                <div className='p-column-inc-add' onClick={logRef(columnData.id)}>
+                                                </div>
+                                            </div>
+                                        </RDragAndDropWrapper>
+                                    )
+                                }
+                            )
+                        }
+                    </RDragAndDropRoot>
+                </div>
             </dragAndDropContext.Provider>
         </StaticBackgroundBlock>
         <StaticBackgroundBlock image={bg_2}/>

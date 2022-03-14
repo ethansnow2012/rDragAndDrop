@@ -15,7 +15,7 @@ export function StaticBackgroundBlock(props) {
     },[])
     //
     return (
-        <StyledBlock image={props.image}>
+        <StyledBlock className={props.className} image={props.image}>
             {props.children}
         </StyledBlock>
     )
