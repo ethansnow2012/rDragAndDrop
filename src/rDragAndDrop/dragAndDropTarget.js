@@ -77,11 +77,11 @@ dragAndDropTarget.prototype.dragOver = function({usedContext, ref}, callback){
     const [context, setContext] = usedContext
     return function(ev){
         ev.preventDefault()
-        // if(ev.target==ref.current){
-        //     ref.current.style.height = '0'
-        // }else{
-        //     ref.current.style.height = ''
-        // }
+        const selfHeight = ref.current.offsetHeight
+                
+        ref.current.style.setProperty("---color", "grey");
+        ref.current.style.setProperty("---placeholder-height", selfHeight+"px");
+        console.log('---placeholder-height', selfHeight+"px")
         
         if(context.targetRef!=ref){
             setContext({...context, targetRef: ref})

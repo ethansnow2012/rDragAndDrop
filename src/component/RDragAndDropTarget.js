@@ -61,14 +61,7 @@ export function RDragAndDropTarget(props){
             (ev)=>{console.log('dragStart');}
         )
     const dragOver = dragAndDropUtils.dragTarget.dragOver(
-            dragTargetInitObject,
-            ()=>{
-                const selfHeight = ref.current.offsetHeight
-                
-                ref.current.style.setProperty("---color", "grey");
-                ref.current.style.setProperty("---placeholder-height", selfHeight+"px");
-                console.log('---placeholder-height', selfHeight+"px")
-            }
+            dragTargetInitObject
         )
     
     const dragEnd = dragAndDropUtils.dragTarget.dragEnd(
