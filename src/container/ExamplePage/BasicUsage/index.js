@@ -23,7 +23,7 @@ const Styled = styled.div`
         margin-right: 2em;
     }
 
-    & ${DefaultStyleRoot} ${DefaultStyleWrapper}.hovered{
+    & ${DefaultStyleRoot} ${DefaultStyleWrapper}.isDragHover{
         background: red;
     }
 
@@ -54,7 +54,7 @@ export function BasicUsage() {
     return (
         <Styled>
             <dragAndDropContext.Provider value={contextObject}>
-                <h2>BasicUseage: {dataState.title}</h2>
+                <h2 >BasicUseage: {dataState.title}</h2>
                 <RDragRDropRoot>
                     {
                         dataState.data
@@ -63,7 +63,7 @@ export function BasicUsage() {
                                 return(  
                                     <div>
                                         <div>
-                                            <h3>{wrapperData.title}</h3>
+                                            <h3 style={{height:"72px"}}>{wrapperData.title}</h3>
                                         </div>
                                         <RDragRDropWrapper key={wrapperData.id} self={wrapperData} parent={dataState.data}>
                                             {

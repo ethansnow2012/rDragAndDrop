@@ -6,6 +6,7 @@ const Styled = styled.div`
     ---color: yellow;
     ---placeholder-height: unset;
     position:relative;
+    box-sizing: context-box;
     &:hover{
         cursor: grab;
         cursor: -moz-grab;
@@ -24,12 +25,13 @@ const Styled = styled.div`
         margin-top: calc(1 * var(---placeholder-height));
         //margin-bottom: calc(0.5 * var(---placeholder-height));
         //transform: translateY(var(---placeholder-height));
+        //margin-top: 110px;
     }
     &.isDragHover:not(.isDragging)::after{
         position: absolute;
         content: '';
         bottom: 100%;
-        background: grey;
+        background: grey; /* this should be overwrited*/
         width: 100%;
         height: 100%;
         left: 0;

@@ -4,6 +4,10 @@ import {dragAndDropUtils, dragAndDropContext, isDescendant, dataMutate} from 'rD
 
 const Styled = styled.div`
     box-sizing: context-box;
+    /* this avoid margin collapse at the cost of using some css property */
+      border-top: 1px solid transparent;
+      margin-top: -1px;
+    /* -- */
 `
 
 export const RDragRDropWrapper = forwardRef(function (props, forwordSelfRef){
@@ -84,7 +88,7 @@ export const RDragRDropWrapper = forwardRef(function (props, forwordSelfRef){
             onDragEnd={dragEnd}
             onDragLeave={dragLeave} 
             onDragEnter={dragEnter}
-            className={isDragHover?'hovered':''}
+            className={isDragHover?' isDragHover':''}
         >
             {props.children}
         </Styled>
