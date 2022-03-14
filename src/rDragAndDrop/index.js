@@ -2,6 +2,7 @@ import {useState, createContext} from 'react'
 import {dragAndDropTarget} from './dragAndDropTarget'
 import {dragAndDropWrapper} from './dragAndDropWrapper'
 import {dragAndDropRoot} from './dragAndDropRoot'
+import {dataMutate} from './dataMutate'
 
 
  /**
@@ -56,3 +57,4 @@ core.prototype.dragRoot = new dragAndDropRoot()
 
 export const dragAndDropUtils = new core();
 export const dragAndDropContext = _context;
+export {dataMutate}

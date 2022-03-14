@@ -4,7 +4,7 @@ import bg_3 from 'assets/bg-3.jpg';
 
 import react, {useState, useRef, useEffect, forwardRef, createRef} from 'react'
 import styled from 'styled-components'
-import {getTodoData} from 'service/todos'
+import {getAllTodoData, getNewOneTodoData} from 'service/todos'
 import {StaticBackgroundBlock, DefaultStyle as StaticBackgroundBlockStyle} from 'container/StaticBackgroundBlock'
 import {RDragAndDropRoot} from 'container/wrapper/RDragAndDropRoot'
 import {RDragAndDropWrapper, DefaultStyle as RDragAndDropWrapperStyle} from 'container/wrapper/RDragAndDropWrapper'
@@ -47,21 +47,36 @@ const Styled = styled.div`
 
 export function MainPage() {
     let tempRef = useRef(null)
+    let refsMap = useRef(new Map()).current;
     const [todoData, setTodoData] = useState({data:[]})
+
+    // Closure:refsMap, todoData
+    const setRefsMap = function(columnData){
+        return (ref) => {
+            //console.log('setRefsMap', columnData, ref)
+            return ref === null ? refsMap.delete(columnData.id) : refsMap.set(columnData.id, ref)
+        }
+    }
+    
+
     const dragAndDropContextInstance = dragAndDropUtils.initContext()()
     const contextObject = {
         data: todoData, 
         setData: setTodoData, 
         contextInstance: dragAndDropContextInstance
     }
-    
-    const logRef = (tempRef)=>{
-        return ()=>{
-            tempRef.current.simpleConsole()
+
+    // Closure:refsMap
+    const logRef = (id)=>{
+        return async ()=>{
+            const dueRef = refsMap.get(id)
+            console.log('logRef', dueRef)
+            const newData = await getNewOneTodoData()
+            dueRef.updateOneTodo(newData)
         }
     }
     useEffect(async ()=>{
-        setTodoData(await getTodoData().then((data)=>{console.log('a', data); return data }))
+        setTodoData(await getAllTodoData().then((data)=>{console.log('a', data); return data }))
     },[])
     return (
         <Styled>
@@ -74,8 +89,8 @@ export function MainPage() {
                             {
                                 return(    
                                     <RDragAndDropWrapper 
-                                        ref={tempRef}
-                                        data-foo='ii' key={columnData.id} self={columnData} parent={columnData} >
+                                        ref={setRefsMap(columnData)}
+                                        data-foo={ii} key={columnData.id} self={columnData} parent={columnData} >
                                         <div className='p-column-inner'>
                                             {
                                                 columnData.data
@@ -85,7 +100,7 @@ export function MainPage() {
                                             }
                                         </div>
                                         <div className='p-column-inc'>
-                                            <div className='p-column-inc-add' onClick={logRef(tempRef)}>
+                                            <div className='p-column-inc-add' onClick={logRef(columnData.id)}>
                                             </div>
                                         </div>
                                     </RDragAndDropWrapper>

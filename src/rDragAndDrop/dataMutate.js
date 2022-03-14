@@ -6,7 +6,7 @@ _dataMutate.prototype.removeSelfFromParent = function(latestDragged, latestDragg
     latestDraggedParent.data.splice(indexToParent, 1)//using splice sideEffect
 }
 
-_dataMutate.prototype.addToAnotherParent = function(latestDragged, targetParent, dropedElement){
+_dataMutate.prototype.addToAnotherParent = function(latestDragged, targetParent, dropedElement=null){
     let indexToBeAppend = targetParent.data.indexOf(dropedElement)
     if(indexToBeAppend>=0){
         targetParent.data.splice(indexToBeAppend, 0, latestDragged)

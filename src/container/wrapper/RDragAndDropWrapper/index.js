@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import {useState, useRef, useContext, useEffect, useLayoutEffect, useImperativeHandle, forwardRef} from 'react'
-import {dragAndDropUtils, dragAndDropContext, isDescendant} from 'rDragAndDrop/index'
+import {dragAndDropUtils, dragAndDropContext, isDescendant, dataMutate} from 'rDragAndDrop/index'
 
 const Styled = styled.div`
     &.hovered {
@@ -29,7 +29,16 @@ export const RDragAndDropWrapper = forwardRef(function (props, forwordSelfRef){
     
     useImperativeHandle(forwordSelfRef, ()=>
         ({
-            simpleConsole: ()=>{ console.log('simpleConsole', ref) }
+            simpleConsole: ()=>{ console.log('simpleConsole', ref) },
+            updateOneTodo: async (data)=>{
+                console.log('here', data, props.self)
+                
+                dataMutate.addToAnotherParent(data, props.self)
+                setData((_data)=>{//after mutation forcely invoke react update
+                    return {..._data}
+                })
+                console.log(data, context, props)
+            }
         })
     )
     

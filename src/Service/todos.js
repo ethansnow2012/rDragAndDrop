@@ -1,11 +1,19 @@
 //import axios from 'axios';
 
-import fakeTodos from 'testData/todos'
+import fakeAllTodos, {fakeNewOneTodo} from 'testData/todos'
 
-export async function getTodoData(){
+export async function getAllTodoData(){
     return new Promise((resolve, reject)=>{
         setTimeout(()=>{
-            resolve(fakeTodos)
+            resolve(fakeAllTodos)
         },1500)
+    })
+}
+
+export async function getNewOneTodoData(){
+    return new Promise((resolve, reject)=>{
+        setTimeout(()=>{
+            resolve(fakeNewOneTodo())
+        },700)
     })
 }

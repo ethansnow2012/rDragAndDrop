@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {getTodoData} from 'service/todos'
+import {getAllTodoData} from 'service/todos'
 import {RDragAndDropTarget} from 'component/RDragAndDropTarget'
 import {RDragAndDropRoot} from 'container/wrapper/RDragAndDropRoot'
 import {RDragAndDropWrapper} from 'container/wrapper/RDragAndDropWrapper'
@@ -24,7 +24,7 @@ export const Default = ()=>{
         contextInstance: dragAndDropContextInstance
     }
     useEffect(async ()=>{
-        setContentTestData(await getTodoData().then((data)=>{console.log('a', data); return data }))
+        setContentTestData(await getAllTodoData().then((data)=>{console.log('a', data); return data }))
     },[])
     return (
         <>
