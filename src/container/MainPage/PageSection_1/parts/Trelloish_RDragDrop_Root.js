@@ -1,6 +1,6 @@
 import {ref, useRef, useContext, useEffect} from 'react'
 import styled from 'styled-components'
-import {DefaultStyle} from 'container/wrapper/RDragAndDropWrapper'
+import {DefaultStyle} from './Trelloish_RDragDrop_Wrapper'
 import {dragAndDropContext, dragAndDropUtils} from 'rDragAndDrop/index'
 
 
@@ -18,7 +18,7 @@ const Styled = styled.div`
     }
 `
 
-export function RDragAndDropRoot(props){
+export function Trelloish_RDragDrop_Root(props){
     const ref = useRef(null)
     const {contextInstance} = useContext(dragAndDropContext)
     const [context, setContext] = contextInstance

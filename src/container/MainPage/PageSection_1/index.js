@@ -4,10 +4,12 @@ import react, {useState, useRef, useEffect, forwardRef, createRef} from 'react'
 import styled from 'styled-components'
 import {getAllTodoData, getNewOneTodoData} from 'service/todos'
 import {StaticBackgroundBlock, DefaultStyle as StaticBackgroundBlockStyle} from 'container/StaticBackgroundBlock'
-import {RDragAndDropRoot} from 'container/wrapper/RDragAndDropRoot'
-import {RDragAndDropWrapper, DefaultStyle as RDragAndDropWrapperStyle} from 'container/wrapper/RDragAndDropWrapper'
-import {RDragAndDropTarget} from 'component/RDragAndDropTarget'
+
 import {dragAndDropUtils, dragAndDropContext} from 'rDragAndDrop/index'
+
+import {Trelloish_RDragDrop_Root} from './parts/Trelloish_RDragDrop_Root'
+import {Trelloish_RDragDrop_Wrapper, DefaultStyle as RDragAndDropWrapperStyle} from './parts/Trelloish_RDragDrop_Wrapper'
+import {Trelloish_RDragDrop_Target} from './parts/Trelloish_RDragDrop_Target'
 
 const Styled = styled.div`
     & ${StaticBackgroundBlockStyle}{
@@ -98,20 +100,20 @@ export function PageSection_1() {
             <StaticBackgroundBlock image={bg_1}>
                 <dragAndDropContext.Provider value={contextObject}>   
                     <div className='rDragAndDropRoot-wrapper'>
-                        <RDragAndDropRoot >
+                        <Trelloish_RDragDrop_Root >
                             {
                                 todoData.data
                                     ?.map((columnData,ii) =>
                                     {
                                         return(    
-                                            <RDragAndDropWrapper 
+                                            <Trelloish_RDragDrop_Wrapper 
                                                 ref={setRefsMap(columnData)}
                                                 data-foo={ii} key={columnData.id} self={columnData} parent={todoData.data} >
                                                 <div className='p-column-inner'>
                                                     {
                                                         columnData.data
                                                             .map((todoItem, jj)=>(
-                                                                <RDragAndDropTarget key={todoItem.id} self={todoItem} parent={columnData}/>
+                                                                <Trelloish_RDragDrop_Target key={todoItem.id} self={todoItem} parent={columnData}/>
                                                             ))
                                                     }
                                                 </div>
@@ -119,12 +121,12 @@ export function PageSection_1() {
                                                     <div className='p-column-inc-add' onClick={logRef(columnData.id)}>
                                                     </div>
                                                 </div>
-                                            </RDragAndDropWrapper>
+                                            </Trelloish_RDragDrop_Wrapper>
                                         )
                                     }
                                 )
                             }
-                        </RDragAndDropRoot>
+                        </Trelloish_RDragDrop_Root>
                     </div>
                 </dragAndDropContext.Provider>
             </StaticBackgroundBlock>

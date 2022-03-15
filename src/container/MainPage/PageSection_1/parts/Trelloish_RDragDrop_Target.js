@@ -39,7 +39,7 @@ const Styled = styled.div`
 
 
 
-export function RDragAndDropTarget(props){
+export function Trelloish_RDragDrop_Target(props){
     const ref = useRef(null)
     const {contextInstance} = useContext(dragAndDropContext)
     const [isDragHover, setIsDragHover] = useState(false)
