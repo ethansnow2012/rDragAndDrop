@@ -6,13 +6,19 @@ import {dragAndDropUtils, dragAndDropContext, isDescendant, dataMutate} from 'rD
 const Styled = styled.div`
     width:80px;
     height:80px;
+    ---x_complement:0px;
+    ---y_complement:0px;
     background:black;
     position: absolute;
-    top:var(---y);
-    left:var(---x);
+    top:calc(var(---y) + var(---y_complement));
+    left:calc(var(---x) + var(---x_complement));
+    &.isDragging{
+
+    }
 `
 
 export function Post_RDragDrop_Wrapper(props){
+    const [isDragging, setIsDragging] = useState(false)
     const [isDragHover, setIsDragHover] = useState(false)
     const ref = useRef(null)
     const {
@@ -24,22 +30,30 @@ export function Post_RDragDrop_Wrapper(props){
     const dragAndDropWrapperInitObject = {
         usedContext: [context, setContext],
         stateData: [data, setData],
+        stateDragging: [isDragging, setIsDragging],
         stateDragHover: [isDragHover, setIsDragHover],
         props,
         ref,
         options:{
-            draggable:true
+            draggableWrapper:true
         }
     }
     const dragStart = dragAndDropUtils.dragWrapper.dragStart(
         dragAndDropWrapperInitObject,
         (ev)=>{console.log('dragStart')}
     )
+    const dragEnd = dragAndDropUtils.dragWrapper.dragEnd(
+        dragAndDropWrapperInitObject,
+        (ev)=>{console.log('dragStart')}
+    )
+    
     return (
         <Styled
         ref={ref}
         onDragStart={dragStart}
-        draggable='true' >
+        onDragEnd={dragEnd}
+        draggable='true' 
+        className={(isDragging?' isDragging':'') + (isDragHover?' isDragHover':'')}>
             <div> </div>
         </Styled>
     )

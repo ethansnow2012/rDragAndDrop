@@ -1,5 +1,7 @@
 import {dataMutate} from './dataMutate'
 import {dragAndDropUtils} from './index'
+import {setCssPositionComplementViaRef, calcMousePosition} from './coreHelpers'
+
 
 export const dragAndDropWrapper = function () {}
 /**
@@ -14,12 +16,13 @@ export const dragAndDropWrapper = function () {}
  **/
 //dragAndDropWrapper.prototype.dragOver =  function(callback){
 
-dragAndDropWrapper.prototype.dragStart =  function({options, ref}, callback){
+dragAndDropWrapper.prototype.dragStart =  function({options, ref, stateDragging}, callback){
     return function(ev){
-        if(options&&options.draggable==true){
-            console.log('wrapper dragging start')
-            ref.current.style.setProperty("---x", "10px");
-            ref.current.style.setProperty("---y", "15px");
+        if(options&&options.draggableWrapper==true){
+            const [isDragging, setIsDragging] = stateDragging
+            setIsDragging(true)
+            const {x, y} = calcMousePosition(ev, ref)
+            setCssPositionComplementViaRef(ref, -x, -y)
         }
         if(typeof callback=='function'){
             callback(ev)
@@ -27,8 +30,12 @@ dragAndDropWrapper.prototype.dragStart =  function({options, ref}, callback){
     }
 }
 
-dragAndDropWrapper.prototype.dragEnd =  function({}, callback){
+dragAndDropWrapper.prototype.dragEnd =  function({options, ref, stateDragging}, callback){
     return function(ev){
+        if(options&&options.draggableWrapper==true){
+            const [isDragging, setIsDragging] = stateDragging
+            setIsDragging(false)
+        }
         if(typeof callback=='function'){
             callback(ev)
         }  
