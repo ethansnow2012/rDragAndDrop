@@ -16,6 +16,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "rollup": "rollup -c",
+    "npm-publish": "npm publish",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "export DESTINATION=development && react-scripts start",
