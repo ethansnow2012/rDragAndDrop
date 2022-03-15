@@ -2,7 +2,7 @@ import bg_1 from 'assets/bg-1.jpg';
 
 import react, {useState, useRef, useEffect, forwardRef, createRef} from 'react'
 import styled from 'styled-components'
-import {getAllTodoData, getNewOneTodoData} from 'service/todos'
+import {getAllTodoData, getNewOneTodoData} from 'service/data'
 import {StaticBackgroundBlock, DefaultStyle as StaticBackgroundBlockStyle} from 'container/StaticBackgroundBlock'
 
 import {dragAndDropUtils, dragAndDropContext} from 'rDragAndDrop/index'

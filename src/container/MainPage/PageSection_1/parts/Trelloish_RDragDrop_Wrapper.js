@@ -13,14 +13,12 @@ const Styled = styled.div`
 export const Trelloish_RDragDrop_Wrapper = forwardRef(function (props, forwordSelfRef){
     const [isDragHover, setIsDragHover] = useState(false)
     const ref = useRef(null)
-    const aa = useContext(dragAndDropContext)
-    console.log('dragAndDropContext',aa)
+    
     const {
             data,
             setData,
             contextInstance
         } = useContext(dragAndDropContext)
-    console.log('dragAndDropContext===')
     const [context, setContext] = contextInstance
     const dragAndDropWrapperInitObject = {
         usedContext: [context, setContext],

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {getAllTodoData} from 'service/todos'
+import {getAllTodoData} from 'service/data'
 import {RDragAndDropTarget} from 'component/RDragAndDropTarget'
 import {RDragAndDropRoot} from 'container/wrapper/RDragAndDropRoot'
 import {RDragAndDropWrapper} from 'container/wrapper/RDragAndDropWrapper'

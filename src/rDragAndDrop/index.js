@@ -13,6 +13,7 @@ import {dataMutate} from './dataMutate'
   *  - targetRef
   *  - wrapperRef
   *  - rootRef
+  *  - options
   **/
 const _context = createContext(null)
 

@@ -14,8 +14,13 @@ export const dragAndDropWrapper = function () {}
  **/
 //dragAndDropWrapper.prototype.dragOver =  function(callback){
 
-dragAndDropWrapper.prototype.dragStart =  function({}, callback){
+dragAndDropWrapper.prototype.dragStart =  function({options, ref}, callback){
     return function(ev){
+        if(options&&options.draggable==true){
+            console.log('wrapper dragging start')
+            ref.current.style.setProperty("---x", "10px");
+            ref.current.style.setProperty("---y", "15px");
+        }
         if(typeof callback=='function'){
             callback(ev)
         }  
