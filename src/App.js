@@ -12,7 +12,8 @@ import { ExamplePage } from 'container/ExamplePage';
 function App() {
   return (
     <div> 
-    <BrowserRouter basename={process.env.DESTINATION=='github_page'?'/rdrag-rdrop':''}>
+    <BrowserRouter basename={process.env.REACT_APP_NODE_ENV=='github_page'?'/rdrag-rdrop':''}>
+      
       <Routes>
         <Route path='/' element={<MainPage />}></Route>
         <Route path='/about' element={<AboutPage />}></Route>

@@ -1,6 +1,6 @@
 {
   "name": "rdrag-rdrop",
-  "version": "0.2.0",
+  "version": "0.3.1",
   "homepage": "https://ethansnow2012.github.io/rdrag-rdrop",
   "main": "dist/rDragAndDrop.js",
   "dependencies": {
@@ -17,10 +17,10 @@
   },
   "scripts": {
     "rollup": "rollup -c",
-    "npm-publish": "npm publish",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "start": "export DESTINATION=development && react-scripts start",
+    "npm-publish": "rollup -c&&npm publish",
+    "predeploy": "export REACT_APP_NODE_ENV=github_page && npm run build",
+    "deploy": "export REACT_APP_NODE_ENV=github_page && gh-pages -d build",
+    "start": "export REACT_APP_NODE_ENV=development && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
