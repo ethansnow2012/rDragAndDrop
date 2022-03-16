@@ -41,7 +41,7 @@ export function PageSection_2() {
                                 postsData.data
                                 ?.map((wrapperData)=>{
                                     return (
-                                        <Post_RDragDrop_Wrapper key={wrapperData.id}>
+                                        <Post_RDragDrop_Wrapper key={wrapperData.id} self={wrapperData} parent={postsData}>
                                         </Post_RDragDrop_Wrapper>
                                     )
                                 })

@@ -1,6 +1,6 @@
 import {dataMutate} from './dataMutate'
 import {dragAndDropUtils} from './index'
-import {setCssPositionComplementViaRef, calcMousePosition} from './coreHelpers'
+import {setCssPositionComplementViaRef, setCssPositionViaRef, calcMousePosition} from './coreHelpers'
 
 
 export const dragAndDropWrapper = function () {}
@@ -14,7 +14,23 @@ export const dragAndDropWrapper = function () {}
  * - dragEnter
  * - dragLeave
  **/
-//dragAndDropWrapper.prototype.dragOver =  function(callback){
+
+dragAndDropWrapper.prototype.init = function({options, props, ref}){
+    return function(){
+        console.log('wrapper init')
+        if(ref.current){
+            if(options&&options.draggableWrapper==true){
+                let {x, y} = props.self
+                if((typeof x=='number') && (typeof y=='number')){
+                    setCssPositionViaRef(ref, x, y)
+                }
+            }
+        }else{
+            console.log('Maybe invoked too early ref not ready.')
+        }
+        
+    }
+}
 
 dragAndDropWrapper.prototype.dragStart =  function({options, ref, stateDragging}, callback){
     return function(ev){

@@ -108,7 +108,7 @@ export function PageSection_1() {
                                         return(    
                                             <Trelloish_RDragDrop_Wrapper 
                                                 ref={setRefsMap(columnData)}
-                                                data-foo={ii} key={columnData.id} self={columnData} parent={todoData.data} >
+                                                data-foo={ii} key={columnData.id} self={columnData} parent={todoData} >
                                                 <div className='p-column-inner'>
                                                     {
                                                         columnData.data

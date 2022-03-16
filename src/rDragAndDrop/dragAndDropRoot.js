@@ -8,7 +8,7 @@ dragAndDropRoot.prototype.dragOver = function({usedContext, stateDragging, props
         if(options&&options.draggableWrapper==true){
             console.log('root dragOver',ev)
             const {x, y} = calcMousePosition(ev, ref)
-            setCssPositionViaRef(ref, x, y)
+            setCssPositionViaRef(ref.current.querySelector('.isDragging'), x, y)
         }
         if(context.rootRef!=ref){
             setContext({...context, rootRef: ref})

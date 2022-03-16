@@ -2,9 +2,10 @@
 
 
 
-export const setCssPositionViaRef = (ref, x, y)=>{
-    ref.current.style.setProperty("---x", x+"px");
-    ref.current.style.setProperty("---y", y+"px");
+export const setCssPositionViaRef = (refOrHTML, x, y)=>{
+    const target = refOrHTML instanceof HTMLElement ? refOrHTML : refOrHTML.current // accept ref or HTMLElement
+    target.style.setProperty("---x", x+"px");
+    target.style.setProperty("---y", y+"px");
 }
 
 export const setCssPositionComplementViaRef = (ref, x, y)=>{

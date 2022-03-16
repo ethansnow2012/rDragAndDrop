@@ -87,6 +87,8 @@ fakePosts = ()=>{
             {
                 id: faker.datatype.uuid(),
                 title: faker.name.findName(),
+                x: 150,
+                y: 80,
                 data: [
                     {
                         id: faker.datatype.uuid(),

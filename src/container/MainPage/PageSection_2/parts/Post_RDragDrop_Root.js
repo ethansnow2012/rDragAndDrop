@@ -28,7 +28,7 @@ export function Post_RDragDrop_Root(props){
     const dragOver = dragAndDropUtils.dragRoot.dragOver(
         dragAndDropRootInitObject,
         () => {
-            console.log('dragOver', ref.current.querySelector('.isDragging'))
+            console.log('dragOver')
         }
     )
     const drop = dragAndDropUtils.dragRoot.drop(

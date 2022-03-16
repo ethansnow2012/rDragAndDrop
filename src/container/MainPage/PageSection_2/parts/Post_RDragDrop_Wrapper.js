@@ -1,5 +1,5 @@
 
-import {ref, useRef, useContext, useEffect, useState} from 'react'
+import {ref, useRef, useContext, useLayoutEffect, useState} from 'react'
 import styled from 'styled-components'
 import {dragAndDropUtils, dragAndDropContext, isDescendant, dataMutate} from 'rDragAndDrop/index'
 
@@ -38,6 +38,11 @@ export function Post_RDragDrop_Wrapper(props){
             draggableWrapper:true
         }
     }
+    
+
+    const init = dragAndDropUtils.dragWrapper.init(dragAndDropWrapperInitObject) 
+    useLayoutEffect(init,[ref])
+    
     const dragStart = dragAndDropUtils.dragWrapper.dragStart(
         dragAndDropWrapperInitObject,
         (ev)=>{console.log('dragStart')}
