@@ -25,7 +25,7 @@ dragAndDropWrapper.prototype.dragStart =  function({options, ref, stateDragging}
             setCssPositionComplementViaRef(ref, -x, -y)
         }
         if(typeof callback=='function'){
-            callback(ev)
+            callback(ev, {options, ref, stateDragging})
         }  
     }
 }
@@ -37,7 +37,7 @@ dragAndDropWrapper.prototype.dragEnd =  function({options, ref, stateDragging}, 
             setIsDragging(false)
         }
         if(typeof callback=='function'){
-            callback(ev)
+            callback(ev, {options, ref, stateDragging})
         }  
     }
 }
@@ -49,7 +49,7 @@ dragAndDropWrapper.prototype.dragOver =  function({usedContext, ref}, callback){
             setContext({...context, wrapperRef: ref})
         }
         if(typeof callback=='function'){
-            callback(ev)
+            callback(ev, {usedContext, ref})
         }  
         ev.preventDefault();
     }
@@ -77,7 +77,7 @@ dragAndDropWrapper.prototype.drop = function({usedContext, stateData, stateDragH
         
         setIsDragHover(false)
         if(typeof callback=='function'){
-            callback(ev)
+            callback(ev, {usedContext, stateData, stateDragHover, ref, props})
         }  
     }
 }
@@ -89,7 +89,7 @@ dragAndDropWrapper.prototype.dragEnter = function({usedContext, stateDragHover, 
         setContext({...context, hoverDelegated: [isDragHover, setIsDragHover, ref]}) 
         setIsDragHover(true)
         if(typeof callback=='function'){
-            callback(ev)
+            callback(ev, {usedContext, stateDragHover, ref})
         }  
     }
 }
@@ -114,7 +114,7 @@ dragAndDropWrapper.prototype.dragLeave = function({stateDragHover, ref}, callbac
 
         //ev.preventDefault()
         if(typeof callback=='function'){
-            callback(ev)
+            callback(ev, {stateDragHover, ref})
         }  
     }
 }

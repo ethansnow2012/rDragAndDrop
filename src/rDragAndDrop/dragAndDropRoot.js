@@ -16,7 +16,7 @@ dragAndDropRoot.prototype.dragOver = function({usedContext, stateDragging, props
         ev.preventDefault()
         
         if(typeof callback=='function'){
-            callback(ev)    
+            callback(ev, {usedContext, stateDragging, props, ref, options})    
         }
     }
 }

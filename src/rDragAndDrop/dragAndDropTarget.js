@@ -62,7 +62,7 @@ dragAndDropTarget.prototype.dragStart = function({usedContext, stateDragging, pr
         })
         document.latestWrapperState = 'DRAG_INIT'
         if(typeof callback=='function'){
-            callback(ev)
+            callback(ev, {usedContext, stateDragging, props})
         }   
     }
 }
@@ -87,7 +87,7 @@ dragAndDropTarget.prototype.dragOver = function({usedContext, ref}, callback){
             setContext({...context, targetRef: ref})
         }
         if(typeof callback=='function'){
-            callback(ev)
+            callback(ev, {usedContext, ref})
         }  
     }
 }
@@ -109,7 +109,7 @@ dragAndDropTarget.prototype.dragEnd = function({usedContext, stateDragging}, cal
         //     ev.target.style.visibility = ""; 
         })
         if(typeof callback=='function'){
-            callback(ev)
+            callback(ev, {usedContext, stateDragging})
         }  
     }
 }
@@ -125,7 +125,7 @@ dragAndDropTarget.prototype.drop = function({usedContext, latestDrop, latestDrop
         setContext({...context, latestDrop, latestDropParent})
         setIsDragHover(false)
         if(typeof callback=='function'){
-            callback(ev)
+            callback(ev, {usedContext, latestDrop, latestDropParent, stateDragHover})
         }  
     }
 }
