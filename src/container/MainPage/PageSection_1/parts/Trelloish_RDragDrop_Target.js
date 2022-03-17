@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import {useRef, useState, useContext} from 'react'
-import {dragAndDropUtils, dragAndDropContext} from 'rDragAndDrop/index'
+import {dragAndDrop, dragAndDropContext} from 'rDragAndDrop/index'
 
 const Styled = styled.div`
     ---color: yellow;
@@ -56,24 +56,24 @@ export function Trelloish_RDragDrop_Target(props){
             latestDropParent: props.parent,
         }
 
-    const dragStart = dragAndDropUtils.dragTarget.dragStart(
+    const dragStart = dragAndDrop.dragTarget.dragStart(
             dragTargetInitObject,
             (ev)=>{console.log('dragStart');}
         )
-    const dragOver = dragAndDropUtils.dragTarget.dragOver(
+    const dragOver = dragAndDrop.dragTarget.dragOver(
             dragTargetInitObject
         )
     
-    const dragEnd = dragAndDropUtils.dragTarget.dragEnd(
+    const dragEnd = dragAndDrop.dragTarget.dragEnd(
             dragTargetInitObject
         )
-    const drop = dragAndDropUtils.dragTarget.drop(
+    const drop = dragAndDrop.dragTarget.drop(
             dragTargetInitObject
         )
-    const dragEnter = dragAndDropUtils.dragTarget.dragEnter(
+    const dragEnter = dragAndDrop.dragTarget.dragEnter(
             dragTargetInitObject
         )
-    const dragLeave = dragAndDropUtils.dragTarget.dragLeave(
+    const dragLeave = dragAndDrop.dragTarget.dragLeave(
             dragTargetInitObject
         )
     

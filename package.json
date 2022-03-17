@@ -1,8 +1,9 @@
 {
   "name": "rdrag-rdrop",
-  "version": "0.3.1",
+  "version": "0.3.3",
   "homepage": "https://ethansnow2012.github.io/rdrag-rdrop",
-  "main": "dist/rDragAndDrop.js",
+  "main": "dist/index.js",
+  "files":["dist/*.js"],
   "dependencies": {
     "@storybook/addon-docs": "^6.4.19",
     "@testing-library/jest-dom": "^5.16.2",

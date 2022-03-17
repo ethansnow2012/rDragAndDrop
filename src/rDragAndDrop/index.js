@@ -56,6 +56,6 @@ core.prototype.dragRoot = new dragAndDropRoot()
 
 //core.prototype.dataMutate = new _dataMutate()
 
-export const dragAndDropUtils = new core();
+export const dragAndDrop = new core();
 export const dragAndDropContext = _context;
 export {dataMutate}

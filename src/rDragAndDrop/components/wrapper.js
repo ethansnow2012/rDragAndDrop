@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import {useState, useRef, useContext, useEffect, useLayoutEffect, useImperativeHandle, forwardRef} from 'react'
-import {dragAndDropUtils, dragAndDropContext, isDescendant, dataMutate} from 'rDragAndDrop/index'
+import {dragAndDrop, dragAndDropContext, isDescendant, dataMutate} from 'rDragAndDrop/index'
 
 const Styled = styled.div`
     box-sizing: context-box;
@@ -45,35 +45,35 @@ export const RDragRDropWrapper = forwardRef(function (props, forwordSelfRef){
     
     
     useEffect(
-            dragAndDropUtils.dragWrapper.wrapperRefEffectFn(dragAndDropWrapperInitObject),
+            dragAndDrop.dragWrapper.wrapperRefEffectFn(dragAndDropWrapperInitObject),
             [context.wrapperRef]
         )
     useEffect(
-            dragAndDropUtils.dragWrapper.latestDropEffectFn(dragAndDropWrapperInitObject),
+            dragAndDrop.dragWrapper.latestDropEffectFn(dragAndDropWrapperInitObject),
             [context.latestDrop]
         )
     
     
 
-    const dragStart = dragAndDropUtils.dragWrapper.dragStart(
+    const dragStart = dragAndDrop.dragWrapper.dragStart(
         dragAndDropWrapperInitObject,
         (ev)=>{console.log('dragStart')}
     )
-    const dragEnd = dragAndDropUtils.dragWrapper.dragEnd(
+    const dragEnd = dragAndDrop.dragWrapper.dragEnd(
         dragAndDropWrapperInitObject
     )
     
-    const dragOver = dragAndDropUtils.dragWrapper.dragOver(
+    const dragOver = dragAndDrop.dragWrapper.dragOver(
         dragAndDropWrapperInitObject
     )
-    const dragLeave = dragAndDropUtils.dragWrapper.dragLeave(
+    const dragLeave = dragAndDrop.dragWrapper.dragLeave(
         dragAndDropWrapperInitObject
     )
     
-    const drop = dragAndDropUtils.dragWrapper.drop(
+    const drop = dragAndDrop.dragWrapper.drop(
         dragAndDropWrapperInitObject
     )
-    const dragEnter = dragAndDropUtils.dragWrapper.dragEnter(
+    const dragEnter = dragAndDrop.dragWrapper.dragEnter(
         dragAndDropWrapperInitObject
     )
     

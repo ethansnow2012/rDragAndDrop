@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import {RDragRDropRoot, DefaultStyle as DefaultStyleRoot } from 'rDragAndDrop/components/root'
 import {RDragRDropWrapper, DefaultStyle as DefaultStyleWrapper } from 'rDragAndDrop/components/wrapper'
 import {RDragRDropTarget, DefaultStyle as DefaultStyleTarget } from 'rDragAndDrop/components/target'
-import {dragAndDropUtils, dragAndDropContext} from 'rDragAndDrop/index'
+import {dragAndDrop, dragAndDropContext} from 'rDragAndDrop/index'
     
 
 
@@ -44,7 +44,7 @@ const Styled = styled.div`
 `
 
 export function BasicUsage() {
-    const contextInstance = dragAndDropUtils.initContext()()
+    const contextInstance = dragAndDrop.initContext()()
     const [dataState, setDataState] = useState(data)
     const contextObject = {
         data: dataState, 

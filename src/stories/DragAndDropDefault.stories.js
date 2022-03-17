@@ -3,7 +3,7 @@ import {getAllTodoData} from 'service/data'
 import {RDragAndDropTarget} from 'component/RDragAndDropTarget'
 import {RDragAndDropRoot} from 'container/wrapper/RDragAndDropRoot'
 import {RDragAndDropWrapper} from 'container/wrapper/RDragAndDropWrapper'
-import {dragAndDropUtils, dragAndDropContext} from 'rDragAndDrop/index'
+import {dragAndDrop, dragAndDropContext} from 'rDragAndDrop/index'
 
 
 
@@ -17,7 +17,7 @@ export default {
 
 export const Default = ()=>{
     const [contentTestData, setContentTestData] = useState({data:[]})
-    const dragAndDropContextInstance = dragAndDropUtils.initContext()()
+    const dragAndDropContextInstance = dragAndDrop.initContext()()
     const contextObject = {
         data: contentTestData, 
         setData: setContentTestData, 

@@ -10,7 +10,7 @@ export default {
     input: "src/rDragAndDrop/index.js",
     output: {
       name:"RDragAndDrop",
-      file: './dist/rDragAndDrop.js',
+      file: './dist/index.js',
       format: 'esm'
     },
     plugins: [

@@ -1,5 +1,5 @@
 import {dataMutate} from './dataMutate'
-import {dragAndDropUtils} from './index'
+import {dragAndDrop} from './index'
 import {setCssPositionComplementViaRef, setCssPositionViaRef, calcMousePosition} from './coreHelpers'
 
 
@@ -119,7 +119,7 @@ dragAndDropWrapper.prototype.dragLeave = function({stateDragHover, ref}, callbac
         console.log('leave outter')
         const [isDragHover, setIsDragHover] = stateDragHover
         
-        if(!dragAndDropUtils.isDescendantOrSelf(ref.current, ev.target)){
+        if(!dragAndDrop.isDescendantOrSelf(ref.current, ev.target)){
             setIsDragHover(false)                
         }
 
@@ -144,7 +144,7 @@ dragAndDropWrapper.prototype.wrapperRefEffectFn = function({usedContext, stateDr
         const [context, setContext] = usedContext
         const [isDragHover, setIsDragHover] = stateDragHover
         if(context.wrapperRef?.current!=ref.current&&context.targetRef?.current&&context.wrapperRef?.current){
-            if(!dragAndDropUtils.isDescendantOrSelf(context.wrapperRef.current, context.targetRef.current)){
+            if(!dragAndDrop.isDescendantOrSelf(context.wrapperRef.current, context.targetRef.current)){
                 setIsDragHover(false)                
             }
         }

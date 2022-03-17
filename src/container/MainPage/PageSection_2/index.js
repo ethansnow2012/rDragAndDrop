@@ -2,7 +2,7 @@ import bg_2 from 'assets/bg-2.jpg';
 
 import react, {useState, useRef, useEffect, forwardRef, createRef} from 'react'
 import styled from 'styled-components'
-import {dragAndDropUtils, dragAndDropContext} from 'rDragAndDrop/index'
+import {dragAndDrop, dragAndDropContext} from 'rDragAndDrop/index'
 import {getPosts} from 'service/data'
 import {StaticBackgroundBlock, DefaultStyle as StaticBackgroundBlockStyle} from 'container/StaticBackgroundBlock'
 
@@ -22,7 +22,7 @@ const Styled = styled.div`
 
 export function PageSection_2() {
     const [postsData, setPostsData] = useState({data:[]})
-    const dragAndDropContextInstance = dragAndDropUtils.initContext()()
+    const dragAndDropContextInstance = dragAndDrop.initContext()()
     const contextObject = {
         data: postsData, 
         setData: setPostsData, 

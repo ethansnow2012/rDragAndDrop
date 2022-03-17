@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import {getAllTodoData, getNewOneTodoData} from 'service/data'
 import {StaticBackgroundBlock, DefaultStyle as StaticBackgroundBlockStyle} from 'container/StaticBackgroundBlock'
 
-import {dragAndDropUtils, dragAndDropContext} from 'rDragAndDrop/index'
+import {dragAndDrop, dragAndDropContext} from 'rDragAndDrop/index'
 
 import {Trelloish_RDragDrop_Root} from './parts/Trelloish_RDragDrop_Root'
 import {Trelloish_RDragDrop_Wrapper, DefaultStyle as RDragAndDropWrapperStyle} from './parts/Trelloish_RDragDrop_Wrapper'
@@ -75,7 +75,7 @@ export function PageSection_1() {
     }
     
 
-    const dragAndDropContextInstance = dragAndDropUtils.initContext()()
+    const dragAndDropContextInstance = dragAndDrop.initContext()()
     const contextObject = {
         data: todoData, 
         setData: setTodoData, 
