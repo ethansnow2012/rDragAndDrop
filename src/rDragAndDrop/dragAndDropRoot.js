@@ -1,6 +1,19 @@
 import {setCssPositionViaRef, calcMousePosition} from './coreHelpers'
 export const dragAndDropRoot = function () {}
 
+dragAndDropRoot.prototype.init = function({usedContext, options, props, ref}){
+    return function(){
+        const [context, setContext] = usedContext
+        console.log('root init')
+        if(ref.current){
+            setContext({...context, rootRef: ref})
+        }else{
+            console.log('Maybe invoked too early ref not ready.')
+        }
+        
+    }
+}
+
 dragAndDropRoot.prototype.dragOver = function({usedContext, stateDragging, props, ref, options}, callback){
     return function(ev){
         const [context, setContext] = usedContext

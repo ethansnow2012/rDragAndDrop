@@ -32,12 +32,16 @@ dragAndDropWrapper.prototype.init = function({options, props, ref}){
     }
 }
 
-dragAndDropWrapper.prototype.dragStart =  function({options, ref, stateDragging}, callback){
+dragAndDropWrapper.prototype.dragStart =  function({usedContext, options, ref, stateDragging, props}, callback){
     return function(ev){
         if(options&&options.draggableWrapper==true){
+            const [context, setContext] = usedContext
             const [isDragging, setIsDragging] = stateDragging
             setIsDragging(true)
+
+            const {x:rootX, y:rootY} = calcMousePosition(ev, context.rootRef)
             const {x, y} = calcMousePosition(ev, ref)
+            setCssPositionViaRef(ref, rootX, rootY)
             setCssPositionComplementViaRef(ref, -x, -y)
         }
         if(typeof callback=='function'){

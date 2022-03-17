@@ -1,4 +1,4 @@
-import {ref, useRef, useContext, useEffect} from 'react'
+import {ref, useRef, useContext, useEffect, useLayoutEffect} from 'react'
 import styled from 'styled-components'
 import {dragAndDropContext, dragAndDropUtils} from 'rDragAndDrop/index'
 
@@ -25,6 +25,11 @@ export function Post_RDragDrop_Root(props){
             draggableWrapper:true
         }
     }
+    const init = dragAndDropUtils.dragRoot.init(
+            dragAndDropRootInitObject
+        )
+    useLayoutEffect(init,[ref])
+
     const dragOver = dragAndDropUtils.dragRoot.dragOver(
         dragAndDropRootInitObject,
         () => {
