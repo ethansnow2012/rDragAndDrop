@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import {useState, useRef, useContext, useEffect, useLayoutEffect, useImperativeHandle, forwardRef} from 'react'
-import {dragAndDrop, dragAndDropContext, isDescendant, dataMutate} from 'rDragAndDrop/index'
+import {dragAndDrop, dragAndDropContext, isDescendant, dataMutate} from '../index'
 
 const Styled = styled.div`
     box-sizing: context-box;
@@ -96,3 +96,8 @@ export const RDragRDropWrapper = forwardRef(function (props, forwordSelfRef){
 })
 
 export const DefaultStyle = Styled;
+
+export default {
+    Element: RDragRDropWrapper,
+    DefaultStyle: Styled
+}

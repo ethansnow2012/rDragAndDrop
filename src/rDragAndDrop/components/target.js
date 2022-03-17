@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import {useRef, useState, useContext} from 'react'
-import {dragAndDrop, dragAndDropContext} from 'rDragAndDrop/index'
+import {dragAndDrop, dragAndDropContext} from '../index'
 
 const Styled = styled.div`
     ---color: yellow;
@@ -96,3 +96,8 @@ export function RDragRDropTarget(props){
 }
 
 export const DefaultStyle = Styled;
+
+export default {
+    Element: RDragRDropTarget,
+    DefaultStyle: Styled
+}

@@ -1,33 +1,38 @@
 
 import react, {useState, useRef, useEffect, forwardRef, createRef} from 'react'
 import styled from 'styled-components'
-import {RDragRDropRoot, DefaultStyle as DefaultStyleRoot } from 'rDragAndDrop/components/root'
-import {RDragRDropWrapper, DefaultStyle as DefaultStyleWrapper } from 'rDragAndDrop/components/wrapper'
-import {RDragRDropTarget, DefaultStyle as DefaultStyleTarget } from 'rDragAndDrop/components/target'
 import {dragAndDrop, dragAndDropContext} from 'rDragAndDrop/index'
     
+import {defaultComponents} from 'dist/index'
 
-
+const {
+    root: _root,
+    wrapper: _wrapper,
+    target: _target
+    } = defaultComponents
+const {Element: root, DefaultStyle: rootStyle} = _root
+const {Element: wrapper, DefaultStyle:wrapperStyle} = _wrapper
+const {Element: target, DefaultStyle: targetStyle} = _target
 
 const Styled = styled.div`
-    & ${DefaultStyleRoot}{
+    & ${rootStyle}{
         display: flex;
         padding: 1em 0em;
     }
 
-    ${DefaultStyleWrapper}{
+    ${wrapperStyle}{
         height: 100%;
     }
     
-    & ${DefaultStyleRoot} > ${DefaultStyleWrapper}{
+    & ${rootStyle} > ${wrapperStyle}{
         margin-right: 2em;
     }
 
-    & ${DefaultStyleRoot} ${DefaultStyleWrapper}.isDragHover{
+    & ${rootStyle} ${wrapperStyle}.isDragHover{
         background: red;
     }
 
-    & ${DefaultStyleRoot} ${DefaultStyleWrapper} ${DefaultStyleTarget}{
+    & ${rootStyle} ${wrapperStyle} ${targetStyle}{
         padding: 5px 10px;
     }
     
@@ -44,6 +49,7 @@ const Styled = styled.div`
 `
 
 export function BasicUsage() {
+    
     const contextInstance = dragAndDrop.initContext()()
     const [dataState, setDataState] = useState(data)
     const contextObject = {

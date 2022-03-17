@@ -1,7 +1,7 @@
 import {ref, useRef, useContext, useEffect} from 'react'
 import styled from 'styled-components'
 import {DefaultStyle as wrapperDefaultStyle} from './wrapper'
-import {dragAndDropContext, dragAndDrop} from 'rDragAndDrop/index'
+import {dragAndDropContext, dragAndDrop} from '../index'
 
 
 const Styled = styled.div`
@@ -37,3 +37,8 @@ export function RDragRDropRoot(props){
 }
 
 export const DefaultStyle = Styled;
+
+export default {
+    Element: RDragRDropRoot,
+    DefaultStyle: Styled
+}

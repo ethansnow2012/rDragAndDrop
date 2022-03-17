@@ -4,6 +4,10 @@ import {dragAndDropWrapper} from './dragAndDropWrapper'
 import {dragAndDropRoot} from './dragAndDropRoot'
 import {dataMutate} from './dataMutate'
 
+import root from './components/root'
+import wrapper from './components/wrapper'
+import target from './components/target'
+
 
  /**
   * _context
@@ -55,7 +59,15 @@ core.prototype.dragWrapper = new dragAndDropWrapper()
 core.prototype.dragRoot = new dragAndDropRoot()
 
 //core.prototype.dataMutate = new _dataMutate()
+const defaultComponents = {
+    root,
+    wrapper,
+    target
+}
 
 export const dragAndDrop = new core();
 export const dragAndDropContext = _context;
-export {dataMutate}
+export {
+    dataMutate,
+    defaultComponents,
+}

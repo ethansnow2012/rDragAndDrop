@@ -18,7 +18,8 @@ export default {
           "process.env.NODE_ENV": JSON.stringify(NODE_ENV)
         }),
         babel({
-          exclude: "node_modules/**"
+          exclude: "node_modules/**",
+          presets: ["@babel/preset-env", "@babel/preset-react"]
         }),
         resolve(),
         commonjs({
@@ -27,16 +28,9 @@ export default {
             // relative to the current directory, or the name
             // of a module in node_modules
             namedExports: {
-              'node_modules/react/index.js': [
-                'createContext',
-                'useState'
-              ],
+              'node_modules/react/index.js': Object.keys(require('react')),
+              'node_modules/react-is/index.js': Object.keys(require('react-is')),
               'node_modules/react-dom/index.js': ['render', 'hydrate'],
-              'node_modules/react-is/index.js': [
-                'isElement',
-                'isValidElementType',
-                'ForwardRef'
-              ]
             }
           })
       ]
