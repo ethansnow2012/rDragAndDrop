@@ -1,5 +1,5 @@
 import babel from "rollup-plugin-babel";
-import commonjs from "rollup-plugin-commonjs";
+import commonjs from "@rollup/plugin-commonjs";
 import resolve from "rollup-plugin-node-resolve";
 import replace from "rollup-plugin-replace";
 
@@ -13,15 +13,20 @@ export default {
       file: './dist/index.js',
       format: 'esm'
     },
+    external: [
+      'react',
+      'react-dom',
+    ],
     plugins: [
         replace({
           "process.env.NODE_ENV": JSON.stringify(NODE_ENV)
         }),
+        resolve(),
         babel({
           exclude: "node_modules/**",
           presets: ["@babel/preset-env", "@babel/preset-react"]
         }),
-        resolve(),
+        //commonjs()
         commonjs({
             include: 'node_modules/**',
             // left-hand side can be an absolute path, a path

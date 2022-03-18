@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import {useState, useRef, useContext, useEffect, useLayoutEffect, useImperativeHandle, forwardRef} from 'react'
+import React from 'react'; 
 import {dragAndDrop, dragAndDropContext, isDescendant, dataMutate} from '../index'
 
 const Styled = styled.div`

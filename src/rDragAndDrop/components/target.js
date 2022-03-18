@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import {useRef, useState, useContext} from 'react'
+import React from 'react'; 
 import {dragAndDrop, dragAndDropContext} from '../index'
 
 const Styled = styled.div`

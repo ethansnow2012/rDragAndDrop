@@ -1,4 +1,5 @@
 import {ref, useRef, useContext, useEffect} from 'react'
+import React from 'react'; 
 import styled from 'styled-components'
 import {DefaultStyle as wrapperDefaultStyle} from './wrapper'
 import {dragAndDropContext, dragAndDrop} from '../index'
@@ -26,6 +27,7 @@ export function RDragRDropRoot(props){
     const drop = dragAndDrop.dragRoot.drop(
             dragAndDropRootInitObject
         )
+    
     return (
             <Styled 
                 onDragOver={dragOver}
