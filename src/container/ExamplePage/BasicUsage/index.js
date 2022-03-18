@@ -1,38 +1,36 @@
 
 import react, {useState, useRef, useEffect, forwardRef, createRef} from 'react'
 import styled from 'styled-components'
-import {dragAndDrop, dragAndDropContext} from 'rDragAndDrop/index'
-    
-import {defaultComponents} from 'dist/index'
+import {dragAndDrop, dragAndDropContext, defaultComponents} from 'rDragAndDrop/index'
 
 const {
     root: _root,
     wrapper: _wrapper,
     target: _target
     } = defaultComponents
-const {Element: root, DefaultStyle: rootStyle} = _root
-const {Element: wrapper, DefaultStyle:wrapperStyle} = _wrapper
-const {Element: target, DefaultStyle: targetStyle} = _target
+const {Element: Root, DefaultStyle: RootStyle} = _root
+const {Element: Wrapper, DefaultStyle: WrapperStyle} = _wrapper
+const {Element: Target, DefaultStyle: TargetStyle} = _target
 
 const Styled = styled.div`
-    & ${rootStyle}{
+    & ${RootStyle}{
         display: flex;
         padding: 1em 0em;
     }
 
-    ${wrapperStyle}{
+    ${WrapperStyle}{
         height: 100%;
     }
     
-    & ${rootStyle} > ${wrapperStyle}{
+    & ${RootStyle} > ${WrapperStyle}{
         margin-right: 2em;
     }
 
-    & ${rootStyle} ${wrapperStyle}.isDragHover{
+    & ${RootStyle} ${WrapperStyle}.isDragHover{
         background: red;
     }
 
-    & ${rootStyle} ${wrapperStyle} ${targetStyle}{
+    & ${RootStyle} ${WrapperStyle} ${TargetStyle}{
         padding: 5px 10px;
     }
     
@@ -61,7 +59,7 @@ export function BasicUsage() {
         <Styled>
             <dragAndDropContext.Provider value={contextObject}>
                 <h2 >BasicUseage: {dataState.title}</h2>
-                <RDragRDropRoot>
+                <Root>
                     {
                         dataState.data
                             ?.map((wrapperData) =>
@@ -71,22 +69,22 @@ export function BasicUsage() {
                                         <div>
                                             <h3 style={{height:"72px"}}>{wrapperData.title}</h3>
                                         </div>
-                                        <RDragRDropWrapper key={wrapperData.id} self={wrapperData} parent={dataState.data}>
+                                        <Wrapper key={wrapperData.id} self={wrapperData} parent={dataState.data}>
                                             {
                                                 wrapperData.data
                                                     .map((target, ii)=>(
-                                                        <RDragRDropTarget key={target.id} self={target} parent={wrapperData}>
+                                                        <Target key={target.id} self={target} parent={wrapperData}>
                                                             <div className='black-block'>{target.title}</div>
-                                                        </RDragRDropTarget>
+                                                        </Target>
                                                     ))
                                             }
-                                        </RDragRDropWrapper>
+                                        </Wrapper>
                                     </div>
                                 )
                             }
                         )
                     }
-                </RDragRDropRoot>
+                </Root>
             </dragAndDropContext.Provider>
             
         </Styled>
