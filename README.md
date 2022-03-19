@@ -1,5 +1,5 @@
 <p align="center">
-  <b>rdrag-rdrop.js</b>
+  <b>rDrag-rDrop.js</b>
   <div>
     A react helper to handle dragging and dropping for you.
   </div>

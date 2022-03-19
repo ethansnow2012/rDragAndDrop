@@ -38,7 +38,7 @@ export function TopNavigation() {
             
             </div>
             <div className="topNavigation-text">
-                Rdrag-RDrop.js
+                rDrag-rDrop.js
                 <div className="topNavigation-text-inner">
                     <div className="topNavigation-text-inner-line"></div>
                 </div>
