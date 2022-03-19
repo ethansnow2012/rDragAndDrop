@@ -2,7 +2,7 @@
 import bg_2 from 'assets/bg-2.jpg';
 import bg_3 from 'assets/bg-3.jpg';
 
-import react, {useState, useRef, useEffect, forwardRef, createRef} from 'react'
+import React, {useState, useRef, useEffect, forwardRef, createRef} from 'react'
 import styled from 'styled-components'
 
 import {StaticBackgroundBlock, DefaultStyle as StaticBackgroundBlockStyle} from 'container/StaticBackgroundBlock'

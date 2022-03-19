@@ -1,5 +1,5 @@
 
-import react, {useState, useRef, useEffect, forwardRef, createRef} from 'react'
+import React, {useState, useRef, useEffect, forwardRef, createRef} from 'react'
 import styled from 'styled-components'
 import {dragAndDrop, dragAndDropContext, defaultComponents} from 'rDragAndDrop/index'
 

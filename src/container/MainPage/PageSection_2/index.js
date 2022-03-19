@@ -1,6 +1,6 @@
 import bg_2 from 'assets/bg-2.jpg';
 
-import react, {useState, useRef, useEffect, forwardRef, createRef} from 'react'
+import React, {useState, useRef, useEffect, forwardRef, createRef} from 'react'
 import styled from 'styled-components'
 import {dragAndDrop, dragAndDropContext} from 'rDragAndDrop/index'
 import {getPosts} from 'service/data'
