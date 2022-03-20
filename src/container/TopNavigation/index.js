@@ -1,5 +1,7 @@
 
 import styled from 'styled-components'
+import {useGlobalState} from 'context/GlobalStateProvider'
+import {useContext} from 'react'
 
 const Styled = styled.div`
     position:relative;
@@ -32,13 +34,15 @@ const Styled = styled.div`
     }
 `
 export function TopNavigation() {
+    const [state, dispatch] = useGlobalState()
+    
     return (
         <Styled>
             <div className="topNavigation-block">
             
             </div>
             <div className="topNavigation-text">
-                rDrag-rDrop.js
+                rDrag-rDrop.js,{state.scrollDirection??''}
                 <div className="topNavigation-text-inner">
                     <div className="topNavigation-text-inner-line"></div>
                 </div>
