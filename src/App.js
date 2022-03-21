@@ -15,17 +15,17 @@ import { GlobalWorker } from 'container/GlobalWorker'
 
 let NODE_ENV = process.env.REACT_APP_NODE_ENV
 //NODE_ENV = 'github_page'
-const baseName = NODE_ENV=='github_page'?'/rdrag-rdrop':''
+export const baseName = NODE_ENV=='github_page'?'/rdrag-rdrop':''
 function App() {
-  console.log('ssfff', NODE_ENV, baseName)
   
   return (
     <div style={{overflow:'hidden'}}>
       
       <GlobalStateProvider>
         <GlobalWorker></GlobalWorker> 
-        <TopNavigation></TopNavigation>
+        
         <BrowserRouter >
+          <TopNavigation></TopNavigation>
           <Routes basename={baseName}>
             <Route path={baseName+'/'} element={GitHubPageRoute(MainPage, baseName)}></Route>
             <Route path={baseName+'/about'} element={GitHubPageRoute(AboutPage, baseName)}></Route>

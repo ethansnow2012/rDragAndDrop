@@ -2,6 +2,8 @@
 import styled from 'styled-components'
 import {useGlobalState} from 'context/GlobalStateProvider'
 import {useContext, useEffect, useState} from 'react'
+import { Link } from 'react-router-dom'
+import {baseName} from 'App'
 
 const Styled = styled.div`
     position:relative;
@@ -39,6 +41,7 @@ const Styled = styled.div`
         top:1em;
         right: 2em;
         color:white;
+        mix-blend-mode: screen;
     }
     & .topNavigation-text-inner-line{
         position: relative;
@@ -66,12 +69,14 @@ const Styled = styled.div`
         bottom: 0;
         width: 100%;
         height: 150px;
-        color: wheat;
+        
     }
     & .topNavigation-block-menu-content-i{
         padding: 10px 15px;
         position: relative;
         display: block;
+        color: wheat !important;
+        text-decoration: auto;
     }
     & .topNavigation-block-menu-content-i::after{
         content: '→';
@@ -151,7 +156,7 @@ export function TopNavigation() {
         >
             <div className="topNavigation-block">
                 <div className="topNavigation-block-menu-content">
-                    <a className="topNavigation-block-menu-content-i">Example</a>
+                    <Link  to={baseName+'/example'} className="topNavigation-block-menu-content-i">Example</Link>
                 </div>
             </div>
             <div className="topNavigation-block-menu" onClick={clickMenuOpen}>
