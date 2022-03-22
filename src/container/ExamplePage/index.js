@@ -6,7 +6,7 @@ const Styled = styled.div`
     padding-top: 4em;
     padding-left: 2em;
     padding-right: 2em;
-    background: #d2c1a2;
+    background: #9dbacc;
 `
 
 export function ExamplePage() {
