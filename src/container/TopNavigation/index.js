@@ -31,9 +31,18 @@ const Styled = styled.div`
         right: 22px;
         width: 18px;
         height: 18px;
-        background: green;
         transition: right 1.5s ease;
         cursor: pointer;
+    }
+    &.isMenuOpen .topNavigation-block-menu::after{
+        content:'';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background: white;
+        left:0;
+        bottom:-4px;
+        opacity:0.7;
     }
     
     & .topNavigation-text{
@@ -160,6 +169,9 @@ export function TopNavigation() {
                 </div>
             </div>
             <div className="topNavigation-block-menu" onClick={clickMenuOpen}>
+                <svg  style={{'---svg-fill':'white', 'width': '100%', 'height': '100%'}}>
+                    <use href="#svg-nine-dot" ></use>
+                </svg>
             </div>
             
             <div className="topNavigation-text">
