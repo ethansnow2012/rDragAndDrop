@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import ReactDom from 'react-dom'
 import style from 'styled-components'
 const Styled = style.div`
@@ -28,6 +28,13 @@ export const DefaultPopup  = function(props){
     const overLayClick = ()=>{
         setPopupState(!popupState)
     }
+    useEffect(()=>{
+        if(typeof popupState=='boolean'){
+            popupState?
+                (document.body.style.overflow = "hidden"):
+                (document.body.style.overflow = "")
+        }
+    }, [popupState])
     return ReactDom.createPortal(
         (popupState)
             ?(
