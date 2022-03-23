@@ -155,10 +155,11 @@ export function PageSection_1() {
                                     }
                                 )
                             }
-                        </Trelloish_RDragDrop_Root>
                         <div className='rDragRDropRoot-wrapper-inc' onClick={togglePopup}>
                             Source Code
-                        </div>
+                        </div>    
+                        </Trelloish_RDragDrop_Root>
+                        
                         <DefaultPopup portalStyled={portalStyled} portalTarget={portalTarget} popupState={[popupState, setPopupState]} className='p-codepopup'>
                             <HeaderForPopupH1>
                                 How to implement "trello-ish" UI.

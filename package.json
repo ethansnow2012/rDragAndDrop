@@ -1,6 +1,6 @@
 {
   "name": "rdrag-rdrop",
-  "version": "0.3.25",
+  "version": "0.3.26",
   "homepage": "https://ethansnow2012.github.io/rdrag-rdrop",
   "main": "dist/index.js",
   "files": [
