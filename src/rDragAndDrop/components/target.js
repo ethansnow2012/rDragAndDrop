@@ -24,9 +24,6 @@ const Styled = styled.div`
     &.isDragHover:not(.isDragging){
         z-index: 1;
         margin-top: calc(1 * var(---placeholder-height));
-        //margin-bottom: calc(0.5 * var(---placeholder-height));
-        //transform: translateY(var(---placeholder-height));
-        //margin-top: 110px;
     }
     &.isDragHover:not(.isDragging)::after{
         position: absolute;

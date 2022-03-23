@@ -325,14 +325,11 @@ const Styled = styled.div\`
   transition: height 1s;/* this seems to avoid some flickers.*/
   }
   &.isDragging:active{
-  //cursor: grabbing !important;
-  //cursor: url(https://www.google.com/intl/en_ALL/mapfiles/closedhand.cur);
+  /* */
   }
   &.isDragHover:not(.isDragging){
   z-index: 1;
   margin-top: calc(1 * var(---placeholder-height));
-  //margin-bottom: calc(0.5 * var(---placeholder-height));
-  //transform: translateY(var(---placeholder-height));
   }
   &.isDragHover:not(.isDragging)::after{
   position: absolute;
