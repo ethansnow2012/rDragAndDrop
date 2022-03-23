@@ -9,6 +9,7 @@ const Styled = style.div`
     transform:translate(-50%, -50%);
     padding: 40px;
     background: white;
+    max-height:calc(100vh - 80px);
 `
 const Overlay = style.div`
     position: fixed;

@@ -12,6 +12,8 @@ import {Trelloish_RDragDrop_Root} from './parts/Trelloish_RDragDrop_Root'
 import {Trelloish_RDragDrop_Wrapper, DefaultStyle as RDragAndDropWrapperStyle} from './parts/Trelloish_RDragDrop_Wrapper'
 import {Trelloish_RDragDrop_Target} from './parts/Trelloish_RDragDrop_Target'
 
+import Highlight from 'react-highlight'
+
 const Styled = styled.div`
     & ${StaticBackgroundBlockStyle}{
         display: flex;
@@ -68,6 +70,7 @@ const Styled = styled.div`
         right:0;
         background:white;
         padding: 2px 7px 3px 7px;
+        cursor: pointer;
     }
 `
 
@@ -143,7 +146,11 @@ export function PageSection_1() {
                         <div className='rDragAndDropRoot-wrapper-inc' onClick={togglePopup}>
                             Source Code
                         </div>
-                        <DefaultPopup popupState={[popupState, setPopupState]}>Source Code HERE</DefaultPopup>
+                        <DefaultPopup popupState={[popupState, setPopupState]}>
+                        <Highlight language="javascript">
+                        {`function foo() { return 'bar' }`}
+                        </Highlight>
+                        </DefaultPopup>
                     </div>
                 </dragAndDropContext.Provider>
             </StaticBackgroundBlock>
