@@ -10,6 +10,8 @@ const Styled = style.div`
     padding: 40px;
     background: white;
     max-height:calc(100vh - 80px);
+    max-width: calc(100vw - 40px);
+    overflow: scroll;
 `
 const Overlay = style.div`
     position: fixed;
