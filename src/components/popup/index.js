@@ -34,6 +34,9 @@ export const DefaultPopup  = function(props){
                 (document.body.style.overflow = "hidden"):
                 (document.body.style.overflow = "")
         }
+        return ()=>{
+            document.body.style.overflow = ""
+        }
     }, [popupState])
     return ReactDom.createPortal(
         (popupState)
