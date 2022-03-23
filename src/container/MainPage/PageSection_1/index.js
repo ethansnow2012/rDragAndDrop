@@ -7,7 +7,7 @@ import {StaticBackgroundBlock, DefaultStyle as StaticBackgroundBlockStyle} from 
 
 import {dragAndDrop, dragAndDropContext} from 'rDragAndDrop/index'
 import {DefaultPopup} from 'components/popup/index.js'
-import {HeaderPopupSubject} from 'components/HeaderPopupSubject'
+import {HeaderForPopupH1, HeaderForPopupH2} from 'components/HeaderForPopup'
 
 
 import {Trelloish_RDragDrop_Root} from './parts/Trelloish_RDragDrop_Root'
@@ -15,6 +15,8 @@ import {Trelloish_RDragDrop_Wrapper, DefaultStyle as RDragAndDropWrapperStyle} f
 import {Trelloish_RDragDrop_Target} from './parts/Trelloish_RDragDrop_Target'
 
 import Highlight from 'react-highlight'
+
+const portalTarget = '#popup-root'
 
 const Styled = styled.div`
     & ${StaticBackgroundBlockStyle}{
@@ -73,6 +75,12 @@ const Styled = styled.div`
         background:white;
         padding: 2px 7px 3px 7px;
         cursor: pointer;
+    }
+    
+`
+const portalStyled = styled.div`
+    .p-codepopup > * + *{
+        margin-top:1.5rem;
     }
 `
 
@@ -147,10 +155,13 @@ export function PageSection_1() {
                         <div className='rDragAndDropRoot-wrapper-inc' onClick={togglePopup}>
                             Source Code
                         </div>
-                        <DefaultPopup popupState={[popupState, setPopupState]}>
-                            <HeaderPopupSubject>
+                        <DefaultPopup portalStyled={portalStyled} portalTarget={portalTarget} popupState={[popupState, setPopupState]} className='p-codepopup'>
+                            <HeaderForPopupH1>
+                                How to implement "trello-ish" UI.
+                            </HeaderForPopupH1>
+                            <HeaderForPopupH2>
                                 Define <strong>Root</strong> Element
-                            </HeaderPopupSubject>
+                            </HeaderForPopupH2>
                             <Highlight language="javascript html">
                         {`
 import {useRef, useContext} from 'react'
@@ -198,9 +209,9 @@ export function Trelloish_RDragDrop_Root(props){
 }
                         `}
                             </Highlight>
-                            <HeaderPopupSubject>
+                            <HeaderForPopupH2>
                                 Define <strong>Wrapper</strong> Element with rDrag-rDrop.js
-                            </HeaderPopupSubject>
+                            </HeaderForPopupH2>
                             <Highlight language="javascript html">
                         {`
 import styled from 'styled-components'
@@ -301,9 +312,9 @@ export const Trelloish_RDragDrop_Wrapper = forwardRef(function (props, forwordSe
 export const DefaultStyle = Styled;
                         `}
                             </Highlight>
-                            <HeaderPopupSubject>
+                            <HeaderForPopupH2>
                                 Define <strong>Target</strong> Element with rDrag-rDrop.js
-                            </HeaderPopupSubject>
+                            </HeaderForPopupH2>
                             <Highlight language="javascript html">
                         {`
 import styled from 'styled-components'
@@ -398,9 +409,9 @@ export function Trelloish_RDragDrop_Target(props){
 }
                         `}
                             </Highlight>
-                            <HeaderPopupSubject>
+                            <HeaderForPopupH2>
                                 Implement the Definition
-                            </HeaderPopupSubject>
+                            </HeaderForPopupH2>
                             <Highlight language="javascript html">
                         {`
 <Trelloish_RDragDrop_Root >

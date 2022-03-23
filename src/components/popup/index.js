@@ -1,4 +1,5 @@
 
+//import { DefaultStyle } from 'container/StaticBackgroundBlock'
 import React, { useEffect } from 'react'
 import ReactDom from 'react-dom'
 import style from 'styled-components'
@@ -43,12 +44,27 @@ export const DefaultPopup  = function(props){
             ?(
                 <>
                     <Overlay onClick={overLayClick}></Overlay>
-                    <Styled>
-                        {props.children}
-                    </Styled>
+                    {
+                        (props.portalStyled)?
+                        <props.portalStyled>
+                            <Styled className={props.className}>
+                                {props.children}
+                            </Styled>
+                        </props.portalStyled>
+                        :
+                        <Styled className={props.className}>
+                            {props.children}
+                        </Styled>
+                    }
+                    
+
+                    
+                    
                 </>
             )
             :""
-        ,document.getElementById("popup-root")
+        ,document.querySelector(props.portalTarget||"#popup-root")
     )
 }
+
+export const DefaultStyle = Styled;
