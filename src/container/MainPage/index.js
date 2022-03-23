@@ -7,10 +7,11 @@ import styled from 'styled-components'
 
 import {StaticBackgroundBlock, DefaultStyle as StaticBackgroundBlockStyle} from 'container/StaticBackgroundBlock'
 import {dragAndDrop, dragAndDropContext} from 'rDragAndDrop/index'
-
+import {DefaultPopup} from 'components/popup/index.js'
 
 import {PageSection_1} from './PageSection_1/index'
 import {PageSection_2} from './PageSection_2/index'
+
 
 
 
@@ -25,6 +26,7 @@ const Styled = styled.div`
 `
 
 export function MainPage() {
+    
     return (
         <Styled>
             <PageSection_1/>

@@ -6,6 +6,7 @@ import {getAllTodoData, getNewOneTodoData} from 'service/data'
 import {StaticBackgroundBlock, DefaultStyle as StaticBackgroundBlockStyle} from 'container/StaticBackgroundBlock'
 
 import {dragAndDrop, dragAndDropContext} from 'rDragAndDrop/index'
+import {DefaultPopup} from 'components/popup/index.js'
 
 import {Trelloish_RDragDrop_Root} from './parts/Trelloish_RDragDrop_Root'
 import {Trelloish_RDragDrop_Wrapper, DefaultStyle as RDragAndDropWrapperStyle} from './parts/Trelloish_RDragDrop_Wrapper'
@@ -58,14 +59,26 @@ const Styled = styled.div`
         display: flex;
         justify-content: center;
         max-width: 100%;
-        overflow: auto;
+        // overflow: auto;
+        position: relative;
+    }
+    .rDragAndDropRoot-wrapper-inc{
+        position: absolute;
+        top:100%;
+        right:0;
+        background:white;
+        padding: 2px 7px 3px 7px;
     }
 `
 
 export function PageSection_1() {
     let refsMap = useRef(new Map()).current;
     const [todoData, setTodoData] = useState({data:[]})
-
+    
+    const [popupState, setPopupState] = useState(false)
+    const togglePopup = ()=>{
+        setPopupState(!popupState)
+    }
     // Closure:refsMap, todoData
     const setRefsMap = function(columnData){
         return (ref) => {
@@ -127,6 +140,10 @@ export function PageSection_1() {
                                 )
                             }
                         </Trelloish_RDragDrop_Root>
+                        <div className='rDragAndDropRoot-wrapper-inc' onClick={togglePopup}>
+                            Source Code
+                        </div>
+                        <DefaultPopup popupState={[popupState, setPopupState]}>Source Code HERE</DefaultPopup>
                     </div>
                 </dragAndDropContext.Provider>
             </StaticBackgroundBlock>
