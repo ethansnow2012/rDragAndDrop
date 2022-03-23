@@ -68,6 +68,12 @@ const Styled = styled.div`
         animation-name: closeMenu;
         animation-fill-mode: forwards;
     }
+    &.isMenuOpen .topNavigation-block-menu-content{
+        animation: delayedVisibilityShow 1.5s linear forwards;
+    }
+    &.isMenuClosed .topNavigation-block-menu-content{
+        animation: delayedVisibilityHide 1.5s linear forwards;
+    }
     &.isMenuOpen .topNavigation-block{
         animation-duration: 1.5s;
         animation-name: openMenu;
@@ -81,10 +87,11 @@ const Styled = styled.div`
         bottom: 0;
         width: 100%;
         height: 150px;
-        
+        padding-top: 7px;
+        visibility:hidden;
     }
     & .topNavigation-block-menu-content-i{
-        padding: 10px 15px;
+        padding: 7px 14px;
         position: relative;
         display: block;
         color: wheat !important;
@@ -97,6 +104,28 @@ const Styled = styled.div`
         float: right;
         position: relative;
         top: 1px;
+    }
+    @keyframes delayedVisibilityShow {
+        0%{
+            visibility: hidden;
+        }
+        30%{
+            visibility: visible;
+        }
+        100%{
+            visibility: visible;
+        } 
+    }
+    @keyframes delayedVisibilityHide {
+        0%{
+            visibility: visible;
+        }
+        70%{
+            visibility: hidden;
+        }
+        100%{
+            visibility: hidden;
+        } 
     }
     @keyframes openMenu {
         0%{
@@ -169,6 +198,7 @@ export function TopNavigation() {
             <div className="topNavigation-block">
                 <div className="topNavigation-block-menu-content">
                     <Link  to={baseName+'/example'} className="topNavigation-block-menu-content-i">Example</Link>
+                    <a  href="https://github.com/ethansnow2012/rdrag-rdrop" className="topNavigation-block-menu-content-i">Github</a>
                 </div>
             </div>
             <div className="topNavigation-block-menu" onClick={clickMenuOpen}>
