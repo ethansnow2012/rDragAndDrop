@@ -1,9 +1,9 @@
 import {dataMutate} from './dataMutate'
-import {dragAndDrop} from './index'
+import {rDragRDrop} from './index'
 import {setCssPositionComplementViaRef, setCssPositionViaRef, calcMousePosition} from './coreHelpers'
 
 
-export const dragAndDropWrapper = function () {}
+export const rDragRDropWrapper = function () {}
 /**
  * this
  * prototype:
@@ -15,7 +15,7 @@ export const dragAndDropWrapper = function () {}
  * - dragLeave
  **/
 
-dragAndDropWrapper.prototype.init = function({options, props, ref}){
+rDragRDropWrapper.prototype.init = function({options, props, ref}){
     return function(){
         console.log('wrapper init')
         if(ref.current){
@@ -32,7 +32,7 @@ dragAndDropWrapper.prototype.init = function({options, props, ref}){
     }
 }
 
-dragAndDropWrapper.prototype.dragStart =  function({usedContext, options, ref, stateDragging, props}, callback){
+rDragRDropWrapper.prototype.dragStart =  function({usedContext, options, ref, stateDragging, props}, callback){
     return function(ev){
         if(options&&options.draggableWrapper==true){
             const [context, setContext] = usedContext
@@ -50,7 +50,7 @@ dragAndDropWrapper.prototype.dragStart =  function({usedContext, options, ref, s
     }
 }
 
-dragAndDropWrapper.prototype.dragEnd =  function({options, ref, stateDragging}, callback){
+rDragRDropWrapper.prototype.dragEnd =  function({options, ref, stateDragging}, callback){
     return function(ev){
         if(options&&options.draggableWrapper==true){
             const [isDragging, setIsDragging] = stateDragging
@@ -62,7 +62,7 @@ dragAndDropWrapper.prototype.dragEnd =  function({options, ref, stateDragging}, 
     }
 }
 
-dragAndDropWrapper.prototype.dragOver =  function({usedContext, ref}, callback){
+rDragRDropWrapper.prototype.dragOver =  function({usedContext, ref}, callback){
     return function(ev){
         const [context, setContext] = usedContext
         if(context.wrapperRef?.current!=ref.current){
@@ -75,7 +75,7 @@ dragAndDropWrapper.prototype.dragOver =  function({usedContext, ref}, callback){
     }
 }
 
-dragAndDropWrapper.prototype.drop = function({usedContext, stateData, stateDragHover, ref, props}, callback){
+rDragRDropWrapper.prototype.drop = function({usedContext, stateData, stateDragHover, ref, props}, callback){
     return function(ev){
         console.log('drop')
         
@@ -102,7 +102,7 @@ dragAndDropWrapper.prototype.drop = function({usedContext, stateData, stateDragH
     }
 }
 
-dragAndDropWrapper.prototype.dragEnter = function({usedContext, stateDragHover, ref}, callback){
+rDragRDropWrapper.prototype.dragEnter = function({usedContext, stateDragHover, ref}, callback){
     return function(ev){
         const [context, setContext] = usedContext
         const [isDragHover, setIsDragHover] = stateDragHover
@@ -114,12 +114,12 @@ dragAndDropWrapper.prototype.dragEnter = function({usedContext, stateDragHover, 
     }
 }
 
-dragAndDropWrapper.prototype.dragLeave = function({stateDragHover, ref}, callback){
+rDragRDropWrapper.prototype.dragLeave = function({stateDragHover, ref}, callback){
     return function(ev){
         console.log('leave outter')
         const [isDragHover, setIsDragHover] = stateDragHover
         
-        if(!dragAndDrop.isDescendantOrSelf(ref.current, ev.target)){
+        if(!rDragRDrop.isDescendantOrSelf(ref.current, ev.target)){
             setIsDragHover(false)                
         }
 
@@ -139,12 +139,12 @@ dragAndDropWrapper.prototype.dragLeave = function({stateDragHover, ref}, callbac
     }
 }
 
-dragAndDropWrapper.prototype.wrapperRefEffectFn = function({usedContext, stateDragHover, ref}, callback){
+rDragRDropWrapper.prototype.wrapperRefEffectFn = function({usedContext, stateDragHover, ref}, callback){
     return function(){
         const [context, setContext] = usedContext
         const [isDragHover, setIsDragHover] = stateDragHover
         if(context.wrapperRef?.current!=ref.current&&context.targetRef?.current&&context.wrapperRef?.current){
-            if(!dragAndDrop.isDescendantOrSelf(context.wrapperRef.current, context.targetRef.current)){
+            if(!rDragRDrop.isDescendantOrSelf(context.wrapperRef.current, context.targetRef.current)){
                 setIsDragHover(false)                
             }
         }
@@ -154,7 +154,7 @@ dragAndDropWrapper.prototype.wrapperRefEffectFn = function({usedContext, stateDr
     }
 }
 
-dragAndDropWrapper.prototype.latestDropEffectFn = function({usedContext, stateData, stateDragHover, ref, props}, callback){
+rDragRDropWrapper.prototype.latestDropEffectFn = function({usedContext, stateData, stateDragHover, ref, props}, callback){
     return function(){
         
         console.log('latestDropEffectFn')

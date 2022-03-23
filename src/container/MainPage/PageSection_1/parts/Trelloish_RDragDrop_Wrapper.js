@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import {useState, useRef, useContext, useEffect, useLayoutEffect, useImperativeHandle, forwardRef} from 'react'
-import {dragAndDrop, dragAndDropContext, isDescendant, dataMutate} from 'rDragAndDrop/index'
+import {rDragRDrop, rDragRDropContext, isDescendant, dataMutate} from 'rDragRDrop/index'
 
 const Styled = styled.div`
     &.hovered {
@@ -18,9 +18,9 @@ export const Trelloish_RDragDrop_Wrapper = forwardRef(function (props, forwordSe
             data,
             setData,
             contextInstance
-        } = useContext(dragAndDropContext)
+        } = useContext(rDragRDropContext)
     const [context, setContext] = contextInstance
-    const dragAndDropWrapperInitObject = {
+    const rDragRDropWrapperInitObject = {
         usedContext: [context, setContext],
         stateData: [data, setData],
         stateDragHover: [isDragHover, setIsDragHover],
@@ -45,36 +45,36 @@ export const Trelloish_RDragDrop_Wrapper = forwardRef(function (props, forwordSe
     
     
     useEffect(
-            dragAndDrop.dragWrapper.wrapperRefEffectFn(dragAndDropWrapperInitObject),
+            rDragRDrop.dragWrapper.wrapperRefEffectFn(rDragRDropWrapperInitObject),
             [context.wrapperRef]
         )
     useEffect(
-            dragAndDrop.dragWrapper.latestDropEffectFn(dragAndDropWrapperInitObject),
+            rDragRDrop.dragWrapper.latestDropEffectFn(rDragRDropWrapperInitObject),
             [context.latestDrop]
         )
     
     
 
-    const dragStart = dragAndDrop.dragWrapper.dragStart(
-        dragAndDropWrapperInitObject,
+    const dragStart = rDragRDrop.dragWrapper.dragStart(
+        rDragRDropWrapperInitObject,
         (ev)=>{console.log('dragStart')}
     )
-    const dragEnd = dragAndDrop.dragWrapper.dragEnd(
-        dragAndDropWrapperInitObject
+    const dragEnd = rDragRDrop.dragWrapper.dragEnd(
+        rDragRDropWrapperInitObject
     )
     
-    const dragOver = dragAndDrop.dragWrapper.dragOver(
-        dragAndDropWrapperInitObject
+    const dragOver = rDragRDrop.dragWrapper.dragOver(
+        rDragRDropWrapperInitObject
     )
-    const dragLeave = dragAndDrop.dragWrapper.dragLeave(
-        dragAndDropWrapperInitObject
+    const dragLeave = rDragRDrop.dragWrapper.dragLeave(
+        rDragRDropWrapperInitObject
     )
     
-    const drop = dragAndDrop.dragWrapper.drop(
-        dragAndDropWrapperInitObject
+    const drop = rDragRDrop.dragWrapper.drop(
+        rDragRDropWrapperInitObject
     )
-    const dragEnter = dragAndDrop.dragWrapper.dragEnter(
-        dragAndDropWrapperInitObject
+    const dragEnter = rDragRDrop.dragWrapper.dragEnter(
+        rDragRDropWrapperInitObject
     )
     
     

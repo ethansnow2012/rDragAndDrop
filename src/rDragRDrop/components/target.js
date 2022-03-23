@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import {useRef, useState, useContext} from 'react'
 import React from 'react'; 
-import {dragAndDrop, dragAndDropContext} from '../index'
+import {rDragRDrop, rDragRDropContext} from '../index'
 
 const Styled = styled.div`
     ---color: yellow;
@@ -40,7 +40,7 @@ const Styled = styled.div`
 
 export function RDragRDropTarget(props){
     const ref = useRef(null)
-    const {contextInstance} = useContext(dragAndDropContext)
+    const {contextInstance} = useContext(rDragRDropContext)
     const [isDragHover, setIsDragHover] = useState(false)
     const [isDragging, setIsDragging] = useState(false)
     const [context, setContext] = contextInstance
@@ -55,24 +55,24 @@ export function RDragRDropTarget(props){
             latestDropParent: props.parent,
         }
 
-    const dragStart = dragAndDrop.dragTarget.dragStart(
+    const dragStart = rDragRDrop.dragTarget.dragStart(
             dragTargetInitObject,
             (ev)=>{console.log('dragStart');}
         )
-    const dragOver = dragAndDrop.dragTarget.dragOver(
+    const dragOver = rDragRDrop.dragTarget.dragOver(
             dragTargetInitObject
         )
     
-    const dragEnd = dragAndDrop.dragTarget.dragEnd(
+    const dragEnd = rDragRDrop.dragTarget.dragEnd(
             dragTargetInitObject
         )
-    const drop = dragAndDrop.dragTarget.drop(
+    const drop = rDragRDrop.dragTarget.drop(
             dragTargetInitObject
         )
-    const dragEnter = dragAndDrop.dragTarget.dragEnter(
+    const dragEnter = rDragRDrop.dragTarget.dragEnter(
             dragTargetInitObject
         )
-    const dragLeave = dragAndDrop.dragTarget.dragLeave(
+    const dragLeave = rDragRDrop.dragTarget.dragLeave(
             dragTargetInitObject
         )
     

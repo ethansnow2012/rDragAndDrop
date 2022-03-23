@@ -2,7 +2,7 @@ import bg_2 from 'assets/bg-2.jpg';
 
 import React, {useState, useRef, useEffect, forwardRef, createRef} from 'react'
 import styled from 'styled-components'
-import {dragAndDrop, dragAndDropContext} from 'rDragAndDrop/index'
+import {rDragRDrop, rDragRDropContext} from 'rDragRDrop/index'
 import {getPosts} from 'service/data'
 import {StaticBackgroundBlock, DefaultStyle as StaticBackgroundBlockStyle} from 'container/StaticBackgroundBlock'
 
@@ -11,7 +11,7 @@ import {Post_RDragDrop_Root} from './parts/Post_RDragDrop_Root'
 
 const Styled = styled.div`
     
-    .posts-rDragAndDropRoot-wrapper{
+    .posts-rDragRDropRoot-wrapper{
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -22,11 +22,11 @@ const Styled = styled.div`
 
 export function PageSection_2() {
     const [postsData, setPostsData] = useState({data:[]})
-    const dragAndDropContextInstance = dragAndDrop.initContext()()
+    const rDragRDropContextInstance = rDragRDrop.initContext()()
     const contextObject = {
         data: postsData, 
         setData: setPostsData, 
-        contextInstance: dragAndDropContextInstance
+        contextInstance: rDragRDropContextInstance
     }
     useEffect(async ()=>{
         setPostsData(await getPosts().then((data)=>{console.log('a', data); return data }))
@@ -34,8 +34,8 @@ export function PageSection_2() {
     return (
         <Styled>
             <StaticBackgroundBlock image={bg_2}>
-                <div className="posts-rDragAndDropRoot-wrapper">
-                    <dragAndDropContext.Provider value={contextObject}>   
+                <div className="posts-rDragRDropRoot-wrapper">
+                    <rDragRDropContext.Provider value={contextObject}>   
                         <Post_RDragDrop_Root >
                             {
                                 postsData.data
@@ -47,7 +47,7 @@ export function PageSection_2() {
                                 })
                             }
                         </Post_RDragDrop_Root>
-                    </dragAndDropContext.Provider>
+                    </rDragRDropContext.Provider>
                 </div>
             </StaticBackgroundBlock>
         </Styled>

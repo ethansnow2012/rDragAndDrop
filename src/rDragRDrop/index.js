@@ -1,7 +1,7 @@
 import {useState, createContext} from 'react'
-import {dragAndDropTarget} from './dragAndDropTarget'
-import {dragAndDropWrapper} from './dragAndDropWrapper'
-import {dragAndDropRoot} from './dragAndDropRoot'
+import {rDragRDropTarget} from './rDragRDropTarget'
+import {rDragRDropWrapper} from './rDragRDropWrapper'
+import {rDragRDropRoot} from './rDragRDropRoot'
 import {dataMutate} from './dataMutate'
 
 import root from './components/root'
@@ -54,9 +54,9 @@ core.prototype.isDescendantOrSelf = function (parent, child) {
 
 
 
-core.prototype.dragTarget = new dragAndDropTarget()
-core.prototype.dragWrapper = new dragAndDropWrapper()
-core.prototype.dragRoot = new dragAndDropRoot()
+core.prototype.dragTarget = new rDragRDropTarget()
+core.prototype.dragWrapper = new rDragRDropWrapper()
+core.prototype.dragRoot = new rDragRDropRoot()
 
 //core.prototype.dataMutate = new _dataMutate()
 const defaultComponents = {
@@ -65,8 +65,8 @@ const defaultComponents = {
     target
 }
 
-export const dragAndDrop = new core();
-export const dragAndDropContext = _context;
+export const rDragRDrop = new core();
+export const rDragRDropContext = _context;
 export {
     dataMutate,
     defaultComponents,

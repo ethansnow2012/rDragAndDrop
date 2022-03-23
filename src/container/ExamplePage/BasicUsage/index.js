@@ -1,7 +1,7 @@
 
 import React, {useState, useRef, useEffect, forwardRef, createRef} from 'react'
 import styled from 'styled-components'
-import {dragAndDrop, dragAndDropContext, defaultComponents} from 'rDragAndDrop/index'
+import {rDragRDrop, rDragRDropContext, defaultComponents} from 'rDragRDrop/index'
 
 const {
     root: _root,
@@ -48,7 +48,7 @@ const Styled = styled.div`
 
 export function BasicUsage() {
     
-    const contextInstance = dragAndDrop.initContext()()
+    const contextInstance = rDragRDrop.initContext()()
     const [dataState, setDataState] = useState(data)
     const contextObject = {
         data: dataState, 
@@ -57,7 +57,7 @@ export function BasicUsage() {
     }
     return (
         <Styled>
-            <dragAndDropContext.Provider value={contextObject}>
+            <rDragRDropContext.Provider value={contextObject}>
                 <h2 >BasicUseage: {dataState.title}</h2>
                 <Root>
                     {
@@ -85,7 +85,7 @@ export function BasicUsage() {
                         )
                     }
                 </Root>
-            </dragAndDropContext.Provider>
+            </rDragRDropContext.Provider>
             
         </Styled>
     )

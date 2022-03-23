@@ -2,7 +2,7 @@ import {ref, useRef, useContext, useEffect} from 'react'
 import React from 'react'; 
 import styled from 'styled-components'
 import {DefaultStyle as wrapperDefaultStyle} from './wrapper'
-import {dragAndDropContext, dragAndDrop} from '../index'
+import {rDragRDropContext, rDragRDrop} from '../index'
 
 
 const Styled = styled.div`
@@ -15,17 +15,17 @@ const Styled = styled.div`
 
 export function RDragRDropRoot(props){
     const ref = useRef(null)
-    const {contextInstance} = useContext(dragAndDropContext)
+    const {contextInstance} = useContext(rDragRDropContext)
     const [context, setContext] = contextInstance
-    const dragAndDropRootInitObject = {
+    const rDragRDropRootInitObject = {
         usedContext: [context, setContext],
         ref
     }
-    const dragOver = dragAndDrop.dragRoot.dragOver(
-            dragAndDropRootInitObject
+    const dragOver = rDragRDrop.dragRoot.dragOver(
+            rDragRDropRootInitObject
         )
-    const drop = dragAndDrop.dragRoot.drop(
-            dragAndDropRootInitObject
+    const drop = rDragRDrop.dragRoot.drop(
+            rDragRDropRootInitObject
         )
     
     return (

@@ -14,7 +14,7 @@
   npm install rdrag-rdrop
   ```
   ```js
-  import { dragAndDrop } from 'rdrag-rdrop'
+  import { rDragRDrop } from 'rdrag-rdrop'
   
   ...
 

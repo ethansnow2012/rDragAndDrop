@@ -7,9 +7,9 @@ const NODE_ENV = process.env.NODE_ENV || "development";
 
 export default {
     //input: path.resolve(__dirname, 'src'),
-    input: "src/rDragAndDrop/index.js",
+    input: "src/rDragRDrop/index.js",
     output: {
-      name:"RDragAndDrop",
+      name:"rDragRDrop",
       file: './dist/index.js',
       format: 'esm'
     },

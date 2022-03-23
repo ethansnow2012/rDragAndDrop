@@ -3,7 +3,7 @@ import {getAllTodoData} from 'service/data'
 import {RDragAndDropTarget} from 'component/RDragAndDropTarget'
 import {RDragAndDropRoot} from 'container/wrapper/RDragAndDropRoot'
 import {RDragAndDropWrapper} from 'container/wrapper/RDragAndDropWrapper'
-import {dragAndDrop, dragAndDropContext} from 'rDragAndDrop/index'
+import {rDragRDrop, rDragRDropContext} from 'rDragRDrop/index'
 
 
 
@@ -17,18 +17,18 @@ export default {
 
 export const Default = ()=>{
     const [contentTestData, setContentTestData] = useState({data:[]})
-    const dragAndDropContextInstance = dragAndDrop.initContext()()
+    const rDragRDropContextInstance = rDragRDrop.initContext()()
     const contextObject = {
         data: contentTestData, 
         setData: setContentTestData, 
-        contextInstance: dragAndDropContextInstance
+        contextInstance: rDragRDropContextInstance
     }
     useEffect(async ()=>{
         setContentTestData(await getAllTodoData().then((data)=>{console.log('a', data); return data }))
     },[])
     return (
         <>
-        <dragAndDropContext.Provider value={contextObject}>
+        <rDragRDropContext.Provider value={contextObject}>
             <RDragAndDropRoot>
                 {
                     contentTestData.data
@@ -48,7 +48,7 @@ export const Default = ()=>{
                     )
                 }
             </RDragAndDropRoot>
-        </dragAndDropContext.Provider>
+        </rDragRDropContext.Provider>
         
         </>
     )

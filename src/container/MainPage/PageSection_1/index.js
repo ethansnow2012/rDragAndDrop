@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import {getAllTodoData, getNewOneTodoData} from 'service/data'
 import {StaticBackgroundBlock, DefaultStyle as StaticBackgroundBlockStyle} from 'container/StaticBackgroundBlock'
 
-import {dragAndDrop, dragAndDropContext} from 'rDragAndDrop/index'
+import {rDragRDrop, rDragRDropContext} from 'rDragRDrop/index'
 import {DefaultPopup} from 'components/popup/index.js'
 import {HeaderForPopupH1, HeaderForPopupH2} from 'components/HeaderForPopup'
 
@@ -59,7 +59,7 @@ const Styled = styled.div`
         font-size: 23px;
         left:-1px;
     }
-    .rDragAndDropRoot-wrapper{
+    .rDragRDropRoot-wrapper{
         width: calc(100% - 10vh);
         height: calc(100vh - 20vh);
         display: flex;
@@ -68,7 +68,7 @@ const Styled = styled.div`
         // overflow: auto;
         position: relative;
     }
-    .rDragAndDropRoot-wrapper-inc{
+    .rDragRDropRoot-wrapper-inc{
         position: absolute;
         top:100%;
         right:0;
@@ -77,7 +77,7 @@ const Styled = styled.div`
         cursor: pointer;
     }
     @media(max-width: 768px){
-        .rDragAndDropRoot-wrapper{
+        .rDragRDropRoot-wrapper{
             width: 100%;
         }
     }
@@ -105,11 +105,11 @@ export function PageSection_1() {
     }
     
 
-    const dragAndDropContextInstance = dragAndDrop.initContext()()
+    const rDragRDropContextInstance = rDragRDrop.initContext()()
     const contextObject = {
         data: todoData, 
         setData: setTodoData, 
-        contextInstance: dragAndDropContextInstance
+        contextInstance: rDragRDropContextInstance
     }
 
     const logRef = (id)=>{
@@ -127,8 +127,8 @@ export function PageSection_1() {
     return (
         <Styled>
             <StaticBackgroundBlock image={bg_1}>
-                <dragAndDropContext.Provider value={contextObject}>   
-                    <div className='rDragAndDropRoot-wrapper'>
+                <rDragRDropContext.Provider value={contextObject}>   
+                    <div className='rDragRDropRoot-wrapper'>
                         <Trelloish_RDragDrop_Root >
                             {
                                 todoData.data
@@ -156,7 +156,7 @@ export function PageSection_1() {
                                 )
                             }
                         </Trelloish_RDragDrop_Root>
-                        <div className='rDragAndDropRoot-wrapper-inc' onClick={togglePopup}>
+                        <div className='rDragRDropRoot-wrapper-inc' onClick={togglePopup}>
                             Source Code
                         </div>
                         <DefaultPopup portalStyled={portalStyled} portalTarget={portalTarget} popupState={[popupState, setPopupState]} className='p-codepopup'>
@@ -174,7 +174,7 @@ export function PageSection_1() {
 import {useRef, useContext} from 'react'
 import styled from 'styled-components'
 import {DefaultStyle} from './Trelloish_RDragDrop_Wrapper'
-import {dragAndDropContext, dragAndDrop} from 'rDragAndDrop/index'
+import {rDragRDropContext, rDragRDrop} from 'rDragRDrop/index'
 
 const Styled = styled.div\`
     background: rgba(255, 255, 255, 0.2);
@@ -193,17 +193,17 @@ const Styled = styled.div\`
 
 export function Trelloish_RDragDrop_Root(props){
     const ref = useRef(null)
-    const {contextInstance} = useContext(dragAndDropContext)
+    const {contextInstance} = useContext(rDragRDropContext)
     const [context, setContext] = contextInstance
-    const dragAndDropRootInitObject = {
+    const rDragRDropRootInitObject = {
     usedContext: [context, setContext],
     ref
     }
-    const dragOver = dragAndDrop.dragRoot.dragOver(
-    dragAndDropRootInitObject
+    const dragOver = rDragRDrop.dragRoot.dragOver(
+    rDragRDropRootInitObject
     )
-    const drop = dragAndDrop.dragRoot.drop(
-    dragAndDropRootInitObject
+    const drop = rDragRDrop.dragRoot.drop(
+    rDragRDropRootInitObject
     )
     return (
     <Styled 
@@ -223,7 +223,7 @@ export function Trelloish_RDragDrop_Root(props){
                         {`
 import styled from 'styled-components'
 import {useState, useRef, useContext, useEffect, useImperativeHandle, forwardRef} from 'react'
-import {dragAndDrop, dragAndDropContext, dataMutate} from 'rDragAndDrop/index'
+import {rDragRDrop, rDragRDropContext, dataMutate} from 'rDragRDrop/index'
 
 const Styled = styled.div\`
   &.hovered {
@@ -241,9 +241,9 @@ export const Trelloish_RDragDrop_Wrapper = forwardRef(function (props, forwordSe
       data,
       setData,
       contextInstance
-    } = useContext(dragAndDropContext)
+    } = useContext(rDragRDropContext)
   const [context, setContext] = contextInstance
-  const dragAndDropWrapperInitObject = {
+  const rDragRDropWrapperInitObject = {
     usedContext: [context, setContext],
     stateData: [data, setData],
     stateDragHover: [isDragHover, setIsDragHover],
@@ -268,36 +268,36 @@ export const Trelloish_RDragDrop_Wrapper = forwardRef(function (props, forwordSe
   
   
   useEffect(
-      dragAndDrop.dragWrapper.wrapperRefEffectFn(dragAndDropWrapperInitObject),
+      rDragRDrop.dragWrapper.wrapperRefEffectFn(rDragRDropWrapperInitObject),
       [context.wrapperRef]
     )
   useEffect(
-      dragAndDrop.dragWrapper.latestDropEffectFn(dragAndDropWrapperInitObject),
+      rDragRDrop.dragWrapper.latestDropEffectFn(rDragRDropWrapperInitObject),
       [context.latestDrop]
     )
   
   
 
-  const dragStart = dragAndDrop.dragWrapper.dragStart(
-    dragAndDropWrapperInitObject,
+  const dragStart = rDragRDrop.dragWrapper.dragStart(
+    rDragRDropWrapperInitObject,
     (ev)=>{console.log('dragStart')}
   )
-  const dragEnd = dragAndDrop.dragWrapper.dragEnd(
-    dragAndDropWrapperInitObject
+  const dragEnd = rDragRDrop.dragWrapper.dragEnd(
+    rDragRDropWrapperInitObject
   )
   
-  const dragOver = dragAndDrop.dragWrapper.dragOver(
-    dragAndDropWrapperInitObject
+  const dragOver = rDragRDrop.dragWrapper.dragOver(
+    rDragRDropWrapperInitObject
   )
-  const dragLeave = dragAndDrop.dragWrapper.dragLeave(
-    dragAndDropWrapperInitObject
+  const dragLeave = rDragRDrop.dragWrapper.dragLeave(
+    rDragRDropWrapperInitObject
   )
   
-  const drop = dragAndDrop.dragWrapper.drop(
-    dragAndDropWrapperInitObject
+  const drop = rDragRDrop.dragWrapper.drop(
+    rDragRDropWrapperInitObject
   )
-  const dragEnter = dragAndDrop.dragWrapper.dragEnter(
-    dragAndDropWrapperInitObject
+  const dragEnter = rDragRDrop.dragWrapper.dragEnter(
+    rDragRDropWrapperInitObject
   )
   
   return (
@@ -326,7 +326,7 @@ export const DefaultStyle = Styled;
                         {`
 import styled from 'styled-components'
 import {useRef, useState, useContext} from 'react'
-import {dragAndDrop, dragAndDropContext} from 'rDragAndDrop/index'
+import {rDragRDrop, rDragRDropContext} from 'rDragRDrop/index'
 
 const Styled = styled.div\`
   ---color: yellow;
@@ -362,7 +362,7 @@ const Styled = styled.div\`
 
 export function Trelloish_RDragDrop_Target(props){
   const ref = useRef(null)
-  const {contextInstance} = useContext(dragAndDropContext)
+  const {contextInstance} = useContext(rDragRDropContext)
   const [isDragHover, setIsDragHover] = useState(false)
   const [isDragging, setIsDragging] = useState(false)
   const [context, setContext] = contextInstance
@@ -377,24 +377,24 @@ export function Trelloish_RDragDrop_Target(props){
     latestDropParent: props.parent,
   }
 
-  const dragStart = dragAndDrop.dragTarget.dragStart(
+  const dragStart = rDragRDrop.dragTarget.dragStart(
     dragTargetInitObject,
     (ev)=>{console.log('dragStart');}
   )
-  const dragOver = dragAndDrop.dragTarget.dragOver(
+  const dragOver = rDragRDrop.dragTarget.dragOver(
     dragTargetInitObject
   )
   
-  const dragEnd = dragAndDrop.dragTarget.dragEnd(
+  const dragEnd = rDragRDrop.dragTarget.dragEnd(
     dragTargetInitObject
   )
-  const drop = dragAndDrop.dragTarget.drop(
+  const drop = rDragRDrop.dragTarget.drop(
     dragTargetInitObject
   )
-  const dragEnter = dragAndDrop.dragTarget.dragEnter(
+  const dragEnter = rDragRDrop.dragTarget.dragEnter(
     dragTargetInitObject
   )
-  const dragLeave = dragAndDrop.dragTarget.dragLeave(
+  const dragLeave = rDragRDrop.dragTarget.dragLeave(
     dragTargetInitObject
   )
   
@@ -457,7 +457,7 @@ export function Trelloish_RDragDrop_Target(props){
                             </Highlight>
                         </DefaultPopup>
                     </div>
-                </dragAndDropContext.Provider>
+                </rDragRDropContext.Provider>
             </StaticBackgroundBlock>
         </Styled>
     )

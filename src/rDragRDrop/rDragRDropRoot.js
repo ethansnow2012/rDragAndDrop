@@ -1,7 +1,7 @@
 import {setCssPositionViaRef, calcMousePosition} from './coreHelpers'
-export const dragAndDropRoot = function () {}
+export const rDragRDropRoot = function () {}
 
-dragAndDropRoot.prototype.init = function({usedContext, options, props, ref}){
+rDragRDropRoot.prototype.init = function({usedContext, options, props, ref}){
     return function(){
         const [context, setContext] = usedContext
         console.log('root init')
@@ -14,7 +14,7 @@ dragAndDropRoot.prototype.init = function({usedContext, options, props, ref}){
     }
 }
 
-dragAndDropRoot.prototype.dragOver = function({usedContext, stateDragging, props, ref, options}, callback){
+rDragRDropRoot.prototype.dragOver = function({usedContext, stateDragging, props, ref, options}, callback){
     return function(ev){
         const [context, setContext] = usedContext
 
@@ -34,7 +34,7 @@ dragAndDropRoot.prototype.dragOver = function({usedContext, stateDragging, props
     }
 }
 
-dragAndDropRoot.prototype.drop = function({usedContext, stateDragging, props}, callback){
+rDragRDropRoot.prototype.drop = function({usedContext, stateDragging, props}, callback){
     return function(ev){
         const [context, setContext] = usedContext
         if(context.hoverDelegated){
