@@ -76,7 +76,11 @@ const Styled = styled.div`
         padding: 2px 7px 3px 7px;
         cursor: pointer;
     }
-    
+    @media(max-width: 768px){
+        .rDragAndDropRoot-wrapper{
+            width: 100%;
+        }
+    }
 `
 const portalStyled = styled.div`
     .p-codepopup > * + *{
@@ -159,6 +163,9 @@ export function PageSection_1() {
                             <HeaderForPopupH1>
                                 How to implement "trello-ish" UI.
                             </HeaderForPopupH1>
+                            <div>
+                                sadfsadf
+                            </div>
                             <HeaderForPopupH2>
                                 Define <strong>Root</strong> Element
                             </HeaderForPopupH2>
