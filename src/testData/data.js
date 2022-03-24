@@ -38,6 +38,48 @@ export default fakeAllTodos = {
                 {
                     id: faker.datatype.uuid(),
                     title: faker.name.findName()
+                },
+                {
+                    id: faker.datatype.uuid(),
+                    title: faker.name.findName()
+                },
+                {
+                    id: faker.datatype.uuid(),
+                    title: faker.name.findName()
+                },
+                {
+                    id: faker.datatype.uuid(),
+                    title: faker.name.findName()
+                },
+                {
+                    id: faker.datatype.uuid(),
+                    title: faker.name.findName()
+                },
+                {
+                    id: faker.datatype.uuid(),
+                    title: faker.name.findName()
+                }
+            ]
+        },
+        {
+            id: faker.datatype.uuid(),
+            title: faker.name.jobTitle(),
+            data: [
+                {
+                    id: faker.datatype.uuid(),
+                    title: faker.name.findName()
+                },
+                {
+                    id: faker.datatype.uuid(),
+                    title: faker.name.findName()
+                },
+                {
+                    id: faker.datatype.uuid(),
+                    title: faker.name.findName()
+                },
+                {
+                    id: faker.datatype.uuid(),
+                    title: faker.name.findName()
                 }
             ]
         },

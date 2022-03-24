@@ -26,7 +26,7 @@ const Styled = styled.div`
 `
 
 export function MainPage() {
-    
+    console.log('MainPage')
     return (
         <Styled>
             <PageSection_1/>
