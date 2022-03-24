@@ -10,6 +10,8 @@ import GitHubPageRoute from 'hoc/router/GithubRoute'
 import { TopNavigation } from 'container/TopNavigation'
 import { GlobalStateProvider } from 'context/GlobalStateProvider'
 import { GlobalWorker } from 'container/GlobalWorker'
+import { FootScript } from 'components/FootScript'
+
 
 
 
@@ -31,6 +33,7 @@ function App() {
             <Route path={baseName+'/about'} element={GitHubPageRoute(AboutPage, baseName)}></Route>
             <Route path={baseName+'/example'} element={GitHubPageRoute(ExamplePage, baseName)}></Route>
           </Routes>
+          <FootScript/>
         </BrowserRouter> 
       </GlobalStateProvider> 
     </div>
