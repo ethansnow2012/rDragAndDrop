@@ -7,7 +7,7 @@ import {StaticBackgroundBlock, DefaultStyle as StaticBackgroundBlockStyle} from 
 
 import {rDragRDrop, rDragRDropContext} from 'rDragRDrop/index'
 import {DefaultPopup} from 'components/popup/index.js'
-import {HeaderForPopupH1, HeaderForPopupH2} from 'components/HeaderForPopup'
+import {HeaderForPopupH1, HeaderForPopupH2} from 'components/Headers'
 
 
 import {Trelloish_RDragDrop_Root} from './parts/Trelloish_RDragDrop_Root'
@@ -165,25 +165,32 @@ export function PageSection_1() {
                         </Trelloish_RDragDrop_Root>
                         
                         <DefaultPopup portalStyled={portalStyled} portalTarget={portalTarget} popupState={[popupState, setPopupState]} className='p-codepopup'>
-                            <div className="c-blockseparator"> 
-                                <HeaderForPopupH1>
-                                    How to implement "trello-ish" UI.
-                                </HeaderForPopupH1>
-                                <div>
-                                    This library is aimed to help dealing with the states and callback complexity. It just expose its core functions so that developers can be used in "react functional component" with almost full customizability.
-                                    Like most library there are still some pre-consumption. For drag-and-drop to work three-layer structure is needed:<br/>
-                                    <br/>
-                                    &nbsp;&nbsp;&nbsp;- Target: the actual element that will be dragged.<br/>
-                                    &nbsp;&nbsp;&nbsp;- Wrapper: the elementthat will be the drop on.<br/>
-                                    &nbsp;&nbsp;&nbsp;- Root: the zoom drag and drop happens.<br/>
+                            <div className="c-blockseparator-1">
+                                <div className="c-blockseparator-2"> 
+                                    <HeaderForPopupH1>
+                                        How to implement "trello-ish" UI.
+                                    </HeaderForPopupH1>
+                                </div>
+                                <div className="c-blockseparator-2">
+                                    <div>
+                                        This library is aimed to help dealing with the states and callback complexity. It just expose its core functions so that developers can be used in "react functional component" with almost full customizability.
+                                        Like most library there are still some pre-consumption. For drag-and-drop to work three-layer structure is needed:<br/>
+                                        <br/>
+                                        &nbsp;&nbsp;&nbsp;- Target: the actual element that will be dragged.<br/>
+                                        &nbsp;&nbsp;&nbsp;- Wrapper: the elementthat will be the drop on.<br/>
+                                        &nbsp;&nbsp;&nbsp;- Root: the zoom drag and drop happens.<br/>
+                                    </div>
                                 </div>
                             </div>
-                            <div className="c-blockseparator"> 
-                                <HeaderForPopupH2>
-                                    Define <strong>Target</strong> Element with rDrag-rDrop.js
-                                </HeaderForPopupH2>
-                                <Highlight language="javascript html">
-                            {`
+                            <div className="c-blockseparator-1"> 
+                                <div className="c-blockseparator-2">
+                                    <HeaderForPopupH2>
+                                        Define <strong>Target</strong> Element with rDrag-rDrop.js
+                                    </HeaderForPopupH2>
+                                </div>
+                                <div className="c-blockseparator-2">
+                                    <Highlight language="javascript html">
+                                {`
 import styled from 'styled-components'
 import {useRef, useState, useContext} from 'react'
 import {rDragRDrop, rDragRDropContext} from 'rDragRDrop/index'
@@ -275,15 +282,21 @@ return (
 </Styled>
 )
 }
-                            `}
-                                </Highlight>
+                                `}
+                                    </Highlight>
+                                </div>
+                                
                             </div>
-                            <div className="c-blockseparator"> 
-                                <HeaderForPopupH2>
-                                    Define <strong>Wrapper</strong> Element with rDrag-rDrop.js
-                                </HeaderForPopupH2>
-                                <Highlight language="javascript html">
-                            {`
+                            <div className="c-blockseparator-1"> 
+                                <div className="c-blockseparator-2"> 
+                                    <HeaderForPopupH2>
+                                        Define <strong>Wrapper</strong> Element with rDrag-rDrop.js
+                                    </HeaderForPopupH2>
+                                </div>
+                                <div className="c-blockseparator-2"> 
+                                
+                                    <Highlight language="javascript html">
+                                {`
 import styled from 'styled-components'
 import {useState, useRef, useContext, useEffect, useImperativeHandle, forwardRef} from 'react'
 import {rDragRDrop, rDragRDropContext, dataMutate} from 'rDragRDrop/index'
@@ -381,15 +394,19 @@ return (
 })
 
 export const DefaultStyle = Styled;
-                            `}
-                                </Highlight>
+                                `}
+                                    </Highlight>
+                                </div>
                             </div>
-                            <div className="c-blockseparator"> 
-                                <HeaderForPopupH2>
-                                    Define <strong>Root</strong> Element
-                                </HeaderForPopupH2>
-                                <Highlight language="javascript html">
-                            {`
+                            <div className="c-blockseparator-1"> 
+                                <div className="c-blockseparator-2"> 
+                                    <HeaderForPopupH2>
+                                        Define <strong>Root</strong> Element
+                                    </HeaderForPopupH2>
+                                </div>
+                                <div className="c-blockseparator-2"> 
+                                    <Highlight language="javascript html">
+                                {`
 import {useRef, useContext} from 'react'
 import styled from 'styled-components'
 import {DefaultStyle} from './Trelloish_RDragDrop_Wrapper'
@@ -434,51 +451,55 @@ export function Trelloish_RDragDrop_Root(props){
     </Styled>
     )
 }
-                            `}
-                                </Highlight>
+                                `}
+                                    </Highlight>
+                                </div>
                             </div>
-                            <div className="c-blockseparator"> 
-                                <HeaderForPopupH2>
-                                    Implement the Definition
-                                </HeaderForPopupH2>
-                                <Highlight language="javascript html">
-                            {`
-<Trelloish_RDragDrop_Root >
-{
-    xxxData.data
-    ?.map((columnData,ii) =>
+                            <div className="c-blockseparator-1"> 
+                                <div className="c-blockseparator-2"> 
+                                    <HeaderForPopupH2>
+                                        Implement the Definition
+                                    </HeaderForPopupH2>
+                                </div>
+                                <div className="c-blockseparator-2"> 
+                                    <Highlight language="javascript html">
+                                {`
+    <Trelloish_RDragDrop_Root >
     {
-        return(  
-        <Trelloish_RDragDrop_Wrapper 
-            ref={setRefsMap(columnData)}
-            key={columnData.id} 
-            self={columnData} 
-            parent={todoData} >
-            <div className='p-column-inner'>
-            {
-                columnData.data
-                .map((item, jj)=>(
-                    <Trelloish_RDragDrop_Target 
-                        key={item.id} 
-                        self={item} 
-                        parent={columnData}
-                    />
-                ))
-            }
-            </div>
-            <div className='p-column-inc'>
-                <div className='p-column-inc-add' onClick={logRef(columnData.id)}></div>
-            </div>
-        </Trelloish_RDragDrop_Wrapper>
+        xxxData.data
+        ?.map((columnData,ii) =>
+        {
+            return(  
+            <Trelloish_RDragDrop_Wrapper 
+                ref={setRefsMap(columnData)}
+                key={columnData.id} 
+                self={columnData} 
+                parent={todoData} >
+                <div className='p-column-inner'>
+                {
+                    columnData.data
+                    .map((item, jj)=>(
+                        <Trelloish_RDragDrop_Target 
+                            key={item.id} 
+                            self={item} 
+                            parent={columnData}
+                        />
+                    ))
+                }
+                </div>
+                <div className='p-column-inc'>
+                    <div className='p-column-inc-add' onClick={logRef(columnData.id)}></div>
+                </div>
+            </Trelloish_RDragDrop_Wrapper>
+            )
+        }
         )
     }
-    )
-}
-</Trelloish_RDragDrop_Root>
-                            `}
-                                </Highlight>
+    </Trelloish_RDragDrop_Root>
+                                `}
+                                    </Highlight>
+                                </div>
                             </div>
-                            
                         </DefaultPopup>
                     </div>
                 </rDragRDropContext.Provider>

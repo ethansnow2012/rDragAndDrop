@@ -11,6 +11,20 @@ const Style = style.div`
         font-size: 1.1rem;
     }
 `
+export const H1 = function({children}){
+    return (
+        <Style>
+            {children}
+        </Style>
+    )
+}
+export const H2 = function({children}){
+    return (
+        <Style className="ov-h2">
+            {children}
+        </Style>
+    )
+}
 export const HeaderForPopupH1 = function({children}){
     return (
         <Style>

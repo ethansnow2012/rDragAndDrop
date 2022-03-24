@@ -25,7 +25,7 @@ function renderMyPortal() {
 
 beforeEach(cleanup)
 
-test('HeaderForPopup render text', ()=>{
+test('Mount the default popup', ()=>{
     const {unmount} = renderMyPortal(<TestComponent />)
     
     expect(document.body.querySelector('.p-codepopup')).toBeTruthy()

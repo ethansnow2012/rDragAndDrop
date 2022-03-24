@@ -1,6 +1,7 @@
 
 import styled from 'styled-components'
 import {BasicUsage} from './BasicUsage'
+import {H1,H2} from 'components/Headers'
 
 const Styled = styled.div`
     padding-top: 4em;
@@ -12,8 +13,13 @@ const Styled = styled.div`
 export function ExamplePage() {
     return (
         <Styled>
-            <h1>ExamplePage</h1>
-            <BasicUsage></BasicUsage>
+            <div className="c-blockseparator-1">
+                <H1>Minimal Usage With Default Component </H1>
+            </div>
+            <div className="c-blockseparator-1">
+                <BasicUsage></BasicUsage>
+            </div>
+            
         </Styled>
     )
 }

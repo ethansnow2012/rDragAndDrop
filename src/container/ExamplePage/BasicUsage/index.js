@@ -2,6 +2,8 @@
 import React, {useState, useRef, useEffect, forwardRef, createRef} from 'react'
 import styled from 'styled-components'
 import {rDragRDrop, rDragRDropContext, defaultComponents} from 'rDragRDrop/index'
+import {H1,H2} from 'components/Headers'
+import Highlight from 'react-highlight'
 
 const {
     root: _root,
@@ -57,35 +59,90 @@ export function BasicUsage() {
     }
     return (
         <Styled>
-            <rDragRDropContext.Provider value={contextObject}>
-                <h2 >BasicUseage: {dataState.title}</h2>
-                <Root>
-                    {
-                        dataState.data
-                            ?.map((wrapperData) =>
-                            {
-                                return(  
-                                    <div>
+            <div className="c-blockseparator-1">
+                <div className="c-blockseparator-2">
+                    <H2 >BasicUseage: {/*dataState.title*/}</H2>
+                </div>    
+                <div className="c-blockseparator-2">
+                    <div className="c-blockseparator-3">
+                        Although rDrag-rDrop.js is designed to provide the helper for drag-drop events. It still has the default components so that anyone can get started with minimal effort.
+                    </div>
+                    <div className="c-blockseparator-3">
+                        To start, you just need to get a three-layer structure json each layer with two required fields -- id&lt;string&gt;, data&lt;Array&gt;. As below:
+                        <div style={{height:"0.5em"}}></div>
+                        <Highlight language="json">
+                            {`
+{
+    "id":"sssfsdfsfjklhjkg",
+    "title":"Title for the Wrapper",
+    "data":[
+       {
+          "id":"01588147-106e-45dd-b54d-ed71da05fb77",
+          "title":"Human Intranet Executive",
+          "data":[
+             {
+                "id":"eaed08e2-9891-4b94-a06e-1473f660ba43",
+                "title":"one"
+             },
+             /* -- */
+             /* -- */
+          ]
+       },
+       {
+          "id":"4a107b1a-c157-4c98-b7df-26935153d7a2",
+          "title":"Human Configuration Executive",
+          "data":[
+             {
+                "id":"91a93433-618e-45db-82b5-033d3e72ddff",
+                "title":"six"
+             }
+             /* -- */
+             /* -- */
+          ]
+       },
+       /* -- */
+    ]
+ }
+                            `}
+                        </Highlight>
+                        <div style={{height:"0.5em"}}></div>
+                        Just loop through this data with "defaultComponents" then you will see the drag-drop component working.
+                        <div style={{height:"2.5em"}}></div>
+                        <div style={{fontWeight:'bolder'}}>Just like the exmaple here:</div>
+                    </div>
+                </div>
+            </div>
+            <div className="c-blockseparator-1">
+                <rDragRDropContext.Provider value={contextObject}>
+                    <Root>
+                        {
+                            dataState.data
+                                ?.map((wrapperData) =>
+                                {
+                                    return(  
                                         <div>
-                                            <h3 style={{height:"72px"}}>{wrapperData.title}</h3>
+                                            <div>
+                                                <h3 style={{height:"72px"}}>{wrapperData.title}</h3>
+                                            </div>
+                                            <Wrapper key={wrapperData.id} self={wrapperData} parent={dataState.data}>
+                                                {
+                                                    wrapperData.data
+                                                        .map((target, ii)=>(
+                                                            <Target key={target.id} self={target} parent={wrapperData}>
+                                                                <div className='black-block'>{target.title}</div>
+                                                            </Target>
+                                                        ))
+                                                }
+                                            </Wrapper>
                                         </div>
-                                        <Wrapper key={wrapperData.id} self={wrapperData} parent={dataState.data}>
-                                            {
-                                                wrapperData.data
-                                                    .map((target, ii)=>(
-                                                        <Target key={target.id} self={target} parent={wrapperData}>
-                                                            <div className='black-block'>{target.title}</div>
-                                                        </Target>
-                                                    ))
-                                            }
-                                        </Wrapper>
-                                    </div>
-                                )
-                            }
-                        )
-                    }
-                </Root>
-            </rDragRDropContext.Provider>
+                                    )
+                                }
+                            )
+                        }
+                    </Root>
+                </rDragRDropContext.Provider>
+            </div>
+            
             
         </Styled>
     )
