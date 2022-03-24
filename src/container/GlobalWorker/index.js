@@ -1,16 +1,15 @@
 
 
-import {useEffect, useContext, useCallback} from 'react'
+import {useEffect, useContext, useCallback, useRef} from 'react'
 import {useGlobalState} from 'context/GlobalStateProvider'
 
 export function GlobalWorker() {
     const [state, dispatch] = useGlobalState()
-    
-    var lastScrollTop = 0    
+    const lastScrollTop = useRef(0)
+
     const scrollHandle = useCallback(()=>{
-        const [state, dispatch] = useGlobalState()
         var st = window.pageYOffset || document.documentElement.scrollTop; // Credits: "https://github.com/qeremy/so/blob/master/so.dom.js#L426"
-        if (st > lastScrollTop){
+        if (st > lastScrollTop.current){
           if(state.scrollDirection!='down'){
               dispatch({...state, scrollDirection:'down'})
           }
@@ -19,8 +18,8 @@ export function GlobalWorker() {
               dispatch({...state, scrollDirection:'up'})
           }
         }
-        lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
-      }, []);
+        lastScrollTop.current = st <= 0 ? 0 : st; // For Mobile or negative scrolling
+      }, [state]);
 
     
     useEffect(() => {
