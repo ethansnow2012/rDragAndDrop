@@ -47,14 +47,19 @@ const Styled = styled.div`
     
     & .topNavigation-text{
         position:absolute;
-        top:1em;
-        right: 2em;
+        top: 15px;
+        right: 39px;
         color:white;
         mix-blend-mode: screen;
     }
     & .topNavigation-text a{
         padding: 0;
     }
+    & .topNavigation-text a.topNavigation-text-mainname{
+        color: white;
+        text-decoration: none;
+    }
+    
     & .topNavigation-text-inner-line{
         position: relative;
         height: 1px;
@@ -208,7 +213,7 @@ export function TopNavigation() {
             </div>
             
             <div className="topNavigation-text">
-                <Link  to={baseName+'/'} className="topNavigation-block-menu-content-i">rDrag-rDrop.js</Link>
+                <Link  className="topNavigation-text-mainname" to={baseName+'/'} >rDrag-rDrop.js</Link>
                 <div className="topNavigation-text-inner">
                     <div className="topNavigation-text-inner-line"></div>
                 </div>

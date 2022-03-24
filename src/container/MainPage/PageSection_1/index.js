@@ -27,9 +27,11 @@ const Styled = styled.div`
     }
     & ${StaticBackgroundBlockStyle} ${RDragAndDropWrapperStyle} {
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         //align-items: center;
         flex-direction: column;
+        overflow: scroll;
+        min-width: min-content;
     }
 
     & ${StaticBackgroundBlockStyle} ${RDragAndDropWrapperStyle} .p-column-inner{
@@ -50,6 +52,7 @@ const Styled = styled.div`
         justify-content: center;
         align-items: center;
         display:flex;
+        cursor: pointer;
     }
     & ${StaticBackgroundBlockStyle} ${RDragAndDropWrapperStyle} .p-column-inc-add::before{
         content:'+';
