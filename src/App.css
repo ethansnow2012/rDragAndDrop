@@ -12,3 +12,9 @@ h1{
   padding-bottom: 20px;
 }
 
+.c-blockseparator > * + *{
+  margin-top: 0.7rem;
+}
+.c-blockseparator + .c-blockseparator{
+  margin-top: 1.8rem !important;
+}

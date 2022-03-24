@@ -20,7 +20,8 @@ const Overlay = style.div`
     left:0;
     right:0;
     bottom:0;
-    background: #000000b5;
+     background: #000000b5;
+    //background:black;
 `
 
 

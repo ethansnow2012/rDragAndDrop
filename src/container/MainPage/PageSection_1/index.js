@@ -160,27 +160,242 @@ export function PageSection_1() {
                                 )
                             }
                         <div className='rDragRDropRoot-wrapper-inc' onClick={togglePopup}>
-                            Source Code
+                            See Example Code.
                         </div>    
                         </Trelloish_RDragDrop_Root>
                         
                         <DefaultPopup portalStyled={portalStyled} portalTarget={portalTarget} popupState={[popupState, setPopupState]} className='p-codepopup'>
-                            <HeaderForPopupH1>
-                                How to implement "trello-ish" UI.
-                            </HeaderForPopupH1>
-                            <div>
-                                sadfsadf
+                            <div className="c-blockseparator"> 
+                                <HeaderForPopupH1>
+                                    How to implement "trello-ish" UI.
+                                </HeaderForPopupH1>
+                                <div>
+                                    This library is aimed to help dealing with the states and callback complexity. It just expose its core functions so that developers can be used in "react functional component" with almost full customizability.
+                                    Like most library there are still some pre-consumption. For drag-and-drop to work three-layer structure is needed:<br/>
+                                    <br/>
+                                    &nbsp;&nbsp;&nbsp;- Target: the actual element that will be dragged.<br/>
+                                    &nbsp;&nbsp;&nbsp;- Wrapper: the elementthat will be the drop on.<br/>
+                                    &nbsp;&nbsp;&nbsp;- Root: the zoom drag and drop happens.<br/>
+                                </div>
                             </div>
-                            <HeaderForPopupH2>
-                                Define <strong>Root</strong> Element
-                            </HeaderForPopupH2>
-                            <Highlight language="javascript html">
-                        {`
+                            <div className="c-blockseparator"> 
+                                <HeaderForPopupH2>
+                                    Define <strong>Target</strong> Element with rDrag-rDrop.js
+                                </HeaderForPopupH2>
+                                <Highlight language="javascript html">
+                            {`
+import styled from 'styled-components'
+import {useRef, useState, useContext} from 'react'
+import {rDragRDrop, rDragRDropContext} from 'rDragRDrop/index'
+
+//style should not matter too much here
+const Styled = styled.div\`
+---color: yellow;
+---placeholder-height: unset;
+padding: 5px 10px;
+position:relative;
+&:hover{
+cursor: grab;
+cursor: -moz-grab;
+cursor: -webkit-grab;
+}
+&.isDragging{
+background: green;
+transition: height 1s;
+}
+&.isDragging:active{
+/* */
+}
+&.isDragHover:not(.isDragging){
+z-index: 1;
+margin-top: calc(1 * var(---placeholder-height));
+}
+&.isDragHover:not(.isDragging)::after{
+position: absolute;
+content: '';
+bottom: 100%;
+background: grey;
+width: 100%;
+height: 100%;
+left: 0;
+}
+\`
+
+export function Trelloish_RDragDrop_Target(props){
+const ref = useRef(null)
+const {contextInstance} = useContext(rDragRDropContext)
+const [isDragHover, setIsDragHover] = useState(false)
+const [isDragging, setIsDragging] = useState(false)
+const [context, setContext] = contextInstance
+
+const dragTargetInitObject = {
+    usedContext: [context, setContext],
+    stateDragging: [isDragging, setIsDragging],
+    stateDragHover: [isDragHover, setIsDragHover],
+    props,
+    ref,
+    latestDrop: props.self,
+    latestDropParent: props.parent,
+}
+
+const dragStart = rDragRDrop.dragTarget.dragStart(
+    dragTargetInitObject,
+    (ev)=>{console.log('dragStart');}
+)
+const dragOver = rDragRDrop.dragTarget.dragOver(
+    dragTargetInitObject
+)
+
+const dragEnd = rDragRDrop.dragTarget.dragEnd(
+    dragTargetInitObject
+)
+const drop = rDragRDrop.dragTarget.drop(
+    dragTargetInitObject
+)
+const dragEnter = rDragRDrop.dragTarget.dragEnter(
+    dragTargetInitObject
+)
+const dragLeave = rDragRDrop.dragTarget.dragLeave(
+    dragTargetInitObject
+)
+
+return (
+<Styled 
+    ref={ref}
+    draggable='true' 
+    onDragStart={dragStart}
+    onDragEnd={dragEnd}
+    onDragOver={dragOver}
+    onDrop={drop}
+    onDragEnter={dragEnter} 
+    onDragLeave={dragLeave} 
+    className={(isDragging?' isDragging':'') + (isDragHover?' isDragHover':'')}
+>
+    todo-item: {props.self.title}
+</Styled>
+)
+}
+                            `}
+                                </Highlight>
+                            </div>
+                            <div className="c-blockseparator"> 
+                                <HeaderForPopupH2>
+                                    Define <strong>Wrapper</strong> Element with rDrag-rDrop.js
+                                </HeaderForPopupH2>
+                                <Highlight language="javascript html">
+                            {`
+import styled from 'styled-components'
+import {useState, useRef, useContext, useEffect, useImperativeHandle, forwardRef} from 'react'
+import {rDragRDrop, rDragRDropContext, dataMutate} from 'rDragRDrop/index'
+
+//style should not matter too much here
+const Styled = styled.div\`
+&.hovered {
+    background: red;
+}
+padding:0px;
+box-sizing: context-box;
+\`
+
+export const Trelloish_RDragDrop_Wrapper = forwardRef(function (props, forwordSelfRef){
+const [isDragHover, setIsDragHover] = useState(false)
+const ref = useRef(null)
+
+const {
+    data,
+    setData,
+    contextInstance
+    } = useContext(rDragRDropContext)
+const [context, setContext] = contextInstance
+const rDragRDropWrapperInitObject = {
+    usedContext: [context, setContext],
+    stateData: [data, setData],
+    stateDragHover: [isDragHover, setIsDragHover],
+    props,
+    ref
+}
+
+useImperativeHandle(forwordSelfRef, ()=>
+    ({
+    simpleConsole: ()=>{ console.log('simpleConsole', ref) },
+    updateOneTodo: async (data)=>{
+        console.log('here', data, props.self)
+        
+        dataMutate.addToAnotherParent(data, props.self)
+        setData((_data)=>{//after mutation forcely invoke react update
+        return {..._data}
+        })
+        console.log(data, context, props)
+    }
+    })
+)
+
+
+useEffect(
+    rDragRDrop.dragWrapper.wrapperRefEffectFn(rDragRDropWrapperInitObject),
+    [context.wrapperRef]
+    )
+useEffect(
+    rDragRDrop.dragWrapper.latestDropEffectFn(rDragRDropWrapperInitObject),
+    [context.latestDrop]
+    )
+
+
+
+const dragStart = rDragRDrop.dragWrapper.dragStart(
+    rDragRDropWrapperInitObject,
+    (ev)=>{console.log('dragStart')}
+)
+const dragEnd = rDragRDrop.dragWrapper.dragEnd(
+    rDragRDropWrapperInitObject
+)
+
+const dragOver = rDragRDrop.dragWrapper.dragOver(
+    rDragRDropWrapperInitObject
+)
+const dragLeave = rDragRDrop.dragWrapper.dragLeave(
+    rDragRDropWrapperInitObject
+)
+
+const drop = rDragRDrop.dragWrapper.drop(
+    rDragRDropWrapperInitObject
+)
+const dragEnter = rDragRDrop.dragWrapper.dragEnter(
+    rDragRDropWrapperInitObject
+)
+
+return (
+    <Styled 
+    ref={ref}
+    onDragStart={dragStart}
+    onDragOver={dragOver} 
+    onDrop={drop} 
+    onDragEnd={dragEnd}
+    onDragLeave={dragLeave} 
+    onDragEnter={dragEnter}
+    className={isDragHover?'hovered':''}
+    >
+    {props.children}
+    </Styled>
+)
+})
+
+export const DefaultStyle = Styled;
+                            `}
+                                </Highlight>
+                            </div>
+                            <div className="c-blockseparator"> 
+                                <HeaderForPopupH2>
+                                    Define <strong>Root</strong> Element
+                                </HeaderForPopupH2>
+                                <Highlight language="javascript html">
+                            {`
 import {useRef, useContext} from 'react'
 import styled from 'styled-components'
 import {DefaultStyle} from './Trelloish_RDragDrop_Wrapper'
 import {rDragRDropContext, rDragRDrop} from 'rDragRDrop/index'
 
+//style should not matter too much here
 const Styled = styled.div\`
     background: rgba(255, 255, 255, 0.2);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -219,213 +434,15 @@ export function Trelloish_RDragDrop_Root(props){
     </Styled>
     )
 }
-                        `}
-                            </Highlight>
-                            <HeaderForPopupH2>
-                                Define <strong>Wrapper</strong> Element with rDrag-rDrop.js
-                            </HeaderForPopupH2>
-                            <Highlight language="javascript html">
-                        {`
-import styled from 'styled-components'
-import {useState, useRef, useContext, useEffect, useImperativeHandle, forwardRef} from 'react'
-import {rDragRDrop, rDragRDropContext, dataMutate} from 'rDragRDrop/index'
-
-const Styled = styled.div\`
-  &.hovered {
-     background: red;
-  }
-  padding:0px;
-  box-sizing: context-box;
-\`
-
-export const Trelloish_RDragDrop_Wrapper = forwardRef(function (props, forwordSelfRef){
-  const [isDragHover, setIsDragHover] = useState(false)
-  const ref = useRef(null)
-  
-  const {
-      data,
-      setData,
-      contextInstance
-    } = useContext(rDragRDropContext)
-  const [context, setContext] = contextInstance
-  const rDragRDropWrapperInitObject = {
-    usedContext: [context, setContext],
-    stateData: [data, setData],
-    stateDragHover: [isDragHover, setIsDragHover],
-    props,
-    ref
-  }
-  
-  useImperativeHandle(forwordSelfRef, ()=>
-    ({
-      simpleConsole: ()=>{ console.log('simpleConsole', ref) },
-      updateOneTodo: async (data)=>{
-        console.log('here', data, props.self)
-        
-        dataMutate.addToAnotherParent(data, props.self)
-        setData((_data)=>{//after mutation forcely invoke react update
-          return {..._data}
-        })
-        console.log(data, context, props)
-      }
-    })
-  )
-  
-  
-  useEffect(
-      rDragRDrop.dragWrapper.wrapperRefEffectFn(rDragRDropWrapperInitObject),
-      [context.wrapperRef]
-    )
-  useEffect(
-      rDragRDrop.dragWrapper.latestDropEffectFn(rDragRDropWrapperInitObject),
-      [context.latestDrop]
-    )
-  
-  
-
-  const dragStart = rDragRDrop.dragWrapper.dragStart(
-    rDragRDropWrapperInitObject,
-    (ev)=>{console.log('dragStart')}
-  )
-  const dragEnd = rDragRDrop.dragWrapper.dragEnd(
-    rDragRDropWrapperInitObject
-  )
-  
-  const dragOver = rDragRDrop.dragWrapper.dragOver(
-    rDragRDropWrapperInitObject
-  )
-  const dragLeave = rDragRDrop.dragWrapper.dragLeave(
-    rDragRDropWrapperInitObject
-  )
-  
-  const drop = rDragRDrop.dragWrapper.drop(
-    rDragRDropWrapperInitObject
-  )
-  const dragEnter = rDragRDrop.dragWrapper.dragEnter(
-    rDragRDropWrapperInitObject
-  )
-  
-  return (
-    <Styled 
-      ref={ref}
-      onDragStart={dragStart}
-      onDragOver={dragOver} 
-      onDrop={drop} 
-      onDragEnd={dragEnd}
-      onDragLeave={dragLeave} 
-      onDragEnter={dragEnter}
-      className={isDragHover?'hovered':''}
-    >
-      {props.children}
-    </Styled>
-  )
-})
-
-export const DefaultStyle = Styled;
-                        `}
-                            </Highlight>
-                            <HeaderForPopupH2>
-                                Define <strong>Target</strong> Element with rDrag-rDrop.js
-                            </HeaderForPopupH2>
-                            <Highlight language="javascript html">
-                        {`
-import styled from 'styled-components'
-import {useRef, useState, useContext} from 'react'
-import {rDragRDrop, rDragRDropContext} from 'rDragRDrop/index'
-
-const Styled = styled.div\`
-  ---color: yellow;
-  ---placeholder-height: unset;
-  padding: 5px 10px;
-  position:relative;
-  &:hover{
-  cursor: grab;
-  cursor: -moz-grab;
-  cursor: -webkit-grab;
-  }
-  &.isDragging{
-  background: green;
-  transition: height 1s;/* this seems to avoid some flickers.*/
-  }
-  &.isDragging:active{
-  /* */
-  }
-  &.isDragHover:not(.isDragging){
-  z-index: 1;
-  margin-top: calc(1 * var(---placeholder-height));
-  }
-  &.isDragHover:not(.isDragging)::after{
-  position: absolute;
-  content: '';
-  bottom: 100%;
-  background: grey;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  }
-\`
-
-export function Trelloish_RDragDrop_Target(props){
-  const ref = useRef(null)
-  const {contextInstance} = useContext(rDragRDropContext)
-  const [isDragHover, setIsDragHover] = useState(false)
-  const [isDragging, setIsDragging] = useState(false)
-  const [context, setContext] = contextInstance
-
-  const dragTargetInitObject = {
-    usedContext: [context, setContext],
-    stateDragging: [isDragging, setIsDragging],
-    stateDragHover: [isDragHover, setIsDragHover],
-    props,
-    ref,
-    latestDrop: props.self,
-    latestDropParent: props.parent,
-  }
-
-  const dragStart = rDragRDrop.dragTarget.dragStart(
-    dragTargetInitObject,
-    (ev)=>{console.log('dragStart');}
-  )
-  const dragOver = rDragRDrop.dragTarget.dragOver(
-    dragTargetInitObject
-  )
-  
-  const dragEnd = rDragRDrop.dragTarget.dragEnd(
-    dragTargetInitObject
-  )
-  const drop = rDragRDrop.dragTarget.drop(
-    dragTargetInitObject
-  )
-  const dragEnter = rDragRDrop.dragTarget.dragEnter(
-    dragTargetInitObject
-  )
-  const dragLeave = rDragRDrop.dragTarget.dragLeave(
-    dragTargetInitObject
-  )
-  
-  return (
-  <Styled 
-    ref={ref}
-    draggable='true' 
-    onDragStart={dragStart}
-    onDragEnd={dragEnd}
-    onDragOver={dragOver}
-    onDrop={drop}
-    onDragEnter={dragEnter} 
-    onDragLeave={dragLeave} 
-    className={(isDragging?' isDragging':'') + (isDragHover?' isDragHover':'')}
-  >
-    todo-item: {props.self.title}
-  </Styled>
-  )
-}
-                        `}
-                            </Highlight>
-                            <HeaderForPopupH2>
-                                Implement the Definition
-                            </HeaderForPopupH2>
-                            <Highlight language="javascript html">
-                        {`
+                            `}
+                                </Highlight>
+                            </div>
+                            <div className="c-blockseparator"> 
+                                <HeaderForPopupH2>
+                                    Implement the Definition
+                                </HeaderForPopupH2>
+                                <Highlight language="javascript html">
+                            {`
 <Trelloish_RDragDrop_Root >
 {
     xxxData.data
@@ -437,29 +454,31 @@ export function Trelloish_RDragDrop_Target(props){
             key={columnData.id} 
             self={columnData} 
             parent={todoData} >
-              <div className='p-column-inner'>
-              {
-                  columnData.data
-                  .map((item, jj)=>(
-                      <Trelloish_RDragDrop_Target 
+            <div className='p-column-inner'>
+            {
+                columnData.data
+                .map((item, jj)=>(
+                    <Trelloish_RDragDrop_Target 
                         key={item.id} 
                         self={item} 
                         parent={columnData}
-                      />
-                  ))
-              }
-              </div>
-              <div className='p-column-inc'>
+                    />
+                ))
+            }
+            </div>
+            <div className='p-column-inc'>
                 <div className='p-column-inc-add' onClick={logRef(columnData.id)}></div>
-              </div>
+            </div>
         </Trelloish_RDragDrop_Wrapper>
         )
     }
     )
 }
 </Trelloish_RDragDrop_Root>
-                        `}
-                            </Highlight>
+                            `}
+                                </Highlight>
+                            </div>
+                            
                         </DefaultPopup>
                     </div>
                 </rDragRDropContext.Provider>

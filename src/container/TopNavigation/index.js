@@ -2,7 +2,7 @@
 import styled from 'styled-components'
 import {useGlobalState} from 'context/GlobalStateProvider'
 import {useContext, useEffect, useState} from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import {baseName} from 'App'
 
 const Styled = styled.div`
@@ -102,8 +102,18 @@ const Styled = styled.div`
         color: wheat !important;
         text-decoration: auto;
     }
-    & .topNavigation-block-menu-content-i::after{
-        content: '→';
+    & .topNavigation-block-menu-content-i::before{
+        content:'•';
+        transition: all 1s;
+        opacity:0;
+        margin-right:6px;
+    }
+    & .topNavigation-block-menu-content-i.active::before{
+        opacity:1;
+        margin-right:6px;
+    }
+    & .topNavigation-block-menu-content-i:not(.active)::after{
+        //content: '→';
         display: inline-block;
         margin-right: 15px;
         float: right;
@@ -202,7 +212,7 @@ export function TopNavigation() {
         >
             <div className="topNavigation-block">
                 <div className="topNavigation-block-menu-content">
-                    <Link  to={baseName+'/example'} className="topNavigation-block-menu-content-i">Example</Link>
+                    <NavLink activeClassName="selected" to={baseName+'/example'} className="topNavigation-block-menu-content-i">Example</NavLink>
                     <a  href="https://github.com/ethansnow2012/rdrag-rdrop" className="topNavigation-block-menu-content-i">Github</a>
                 </div>
             </div>
@@ -213,7 +223,7 @@ export function TopNavigation() {
             </div>
             
             <div className="topNavigation-text">
-                <Link  className="topNavigation-text-mainname" to={baseName+'/'} >rDrag-rDrop.js</Link>
+                <NavLink  className="topNavigation-text-mainname" to={baseName+'/'} >rDrag-rDrop.js</NavLink>
                 <div className="topNavigation-text-inner">
                     <div className="topNavigation-text-inner-line"></div>
                 </div>
