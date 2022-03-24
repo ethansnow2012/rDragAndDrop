@@ -8,16 +8,21 @@ const Styled = styled.div`
     padding-left: 2em;
     padding-right: 2em;
     background: #9dbacc;
+    & .inner{
+        max-width: 780px;
+    }
 `
 
 export function ExamplePage() {
     return (
         <Styled>
-            <div className="c-blockseparator-1">
-                <H1>Minimal Usage With Default Component </H1>
-            </div>
-            <div className="c-blockseparator-1">
-                <BasicUsage></BasicUsage>
+            <div className="inner">
+                <div className="c-blockseparator-1">
+                    <H1>Minimal Usage With Default Component </H1>
+                </div>
+                <div className="c-blockseparator-1">
+                    <BasicUsage></BasicUsage>
+                </div>
             </div>
             
         </Styled>

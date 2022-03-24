@@ -1,5 +1,5 @@
 :root{
-
+  --smooth-space-unit: 6vmin;
 }
 
 * {
@@ -13,11 +13,14 @@ h1{
 }
 
 .c-blockseparator-1 + .c-blockseparator-1{
-  margin-top: 1.8rem ;
+  /* margin-top: 1.8rem ; */
+  margin-top: calc(var(--smooth-space-unit) * 1.8);
 }
 .c-blockseparator-2 + .c-blockseparator-2{
-  margin-top: 0.7rem;
+  /*margin-top: 0.7rem;*/
+  margin-top: calc(var(--smooth-space-unit) * 1.2);
 }
 .c-blockseparator-3 + .c-blockseparator-3{
-  margin-top: 0.45rem;
+  /*margin-top: 0.45rem;*/
+  margin-top: calc(var(--smooth-space-unit) * 1);
 }

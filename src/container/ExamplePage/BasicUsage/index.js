@@ -69,7 +69,7 @@ export function BasicUsage() {
                     </div>
                     <div className="c-blockseparator-3">
                         To start, you just need to get a three-layer structure json each layer with two required fields -- id&lt;string&gt;, data&lt;Array&gt;. As below:
-                        <div style={{height:"0.5em"}}></div>
+                        <div style={{height:"calc(var(--smooth-space-unit) * 1)"}}></div>
                         <Highlight language="json">
                             {`
 {
@@ -105,9 +105,9 @@ export function BasicUsage() {
  }
                             `}
                         </Highlight>
-                        <div style={{height:"0.5em"}}></div>
+                        <div style={{height:"calc(var(--smooth-space-unit) * 1)"}}></div>
                         Just loop through this data with "defaultComponents" then you will see the drag-drop component working.
-                        <div style={{height:"2.5em"}}></div>
+                        <div style={{height:"calc(var(--smooth-space-unit) * 2.5)"}}></div>
                         <div style={{fontWeight:'bolder'}}>Just like the exmaple here:</div>
                     </div>
                 </div>
@@ -122,7 +122,7 @@ export function BasicUsage() {
                                     return(  
                                         <div>
                                             <div>
-                                                <h3 style={{height:"72px"}}>{wrapperData.title}</h3>
+                                                <h3 style={{fontSize: '0.8em', height: '43px', paddingRight:'1.5em'}}>{wrapperData.title}</h3>
                                             </div>
                                             <Wrapper key={wrapperData.id} self={wrapperData} parent={dataState.data}>
                                                 {

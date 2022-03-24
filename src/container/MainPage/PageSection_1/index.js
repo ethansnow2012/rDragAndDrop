@@ -86,9 +86,9 @@ const Styled = styled.div`
     }
 `
 const portalStyled = styled.div`
-    .p-codepopup > * + *{
-        margin-top:1.5rem;
-    }
+    // .p-codepopup > * + *{
+    //     margin-top:1.5rem;
+    // }
 `
 
 export function PageSection_1() {
