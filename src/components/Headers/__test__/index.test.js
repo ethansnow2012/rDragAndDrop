@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react'
-import { HeaderForPopupH1, HeaderForPopupH2 } from './index.js'
+import { HeaderForPopupH1, HeaderForPopupH2 } from '../index.js'
 
 test('HeaderForPopup render text', ()=>{
     const renderRTN = render(

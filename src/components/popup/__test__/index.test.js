@@ -1,5 +1,5 @@
 import { render, screen, cleanup } from '@testing-library/react'
-import { DefaultPopup } from './index.js'
+import { DefaultPopup } from '../index.js'
 import styled from 'styled-components'
 import {useState} from 'react'
 
