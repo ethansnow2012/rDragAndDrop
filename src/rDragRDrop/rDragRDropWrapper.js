@@ -156,8 +156,6 @@ rDragRDropWrapper.prototype.wrapperRefEffectFn = function({usedContext, stateDra
 
 rDragRDropWrapper.prototype.latestDropEffectFn = function({usedContext, stateData, stateDragHover, ref, props}, callback){
     return function(){
-        
-        console.log('latestDropEffectFn')
         const [data, setData] = stateData
         const [context, setContext] = usedContext
         if(!context.latestDrop){

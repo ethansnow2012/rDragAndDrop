@@ -24,7 +24,8 @@
     "deploy": "export REACT_APP_NODE_ENV=github_page && gh-pages -d build",
     "start": "export REACT_APP_NODE_ENV=development && react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --silent",
+    "test": "react-scripts test",
+    "test-silent": "react-scripts test --silent",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
