@@ -87,7 +87,7 @@ export function Trelloish_RDragDrop_Target(props){
             onDragLeave={dragLeave} 
             className={(isDragging?' isDragging':'') + (isDragHover?' isDragHover':'')}
         >
-                todo-item: {props.self.title}
+                Name:<br/> {props.self.title}
         </Styled>
     )
 }

@@ -116,10 +116,10 @@ export function PageSection_1() {
         contextInstance: rDragRDropContextInstance
     }
 
-    const logRef = (id)=>{
+    const clickAddOne = (id)=>{
         return async ()=>{
             const dueRef = refsMap.get(id)
-            console.log('logRef', dueRef)
+            console.log('clickAddOne', dueRef)
             const newData = await getNewOneTodoData()
             dueRef.updateOneTodo(newData)
         }
@@ -151,7 +151,7 @@ export function PageSection_1() {
                                                     }
                                                 </div>
                                                 <div className='p-column-inc'>
-                                                    <div className='p-column-inc-add' onClick={logRef(columnData.id)}>
+                                                    <div className='p-column-inc-add' onClick={clickAddOne(columnData.id)}>
                                                     </div>
                                                 </div>
                                             </Trelloish_RDragDrop_Wrapper>
@@ -174,7 +174,7 @@ export function PageSection_1() {
                                 <div className="c-blockseparator-2">
                                     <div>
                                         This library is aimed to help dealing with the states and callback complexity. It just expose its core functions so that developers can be used in "react functional component" with almost full customizability.
-                                        Like most library there are still some pre-consumption. For drag-and-drop to work three-layer structure is needed:<br/>
+                                        Like most library there are still some pre-consumption. For drag-and-drop to work, a three-layer structure(in html) and one context provider are needed:<br/>
                                         <br/>
                                         &nbsp;&nbsp;&nbsp;- Target: the actual element that will be dragged.<br/>
                                         &nbsp;&nbsp;&nbsp;- Wrapper: the elementthat will be the drop on.<br/>
@@ -462,40 +462,82 @@ export function Trelloish_RDragDrop_Root(props){
                                     </HeaderForPopupH2>
                                 </div>
                                 <div className="c-blockseparator-2"> 
+                                    <div>Initial some state and object.</div>
+                                    <Highlight language="javascript html">
+                                        {`
+let refsMap = useRef(new Map()).current;
+const [todoData, setTodoData] = useState({data:[]})
+
+const [popupState, setPopupState] = useState(false)
+const togglePopup = ()=>{
+    setPopupState(!popupState)
+}
+const setRefsMap = function(columnData){
+    return (ref) => {
+        //console.log('setRefsMap', columnData, ref)
+        return ref === null ? refsMap.delete(columnData.id) : refsMap.set(columnData.id, ref)
+    }
+}
+const rDragRDropContextInstance = rDragRDrop.initContext()()
+const contextObject = {
+    data: todoData, 
+    setData: setTodoData, 
+    contextInstance: rDragRDropContextInstance
+}
+const clickAddOne = (id)=>{
+    return async ()=>{
+        const dueRef = refsMap.get(id)
+        console.log('clickAddOne', dueRef)
+        const newData = await getNewOneTodoData()
+        dueRef.updateOneTodo(newData)
+    }
+}
+useEffect(async ()=>{
+    setTodoData(await getAllTodoData().then((data)=>{console.log('a', data); return data }))
+},[])
+                                        `}
+                                    </Highlight>
+                                </div>
+                                <div className="c-blockseparator-2"> 
+                                    <div>The Jsx.</div>
                                     <Highlight language="javascript html">
                                 {`
+return(
+  <rDragRDropContext.Provider value={contextObject}>                
     <Trelloish_RDragDrop_Root >
     {
-        xxxData.data
+        todoData.data
         ?.map((columnData,ii) =>
         {
-            return(  
-            <Trelloish_RDragDrop_Wrapper 
-                ref={setRefsMap(columnData)}
-                key={columnData.id} 
-                self={columnData} 
-                parent={todoData} >
-                <div className='p-column-inner'>
-                {
-                    columnData.data
-                    .map((item, jj)=>(
-                        <Trelloish_RDragDrop_Target 
-                            key={item.id} 
-                            self={item} 
-                            parent={columnData}
-                        />
-                    ))
-                }
-                </div>
-                <div className='p-column-inc'>
-                    <div className='p-column-inc-add' onClick={logRef(columnData.id)}></div>
-                </div>
-            </Trelloish_RDragDrop_Wrapper>
-            )
+        return(  
+        <Trelloish_RDragDrop_Wrapper 
+            ref={setRefsMap(columnData)}
+            key={columnData.id} 
+            self={columnData} 
+            parent={todoData} >
+            <div className='p-column-inner'>
+            {
+            columnData.data
+            .map((item, jj)=>(
+                <Trelloish_RDragDrop_Target 
+                key={item.id} 
+                self={item} 
+                parent={columnData}
+                />
+            ))
+            }
+            </div>
+            <div className='p-column-inc'>
+            <div className='p-column-inc-add' onClick={clickAddOne(columnData.id)}></div>
+            </div>
+        </Trelloish_RDragDrop_Wrapper>
+        )
         }
         )
     }
     </Trelloish_RDragDrop_Root>
+  </rDragRDropContext.Provider>
+)
                                 `}
                                     </Highlight>
                                 </div>

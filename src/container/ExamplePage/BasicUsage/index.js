@@ -65,7 +65,7 @@ export function BasicUsage() {
                 </div>    
                 <div className="c-blockseparator-2">
                     <div className="c-blockseparator-3">
-                        Although rDrag-rDrop.js is designed to provide the helper for drag-drop events. It still has the default components so that anyone can get started with minimal effort.
+                        Although rDrag-rDrop.js is designed to just provide the helpers for drag-drop events. It still has the default components so that anyone can get started with minimal effort.
                     </div>
                     <div className="c-blockseparator-3">
                         To start, you just need to get a three-layer structure json each layer with two required fields -- id&lt;string&gt;, data&lt;Array&gt;. As below:
@@ -105,8 +105,55 @@ export function BasicUsage() {
  }
                             `}
                         </Highlight>
+                        <div style={{height:"calc(var(--smooth-space-unit) * 2)"}}></div>
+                            Initial some state.
                         <div style={{height:"calc(var(--smooth-space-unit) * 1)"}}></div>
+                        <Highlight language="javascript">
+                        {`
+const contextInstance = rDragRDrop.initContext()() // <= Yes, do it this way.
+const [dataState, setDataState] = useState(data)
+const contextObject = {
+    data: dataState, 
+    setData: setDataState, 
+    contextInstance: contextInstance
+}
+                        `}
+                        </Highlight>
+                        <div style={{height:"calc(var(--smooth-space-unit) * 2)"}}></div>
                         Just loop through this data with "defaultComponents" then you will see the drag-drop component working.
+                        <div style={{height:"calc(var(--smooth-space-unit) * 1)"}}></div>
+                        <Highlight language="javascript">
+                            {`
+<rDragRDropContext.Provider value={contextObject}>
+<Root>
+{
+  dataState.data
+    ?.map((wrapperData) =>
+      {
+      return(  
+          <div>
+          <div>
+              <h3 style={{fontSize: '0.8em', height: '43px', paddingRight:'1.5em'}}>{wrapperData.title}</h3>
+          </div>
+          <Wrapper key={wrapperData.id} self={wrapperData} parent={dataState.data}>
+              {
+              wrapperData.data
+                  .map((target, ii)=>(
+                  <Target key={target.id} self={target} parent={wrapperData}>
+                      <div className='black-block'>{target.title}</div>
+                  </Target>
+                  ))
+              }
+          </Wrapper>
+          </div>
+      )
+    }
+  )
+}
+</Root>
+</rDragRDropContext.Provider>
+                            `}
+                        </Highlight>
                         <div style={{height:"calc(var(--smooth-space-unit) * 2.5)"}}></div>
                         <div style={{fontWeight:'bolder'}}>Just like the exmaple here:</div>
                     </div>
