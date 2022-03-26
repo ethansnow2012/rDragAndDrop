@@ -63,7 +63,7 @@ const Styled = styled.div`
         left:-1px;
     }
     .rDragRDropRoot-wrapper{
-        width: calc(100% - 10vh);
+        // width: calc(100% - 10vh);
         height: calc(100vh - 20vh);
         display: flex;
         justify-content: center;
