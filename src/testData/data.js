@@ -7,107 +7,126 @@ export default fakeAllTodos = {
     data: [
         {
             id: faker.datatype.uuid(),
-            title: faker.name.jobTitle(),
+            title: faker.name.findName(),
             data: [
                 {
                     id: faker.datatype.uuid(),
-                    title: faker.name.findName()
+                    title: faker.name.findName(),
+                    job_title:"Job: "+faker.name.jobType()
                 },
                 {
                     id: faker.datatype.uuid(),
-                    title: faker.name.findName()
+                    title: faker.name.findName(),
+                    job_title:"Job: "+faker.name.jobType()
                 },
                 {
                     id: faker.datatype.uuid(),
-                    title: faker.name.findName()
+                    title: faker.name.findName(),
+                    job_title:"Job: "+faker.name.jobType()
                 },
                 {
                     id: faker.datatype.uuid(),
-                    title: faker.name.findName()
+                    title: faker.name.findName(),
+                    job_title:"Job: "+faker.name.jobType()
                 },
                 {
                     id: faker.datatype.uuid(),
-                    title: faker.name.findName()
+                    title: faker.name.findName(),
+                    job_title:"Job: "+faker.name.jobType()
                 }
             ]
         },
         {
             id: faker.datatype.uuid(),
-            title: faker.name.jobTitle(),
+            title: faker.name.findName(),
             data: [
                 {
                     id: faker.datatype.uuid(),
-                    title: faker.name.findName()
+                    title: faker.name.findName(),
+                    job_title:"Job: "+faker.name.jobType()
                 },
                 {
                     id: faker.datatype.uuid(),
-                    title: faker.name.findName()
+                    title: faker.name.findName(),
+                    job_title:"Job: "+faker.name.jobType()
                 },
                 {
                     id: faker.datatype.uuid(),
-                    title: faker.name.findName()
+                    title: faker.name.findName(),
+                    job_title:"Job: "+faker.name.jobType()
                 },
                 {
                     id: faker.datatype.uuid(),
-                    title: faker.name.findName()
+                    title: faker.name.findName(),
+                    job_title:"Job: "+faker.name.jobType()
                 },
                 {
                     id: faker.datatype.uuid(),
-                    title: faker.name.findName()
+                    title: faker.name.findName(),
+                    job_title:"Job: "+faker.name.jobType()
                 },
                 {
                     id: faker.datatype.uuid(),
-                    title: faker.name.findName()
+                    title: faker.name.findName(),
+                    job_title:"Job: "+faker.name.jobType()
                 }
             ]
         },
         {
             id: faker.datatype.uuid(),
-            title: faker.name.jobTitle(),
+            title: faker.name.findName(),
             data: [
                 {
                     id: faker.datatype.uuid(),
-                    title: faker.name.findName()
+                    title: faker.name.findName(),
+                    job_title:"Job: "+faker.name.jobType()
                 },
                 {
                     id: faker.datatype.uuid(),
-                    title: faker.name.findName()
+                    title: faker.name.findName(),
+                    job_title:"Job: "+faker.name.jobType()
                 },
                 {
                     id: faker.datatype.uuid(),
-                    title: faker.name.findName()
+                    title: faker.name.findName(),
+                    job_title:"Job: "+faker.name.jobType()
                 },
                 {
                     id: faker.datatype.uuid(),
-                    title: faker.name.findName()
+                    title: faker.name.findName(),
+                    job_title:"Job: "+faker.name.jobType()
                 }
             ]
         },
         {
             id: faker.datatype.uuid(),
-            title: faker.name.jobTitle(),
+            title: faker.name.findName(),
             data: [
                 {
                     id: faker.datatype.uuid(),
-                    title: faker.name.findName()
+                    title: faker.name.findName(),
+                    job_title:"Job: "+faker.name.jobType()
                 },
                 {
                     id: faker.datatype.uuid(),
-                    title: faker.name.findName()
+                    title: faker.name.findName(),
+                    job_title:"Job: "+faker.name.jobType()
                 }
             ]
         },
         {
             id: faker.datatype.uuid(),
-            title: faker.name.jobTitle(),
+            title: faker.name.findName(),
             data: [
                 {
                     id: faker.datatype.uuid(),
-                    title: faker.name.findName()
+                    title: faker.name.findName(),
+                    job_title:"Job: "+faker.name.jobType()
                 },
                 {
                     id: faker.datatype.uuid(),
-                    title: faker.name.findName()
+                    title: faker.name.findName(),
+                    job_title:"Job: "+faker.name.jobType()
                 }
             ]
         }
@@ -117,7 +136,8 @@ export default fakeAllTodos = {
 fakeNewOneTodo = ()=>{
     return {
         id: faker.datatype.uuid(),
-        title: faker.name.findName()
+        title: faker.name.findName(),
+        job_title:"Job: "+faker.name.jobType()
     }    
 }
 
@@ -125,10 +145,12 @@ fakePosts = ()=>{
     return { // root
         id: faker.datatype.uuid(),
         title: faker.name.findName(),
+        job_title:"Job: "+faker.name.jobType(),
         data: [
             {
                 id: faker.datatype.uuid(),
                 title: faker.name.findName(),
+                job_title:"Job: "+faker.name.jobType(),
                 x: 150,
                 y: 80,
                 data: [

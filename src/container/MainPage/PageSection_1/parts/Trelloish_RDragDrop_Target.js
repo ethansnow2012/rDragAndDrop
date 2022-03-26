@@ -1,11 +1,11 @@
 import styled from 'styled-components'
 import {useRef, useState, useContext} from 'react'
-import {rDragRDrop, rDragRDropContext} from 'rDragRDrop/index'
+import {rDragRDrop, rDragRDropContext, dataMutate} from 'rDragRDrop'
 
 const Styled = styled.div`
     ---color: yellow;
     ---placeholder-height: unset;
-    padding: 5px 10px;
+    padding: 12px 5px;
     position:relative;
     &:hover{
         cursor: grab;
@@ -32,6 +32,33 @@ const Styled = styled.div`
         width: 100%;
         height: 100%;
         left: 0;
+    }
+    &:focus{
+        background: white;
+    }
+    & .selfName{
+        font-size: 0.5em;
+        padding-left: 0;
+        width: max-content;
+    }
+    & > * + *{
+        margin-top:4px;
+    }
+    & > *{
+        padding: 0px 5px;
+    }
+    & .editableDiv{
+        padding-top: 3px;
+        padding-bottom: 3px;
+        background: #ffffffa1;
+        font-size: 0.8em;
+        border-radius: 3px;
+        overflow: hidden;
+    }
+    & .editableDiv:focus{
+        outline: none;
+        background: white;
+        cursor: initial;
     }
 `
 
@@ -74,7 +101,12 @@ export function Trelloish_RDragDrop_Target(props){
     const dragLeave = rDragRDrop.dragTarget.dragLeave(
             dragTargetInitObject
         )
-    
+    const editBlur = (ev)=>{
+        props.self.job_title = ev.target.innerHTML
+        setContext(()=>{
+            return {...context}
+        })
+    }
     return (
         <Styled 
             ref={ref}
@@ -87,7 +119,9 @@ export function Trelloish_RDragDrop_Target(props){
             onDragLeave={dragLeave} 
             className={(isDragging?' isDragging':'') + (isDragHover?' isDragHover':'')}
         >
-                Name:<br/> {props.self.title}
+            <div className="selfName" >Name: {props.self.title}</div>
+            <div className="editableDiv" dangerouslySetInnerHTML={{__html: props.self.job_title}} contentEditable="true" onBlur={editBlur} suppressContentEditableWarning={true}>
+            </div>
         </Styled>
     )
 }

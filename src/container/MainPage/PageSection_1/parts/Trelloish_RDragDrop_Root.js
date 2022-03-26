@@ -5,7 +5,7 @@ import {rDragRDropContext, rDragRDrop} from 'rDragRDrop/index'
 
 
 const Styled = styled.div`
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.55);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     /*
         bug: scroll ... flickered.
