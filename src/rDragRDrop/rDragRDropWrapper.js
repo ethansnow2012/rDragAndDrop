@@ -166,6 +166,10 @@ rDragRDropWrapper.prototype.latestDropEffectFn = function({usedContext, stateDat
         const latestDragged = context.latestDragged
         const latestDropParent = context.latestDropParent// the same with props.self
         const latestDrop = context.latestDrop
+
+        if(latestDragged.id==latestDrop.id){
+            return
+        }
         
         if(latestDropParent != props.self){
             return
