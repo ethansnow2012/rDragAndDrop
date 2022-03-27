@@ -49,7 +49,7 @@ export function PageSection_2() {
                                             {
                                                 wrapperData.data.map((targetData)=>{
                                                     return (
-                                                        <Post_RDragDrop_Target key={targetData.id}>
+                                                        <Post_RDragDrop_Target key={targetData.id} self={targetData} parent={wrapperData}>
                                                         </Post_RDragDrop_Target>
                                                     )
                                                 })

@@ -45,7 +45,6 @@ rDragRDropTarget.prototype.dragStart = function({usedContext, stateDragging, pro
         const [context, setContext] = usedContext
         
         const [isDragging, setIsDragging] = stateDragging
-        
         const _isDragging = true
         setIsDragging(_isDragging)
         setContext({
@@ -84,7 +83,6 @@ rDragRDropTarget.prototype.dragOver = function({usedContext, ref}, callback){
                 
         ref.current.style.setProperty("---color", "grey");
         ref.current.style.setProperty("---placeholder-height", selfHeight+"px");
-        console.log('---placeholder-height', selfHeight+"px")
         
         if(context.targetRef!=ref){
             setContext({...context, targetRef: ref})

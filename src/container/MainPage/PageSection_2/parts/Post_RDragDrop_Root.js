@@ -35,12 +35,15 @@ export function Post_RDragDrop_Root(props){
     const dragOver = rDragRDrop.dragRoot.dragOver(
         rDragRDropRootInitObject,
         (ev) => {
-            console.log('dragOver')
-            console.log('dataTransfer over', ev.nativeEvent.dataTransfer.getData('text/plain')=='ccccc'?'A':'B')
+            //console.log('dragOver')
+            //console.log('dataTransfer over', ev.nativeEvent.dataTransfer.getData('text/plain')=='ccccc'?'A':'B')
         }
     )
     const drop = rDragRDrop.dragRoot.drop(
-            rDragRDropRootInitObject
+            rDragRDropRootInitObject,
+            (ev) => {
+                console.log('drop-root')
+            }
         )
     return (
         <Styled 

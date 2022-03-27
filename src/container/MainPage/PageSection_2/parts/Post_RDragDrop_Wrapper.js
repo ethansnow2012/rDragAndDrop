@@ -1,5 +1,5 @@
 
-import {ref, useRef, useContext, useLayoutEffect, useState} from 'react'
+import {ref, useRef, useContext, useLayoutEffect, useState, useEffect} from 'react'
 import styled from 'styled-components'
 import {rDragRDrop, rDragRDropContext, isDescendant, dataMutate} from 'rDragRDrop/index'
 
@@ -10,7 +10,9 @@ const Styled = styled.div`
     ---y_complement:0px;
     background:black;
     position: absolute;
-    display:grid;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
     grid-auto-flow: column;
     top:calc(var(---y) + var(---y_complement));
     left:calc(var(---x) + var(---x_complement));
@@ -40,6 +42,9 @@ export function Post_RDragDrop_Wrapper(props){
             draggableWrapper:true
         }
     }
+    useEffect((x)=>{
+        console.log('isDragging effect', x, isDragging)
+    }, [isDragging])
     
 
     const init = rDragRDrop.dragWrapper.init(rDragRDropWrapperInitObject) 
@@ -51,14 +56,44 @@ export function Post_RDragDrop_Wrapper(props){
     )
     const dragEnd = rDragRDrop.dragWrapper.dragEnd(
         rDragRDropWrapperInitObject,
-        (ev)=>{console.log('dragStart')}
+        (ev)=>{console.log('SdragEnd')}
     )
     
+    const dragOver = rDragRDrop.dragWrapper.dragOver(
+        rDragRDropWrapperInitObject,
+        (ev)=>{console.log('SdragOver')}
+    )
+    const dragLeave = rDragRDrop.dragWrapper.dragLeave(
+        rDragRDropWrapperInitObject,
+        (ev)=>{console.log('SdragLeave')}
+    )
+    
+    const drop = rDragRDrop.dragWrapper.drop(
+        rDragRDropWrapperInitObject,
+        (ev)=>{console.log('Sdrop')}
+    )
+    const dragEnter = rDragRDrop.dragWrapper.dragEnter(
+        rDragRDropWrapperInitObject,
+        (ev)=>{console.log('SdragEnter')}
+    )
+    // const dragLeave = rDragRDrop.dragWrapper.dragLeave(
+    //     rDragRDropWrapperInitObject,()=>{
+    //         console.log('dragLeave')
+    //     }
+    // )
+
     return (
         <Styled
         ref={ref}
         onDragStart={dragStart}
+        onDrop={drop}
         onDragEnd={dragEnd}
+        onDragOver={dragOver}
+        onDragLeave={dragLeave}
+        onDragEnter={dragEnter}
+        
+        //onDragLeave={dragLeave} 
+        
         draggable='true' 
         className={(isDragging?' isDragging':'') + (isDragHover?' isDragHover':'')}>
             {props.children}

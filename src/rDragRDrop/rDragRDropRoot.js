@@ -17,7 +17,6 @@ rDragRDropRoot.prototype.init = function({usedContext, options, props, ref}){
 rDragRDropRoot.prototype.dragOver = function({usedContext, stateDragging, props, ref, options}, callback){
     return function(ev){
         const [context, setContext] = usedContext
-        console.log('AAADAAA',document.psuedoDataTransferText)
         if(options&&options.draggableWrapper==true){
             if(!(document.psuedoDataTransferText=="TARGET_DRAGGED")){
                 const {x, y} = calcMousePosition(ev, ref)
@@ -43,8 +42,13 @@ rDragRDropRoot.prototype.drop = function({usedContext, stateDragging, props}, ca
         if(context.hoverDelegated){
             const [isDragHover, setIsDragHover, _ref] = context.hoverDelegated
             setIsDragHover(false)   
+            //const [isDragging, setIsDragging, _ref2] = context.draggingDelegated
+            //setIsDragging(false)
         }
         
-        console.log('root drop next')
+        
+        if(typeof callback=='function'){
+            callback(ev, {usedContext, stateDragging, props})    
+        }
     }
 }

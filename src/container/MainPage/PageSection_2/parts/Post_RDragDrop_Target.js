@@ -41,20 +41,13 @@ export function Post_RDragDrop_Target(props){
         }
 
     const dragStart = rDragRDrop.dragTarget.dragStart(
-            dragTargetInitObject,
-            (ev)=>{
-                //document.psuedoDataTransferText = 'TARGET_DRAGGED'
-            }
+            dragTargetInitObject
         )
     const dragOver = rDragRDrop.dragTarget.dragOver(
             dragTargetInitObject
         )
-    
     const dragEnd = rDragRDrop.dragTarget.dragEnd(
-            dragTargetInitObject,
-            (ev)=>{
-                //document.psuedoDataTransferText = null
-            }
+            dragTargetInitObject
         )
     const drop = rDragRDrop.dragTarget.drop(
             dragTargetInitObject
@@ -75,7 +68,7 @@ export function Post_RDragDrop_Target(props){
             onDrop={drop}
             onDragEnter={dragEnter} 
             onDragLeave={dragLeave} 
-            className={(isDragging?' isDragging':'') + (isDragHover?' isDragHover':'') + ( 'drag-cascading-stop')}
+            className={(isDragging?' isDragging':'') + (isDragHover?' isDragHover':'') + ( ' drag-cascading-stop')}
             >
             <div className='icon drag-cascading-stop'></div>
             <div className='title drag-cascading-stop'>fffff</div>

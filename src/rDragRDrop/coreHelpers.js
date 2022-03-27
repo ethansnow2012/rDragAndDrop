@@ -14,7 +14,6 @@ export const setCssPositionComplementViaRef = (ref, x, y)=>{
 }
 
 export const calcMousePosition = (ev, targetElement)=>{
-    console.log("yy", ev.pageY, targetElement.current.offsetTop)
     const top = targetElement.current.getBoundingClientRect().top
     const left = targetElement.current.getBoundingClientRect().left
     return {

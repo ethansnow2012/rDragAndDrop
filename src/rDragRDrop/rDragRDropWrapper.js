@@ -35,7 +35,10 @@ rDragRDropWrapper.prototype.dragStart =  function({usedContext, options, ref, st
         if(options&&options.draggableWrapper==true){
             const [context, setContext] = usedContext
             const [isDragging, setIsDragging] = stateDragging
+            console.log('dragging start-warpper')
             setIsDragging(true)
+            // context double update in one life cycle cause "...context" to be stale
+            //setContext({...context, draggingDelegated: [isDragging, setIsDragging, ref]}) 
 
             const {x:rootX, y:rootY} = calcMousePosition(ev, context.rootRef)
             const {x, y} = calcMousePosition(ev, ref)
@@ -80,19 +83,23 @@ rDragRDropWrapper.prototype.drop = function({usedContext, stateData, stateDragHo
         const [data, setData] = stateData
         const [context, setContext] = usedContext
         const [isDragHover, setIsDragHover] = stateDragHover
-
         let latestDraggedParent = context.latestDraggedParent
         let latestDragged = context.latestDragged
-        
-        if(ref.current==ev.target){
-            dataMutate.removeSelfFromParent(latestDragged, latestDraggedParent)
-            dataMutate.addToAnotherParent(latestDragged, props.self, null)
-            
-            setData((_data)=>{//after mutation forcely invoke react update
-                return {..._data}
-            })
+
+        if(latestDraggedParent && latestDragged){
+            if(ref.current==ev.target){
+                dataMutate.removeSelfFromParent(latestDragged, latestDraggedParent)
+                dataMutate.addToAnotherParent(latestDragged, props.self, null)
+                context.latestDraggedParent = null
+                context.latestDragged = null
+                setData((_data)=>{//after mutation forcely invoke react update
+                    return {..._data}
+                })
+            }
         }
         
+        document.psuedoDataTransferText=null
+
         setIsDragHover(false)
         if(typeof callback=='function'){
             callback(ev, {usedContext, stateData, stateDragHover, ref, props})
