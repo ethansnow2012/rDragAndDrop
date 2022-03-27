@@ -40,7 +40,7 @@ export const rDragRDropTarget = function () {}
  * 
  * @return {function} function that will actually be invoked when drag starts
  */
-rDragRDropTarget.prototype.dragStart = function({usedContext, stateDragging, props}, callback){
+rDragRDropTarget.prototype.dragStart = function({usedContext, stateDragging, props, options}, callback){
     return function(ev){
         const [context, setContext] = usedContext
         
@@ -61,6 +61,9 @@ rDragRDropTarget.prototype.dragStart = function({usedContext, stateDragging, pro
             //ev.target.style.visibility = "hidden"; 
         })
         document.latestWrapperState = 'DRAG_INIT'
+        if(options&&options.draggableWrapper==true){
+            document.psuedoDataTransferText = 'TARGET_DRAGGED'
+        }
         if(typeof callback=='function'){
             callback(ev, {usedContext, stateDragging, props})
         }   
@@ -96,7 +99,7 @@ rDragRDropTarget.prototype.dragOver = function({usedContext, ref}, callback){
  * 
  * @return {function}
  **/
-rDragRDropTarget.prototype.dragEnd = function({usedContext, stateDragging}, callback){
+rDragRDropTarget.prototype.dragEnd = function({usedContext, stateDragging, options}, callback){
     return function(ev){
         const _isDragging = false
         const [context, setContext] = usedContext
@@ -108,6 +111,10 @@ rDragRDropTarget.prototype.dragEnd = function({usedContext, stateDragging}, call
             ev.target.display=""
         //     ev.target.style.visibility = ""; 
         })
+        if(options&&options.draggableWrapper==true){
+            document.psuedoDataTransferText = null
+        }
+        
         if(typeof callback=='function'){
             callback(ev, {usedContext, stateDragging})
         }  

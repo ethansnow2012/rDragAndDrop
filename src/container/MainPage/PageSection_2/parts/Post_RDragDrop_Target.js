@@ -35,12 +35,15 @@ export function Post_RDragDrop_Target(props){
             ref,
             latestDrop: props.self,
             latestDropParent: props.parent,
+            options:{
+                draggableWrapper:true
+            }
         }
 
     const dragStart = rDragRDrop.dragTarget.dragStart(
             dragTargetInitObject,
             (ev)=>{
-                document.psuedoDataTransferText = 'TARGET_DRAGGED'
+                //document.psuedoDataTransferText = 'TARGET_DRAGGED'
             }
         )
     const dragOver = rDragRDrop.dragTarget.dragOver(
@@ -50,7 +53,7 @@ export function Post_RDragDrop_Target(props){
     const dragEnd = rDragRDrop.dragTarget.dragEnd(
             dragTargetInitObject,
             (ev)=>{
-                document.psuedoDataTransferText = null
+                //document.psuedoDataTransferText = null
             }
         )
     const drop = rDragRDrop.dragTarget.drop(
