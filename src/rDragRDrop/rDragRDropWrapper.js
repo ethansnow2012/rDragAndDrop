@@ -36,7 +36,9 @@ rDragRDropWrapper.prototype.dragStart =  function({usedContext, options, ref, st
             const [context, setContext] = usedContext
             const [isDragging, setIsDragging] = stateDragging
             console.log('dragging start-warpper')
-            setIsDragging(true)
+            if(!document.psuedoDataTransferText){
+                setIsDragging(true)
+            }
             // context double update in one life cycle cause "...context" to be stale
             //setContext({...context, draggingDelegated: [isDragging, setIsDragging, ref]}) 
 
