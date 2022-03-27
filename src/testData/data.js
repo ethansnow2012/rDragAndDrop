@@ -179,6 +179,21 @@ fakePosts = ()=>{
                         postion: {x:80, y:32}
                     }       
                 ]
+            },
+            {
+                id: faker.datatype.uuid(),
+                title: faker.name.findName(),
+                job_title:"Job: "+faker.name.jobType(),
+                x: 700,
+                y: 200,
+                data: [
+                    {
+                        id: faker.datatype.uuid(),
+                        title: "post22222",
+                        content: "post22222 content",
+                        postion: {x:80, y:32}
+                    }  
+                ]
             }
         ]
     }    

@@ -4,12 +4,14 @@ import styled from 'styled-components'
 import {rDragRDrop, rDragRDropContext, isDescendant, dataMutate} from 'rDragRDrop/index'
 
 const Styled = styled.div`
-    width:80px;
-    height:80px;
+    width:200px;
+    height:200px;
     ---x_complement:0px;
     ---y_complement:0px;
     background:black;
     position: absolute;
+    display:grid;
+    grid-auto-flow: column;
     top:calc(var(---y) + var(---y_complement));
     left:calc(var(---x) + var(---x_complement));
     &.isDragging{
@@ -59,7 +61,7 @@ export function Post_RDragDrop_Wrapper(props){
         onDragEnd={dragEnd}
         draggable='true' 
         className={(isDragging?' isDragging':'') + (isDragHover?' isDragHover':'')}>
-            <div> </div>
+            {props.children}
         </Styled>
     )
 }

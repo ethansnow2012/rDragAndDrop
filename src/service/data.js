@@ -22,7 +22,7 @@ export async function getNewOneTodoData(){
 export async function getPosts(){
     return new Promise((resolve, reject)=>{
         setTimeout(()=>{
-            resolve(fakePosts)
+            resolve(fakePosts())
         },700)
     })
 }

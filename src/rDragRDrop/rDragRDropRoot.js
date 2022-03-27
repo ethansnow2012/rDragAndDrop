@@ -17,11 +17,14 @@ rDragRDropRoot.prototype.init = function({usedContext, options, props, ref}){
 rDragRDropRoot.prototype.dragOver = function({usedContext, stateDragging, props, ref, options}, callback){
     return function(ev){
         const [context, setContext] = usedContext
-
+        console.log('AAADAAA',document.psuedoDataTransferText)
         if(options&&options.draggableWrapper==true){
-            console.log('root dragOver',ev)
-            const {x, y} = calcMousePosition(ev, ref)
-            setCssPositionViaRef(ref.current.querySelector('.isDragging'), x, y)
+            if(!(document.psuedoDataTransferText=="TARGET_DRAGGED")){
+                const {x, y} = calcMousePosition(ev, ref)
+                setCssPositionViaRef(ref.current.querySelector('.isDragging'), x, y)
+            }else{
+                // ev.stopPropagation()
+            }
         }
         if(context.rootRef!=ref){
             setContext({...context, rootRef: ref})

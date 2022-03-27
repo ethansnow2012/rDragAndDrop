@@ -17,7 +17,6 @@ export const rDragRDropWrapper = function () {}
 
 rDragRDropWrapper.prototype.init = function({options, props, ref}){
     return function(){
-        console.log('wrapper init')
         if(ref.current){
             if(options&&options.draggableWrapper==true){
                 let {x, y} = props.self
@@ -28,7 +27,6 @@ rDragRDropWrapper.prototype.init = function({options, props, ref}){
         }else{
             console.log('Maybe invoked too early ref not ready.')
         }
-        
     }
 }
 
