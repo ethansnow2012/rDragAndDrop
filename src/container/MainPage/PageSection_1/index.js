@@ -32,7 +32,7 @@ const Styled = styled.div`
         justify-content: flex-start;
         //align-items: center;
         flex-direction: column;
-        overflow: scroll;
+        // overflow: scroll;
         min-width: min-content;
     }
     & ${StaticBackgroundBlockStyle} ${RDragAndDropWrapperStyle} {
@@ -43,7 +43,7 @@ const Styled = styled.div`
         flex-direction: column;
         align-items: stretch;
         height: calc(100% - 30px);
-        overflow: scroll;
+        overflow-y: auto;
     }
 
     & ${StaticBackgroundBlockStyle} ${RDragAndDropWrapperStyle} .p-column-inc{
