@@ -78,7 +78,6 @@ export function Trelloish_RDragDrop_Target(props){
     
     useEffect(()=>{
         if(props.self.isNew){ // This will only pass once. Then set to false by proxy
-            console.log('got new one', props.isNew, props.self.title)
             ref.current.scrollIntoView({block: "nearest", inline: "nearest", behavior: "smooth"})   
         }
     }, [ref])

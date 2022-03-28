@@ -104,13 +104,14 @@ const transition = styled.div`
     
     .transition-enter{
         opacity: 0.3;
-        transition: opacity 0.8s;
+        transition: opacity 0.5s;
     }
     .transition-enter-active{
         opacity: 1;
     }
     .transition-exit{
         opacity: 1;
+        transition: opacity 0.5s;
     }
     .transition-exit-active{
         opacity: 0.5;
@@ -129,7 +130,6 @@ export function PageSection_1() {
     // Closure:refsMap, todoData
     const setRefsMap = function(columnData){
         return (ref) => {
-            //console.log('setRefsMap', columnData, ref)
             return ref === null ? refsMap.delete(columnData.id) : refsMap.set(columnData.id, ref)
         }
     }
@@ -172,7 +172,9 @@ export function PageSection_1() {
                                                         {
                                                             columnData.data
                                                                 .map((todoItem, jj)=>(
-                                                                    <CSSTransition key={todoItem.id} timeout={800} classNames="transition">
+                                                                    <CSSTransition key={todoItem.id} 
+                                                                        transitionEnterTimeout={500} 
+                                                                        transitionLeaveTimeout={200} classNames="transition">
                                                                         <Trelloish_RDragDrop_Target self={todoItem} parent={columnData}/>
                                                                     </CSSTransition>
                                                                 ))  
