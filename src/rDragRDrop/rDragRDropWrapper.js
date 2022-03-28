@@ -89,7 +89,7 @@ rDragRDropWrapper.prototype.drop = function({usedContext, stateData, stateDragHo
         let latestDragged = context.latestDragged
 
         if(latestDraggedParent && latestDragged){
-            if(ref.current==ev.target){
+            if(ref.current==ev.currentTarget){
                 dataMutate.removeSelfFromParent(latestDragged, latestDraggedParent)
                 dataMutate.addToAnotherParent(latestDragged, props.self, null)
                 context.latestDraggedParent = null
