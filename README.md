@@ -8,19 +8,11 @@
 ## Note!
 > This project is Not fully tested use with some care. And welcome any form of contribution ^.^ at this stage.
 
-## Quickstart
+## Install
  - npm install: 
   ```bash
   npm install rdrag-rdrop
   ```
-  ```js
-  import { rDragRDrop } from 'rdrag-rdrop'
-  
-  ...
-
-  
-
-  ```
-  
-## Demo
+ 
+## Demo and Document
 [here](https://ethansnow2012.github.io/rdrag-rdrop)

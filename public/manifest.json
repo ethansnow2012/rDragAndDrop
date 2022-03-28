@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "rdrag-rdrop.js",
+  "name": "rdrag-rdrop.js | React library for drag and drop UI",
   "icons": [
     {
       "src": "favicon.ico",
