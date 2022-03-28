@@ -134,11 +134,24 @@ export default fakeAllTodos = {
 }
 
 fakeNewOneTodo = ()=>{
-    return {
-        id: faker.datatype.uuid(),
-        title: faker.name.findName(),
-        job_title:"Job: "+faker.name.jobType()
-    }    
+    let _isNew = true
+    const handler1 = {
+        get(target, prop, receiver) {
+            if (prop === "isNew") {
+                let temp = _isNew
+                _isNew = false
+                return temp;
+            }
+            return Reflect.get(...arguments);
+        }
+    }
+    return new Proxy({
+            id: faker.datatype.uuid(),
+            title: faker.name.findName(),
+            job_title:"Job: "+faker.name.jobType()
+        }, 
+        handler1
+    )
 }
 
 fakePosts = ()=>{

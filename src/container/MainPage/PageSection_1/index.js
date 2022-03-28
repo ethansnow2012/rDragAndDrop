@@ -4,6 +4,7 @@ import React, {useState, useRef, useEffect, forwardRef, createRef} from 'react'
 import styled from 'styled-components'
 import {getAllTodoData, getNewOneTodoData} from 'service/data'
 import {StaticBackgroundBlock, DefaultStyle as StaticBackgroundBlockStyle} from 'container/StaticBackgroundBlock'
+import {TransitionGroup, CSSTransition} from 'react-transition-group'
 
 import {rDragRDrop, rDragRDropContext} from 'rDragRDrop/index'
 import {DefaultPopup} from 'components/popup/index.js'
@@ -13,6 +14,7 @@ import {HeaderForPopupH1, HeaderForPopupH2} from 'components/Headers'
 import {Trelloish_RDragDrop_Root} from './parts/Trelloish_RDragDrop_Root'
 import {Trelloish_RDragDrop_Wrapper, DefaultStyle as RDragAndDropWrapperStyle} from './parts/Trelloish_RDragDrop_Wrapper'
 import {Trelloish_RDragDrop_Target} from './parts/Trelloish_RDragDrop_Target'
+
 
 import Highlight from 'react-highlight'
 
@@ -33,19 +35,24 @@ const Styled = styled.div`
         overflow: scroll;
         min-width: min-content;
     }
-
+    & ${StaticBackgroundBlockStyle} ${RDragAndDropWrapperStyle} {
+        position: relative;
+    }
     & ${StaticBackgroundBlockStyle} ${RDragAndDropWrapperStyle} .p-column-inner{
         display: flex;
         flex-direction: column;
         align-items: stretch;
+        height: calc(100% - 30px);
+        overflow: scroll;
     }
 
     & ${StaticBackgroundBlockStyle} ${RDragAndDropWrapperStyle} .p-column-inc{
         width: 100%;
         margin-top:auto;
         min-width:110px;
-        position: sticky;
-        bottom: 0;
+        // position: sticky;
+        postion: absolute;
+        bottom: 0px;
     }
     & ${StaticBackgroundBlockStyle} ${RDragAndDropWrapperStyle} .p-column-inc-add{
         width: 100%;
@@ -91,6 +98,23 @@ const portalStyled = styled.div`
     // .p-codepopup > * + *{
     //     margin-top:1.5rem;
     // }
+`
+
+const transition = styled.div`
+    
+    .transition-enter{
+        opacity: 0.3;
+        transition: opacity 0.8s;
+    }
+    .transition-enter-active{
+        opacity: 1;
+    }
+    .transition-exit{
+        opacity: 1;
+    }
+    .transition-exit-active{
+        opacity: 0.5;
+    }
 `
 
 export function PageSection_1() {
@@ -144,12 +168,16 @@ export function PageSection_1() {
                                                 ref={setRefsMap(columnData)}
                                                 key={columnData.id} self={columnData} parent={todoData} >
                                                 <div className='p-column-inner'>
-                                                    {
-                                                        columnData.data
-                                                            .map((todoItem, jj)=>(
-                                                                <Trelloish_RDragDrop_Target key={todoItem.id} self={todoItem} parent={columnData}/>
-                                                            ))
-                                                    }
+                                                    <TransitionGroup  component={transition}>
+                                                        {
+                                                            columnData.data
+                                                                .map((todoItem, jj)=>(
+                                                                    <CSSTransition key={todoItem.id} timeout={800} classNames="transition">
+                                                                        <Trelloish_RDragDrop_Target self={todoItem} parent={columnData}/>
+                                                                    </CSSTransition>
+                                                                ))  
+                                                        }
+                                                    </TransitionGroup>
                                                 </div>
                                                 <div className='p-column-inc'>
                                                     <div className='p-column-inc-add' onClick={clickAddOne(columnData.id)}>

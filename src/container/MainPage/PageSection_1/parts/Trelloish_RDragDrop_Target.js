@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import {useRef, useState, useContext} from 'react'
+import {useRef, useState, useContext, useEffect} from 'react'
 import {rDragRDrop, rDragRDropContext, dataMutate} from 'rDragRDrop'
 
 const Styled = styled.div`
@@ -74,7 +74,14 @@ export function Trelloish_RDragDrop_Target(props){
     const [isDragHover, setIsDragHover] = useState(false)
     const [isDragging, setIsDragging] = useState(false)
     const [context, setContext] = contextInstance
-
+    
+    
+    useEffect(()=>{
+        if(props.self.isNew){ // This will only pass once. Then set to false by proxy
+            console.log('got new one', props.isNew, props.self.title)
+            ref.current.scrollIntoView({block: "nearest", inline: "nearest", behavior: "smooth"})   
+        }
+    }, [ref])
     const dragTargetInitObject = {
             usedContext: [context, setContext],
             stateDragging: [isDragging, setIsDragging],
@@ -130,8 +137,7 @@ export function Trelloish_RDragDrop_Target(props){
             className={(isDragging?' isDragging':'') + (isDragHover?' isDragHover':'')}
         >
             <div className="selfName" dangerouslySetInnerHTML={{__html: props.self.title}} contentEditable="true" onBlur={editBlurTitle} suppressContentEditableWarning={true}></div>
-            <div className="editableDiv" dangerouslySetInnerHTML={{__html: props.self.job_title}} contentEditable="true" onBlur={editBlur} suppressContentEditableWarning={true}>
-            </div>
+            <div className="editableDiv" dangerouslySetInnerHTML={{__html: props.self.job_title}} contentEditable="true" onBlur={editBlur} suppressContentEditableWarning={true}></div>
         </Styled>
     )
 }
