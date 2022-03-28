@@ -43,7 +43,9 @@ const Styled = styled.div`
     & ${StaticBackgroundBlockStyle} ${RDragAndDropWrapperStyle} .p-column-inc{
         width: 100%;
         margin-top:auto;
-        min-width:110px
+        min-width:110px;
+        position: sticky;
+        bottom: 0;
     }
     & ${StaticBackgroundBlockStyle} ${RDragAndDropWrapperStyle} .p-column-inc-add{
         width: 100%;
@@ -119,7 +121,6 @@ export function PageSection_1() {
     const clickAddOne = (id)=>{
         return async ()=>{
             const dueRef = refsMap.get(id)
-            console.log('clickAddOne', dueRef)
             const newData = await getNewOneTodoData()
             dueRef.updateOneTodo(newData)
         }

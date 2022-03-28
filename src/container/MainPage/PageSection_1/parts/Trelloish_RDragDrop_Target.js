@@ -60,6 +60,10 @@ const Styled = styled.div`
         background: white;
         cursor: initial;
     }
+    & .selfName:focus{
+        outline: none;
+        cursor: initial;
+    }
 `
 
 
@@ -107,6 +111,12 @@ export function Trelloish_RDragDrop_Target(props){
             return {...context}
         })
     }
+    const editBlurTitle = (ev)=>{
+        props.self.title = ev.target.innerHTML
+        setContext(()=>{
+            return {...context}
+        })
+    }
     return (
         <Styled 
             ref={ref}
@@ -119,7 +129,7 @@ export function Trelloish_RDragDrop_Target(props){
             onDragLeave={dragLeave} 
             className={(isDragging?' isDragging':'') + (isDragHover?' isDragHover':'')}
         >
-            <div className="selfName" >Name: {props.self.title}</div>
+            <div className="selfName" dangerouslySetInnerHTML={{__html: props.self.title}} contentEditable="true" onBlur={editBlurTitle} suppressContentEditableWarning={true}></div>
             <div className="editableDiv" dangerouslySetInnerHTML={{__html: props.self.job_title}} contentEditable="true" onBlur={editBlur} suppressContentEditableWarning={true}>
             </div>
         </Styled>
