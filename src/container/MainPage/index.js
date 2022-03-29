@@ -11,6 +11,7 @@ import {DefaultPopup} from 'components/popup/index.js'
 
 import {PageSection_1} from './PageSection_1/index'
 import {PageSection_2} from './PageSection_2/index'
+import {PageSection_3} from './PageSection_3'
 
 
 
@@ -31,7 +32,7 @@ export function MainPage() {
         <Styled>
             <PageSection_1/>
             <PageSection_2/>
-            <StaticBackgroundBlock image={bg_3}/>
+            <PageSection_3/> 
         </Styled>
     )
 }

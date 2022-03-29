@@ -6,16 +6,13 @@ const StyledBlock = styled.div`
     height: 100vh;
     position: relative;
     background-attachment: fixed !important;
+    background-size: cover;
     background-image:${props=>props.image?`url(${props.image})`:''};
 `
 
 export function StaticBackgroundBlock(props) {
-    useEffect(()=>{
-        console.log('StaticBackgroundBlock')
-    },[])
-    //
     return (
-        <StyledBlock className={props.className} image={props.image}>
+        <StyledBlock className={props.className} image={props.image} style={props.style}>
             {props.children}
         </StyledBlock>
     )

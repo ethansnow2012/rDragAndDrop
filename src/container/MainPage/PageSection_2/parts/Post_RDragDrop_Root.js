@@ -50,7 +50,15 @@ export function Post_RDragDrop_Root(props){
             ref={ref}
             onDragOver={dragOver}
             onDrop={drop}>
-            <div>Post_RDragDrop_Root</div>
+            <div style={{
+                    background: 'blanchedalmond',
+                    width: 'max-content',
+                    padding: '0 6px 2px 5px',
+                    position: 'relative',
+                    left: '-62px',
+                    top: '10px',
+                    }}>
+                Try to move black block or drag to small black to another block.</div>
             {props.children}
         </Styled>
     )

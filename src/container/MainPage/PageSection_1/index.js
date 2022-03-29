@@ -173,8 +173,12 @@ export function PageSection_1() {
                                                             columnData.data
                                                                 .map((todoItem, jj)=>(
                                                                     <CSSTransition key={todoItem.id} 
-                                                                        transitionEnterTimeout={500} 
-                                                                        transitionLeaveTimeout={200} classNames="transition">
+                                                                        timeout={{
+                                                                            appear: 500,
+                                                                            enter: 300,
+                                                                            exit: 200,
+                                                                        }}
+                                                                        classNames="transition">
                                                                         <Trelloish_RDragDrop_Target self={todoItem} parent={columnData}/>
                                                                     </CSSTransition>
                                                                 ))  

@@ -165,7 +165,7 @@ fakePosts = ()=>{
                 title: faker.name.findName(),
                 job_title:"Job: "+faker.name.jobType(),
                 x: 150,
-                y: 80,
+                y: 180,
                 data: [
                     {
                         id: faker.datatype.uuid(),
